@@ -1,0 +1,24 @@
+
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-signal"></span>&nbsp;<%=t "pages.charts" %> <span class="caret"></span></a>
+
+      <ul class="dropdown-menu">
+          <li><%= link_to root_path do %>
+            <span class="fa fa-tasks"></span>&nbsp;<%=t "pages.errand.index.title" %>
+            <% end %>
+          </li>
+
+          <li><%= link_to root_path do %>
+            <span class="fa fa-calendar"></span>&nbsp;<%=t "pages.event.index.title" %>
+            <% end %>
+          </li>
+
+          <li><%= link_to root_path do %>
+            <span class="fa fa-project-diagram"></span>&nbsp;<%=t "pages.project.index.title" %>
+            <% end %>
+          </li>
+
+      </ul>
+    </li>
+
+
