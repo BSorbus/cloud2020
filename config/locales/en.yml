@@ -20,48 +20,75 @@ en:
       slide_0: 'Access to documents can be simple.'
       slide_1: 'Just one click...'
       slide_2: '...to see the whole world.'
+  management: 'Management'
+  table_action: 'Action'
+  table_role_granted: 'Granted?'
+  table_group_member: 'Is a member?'
+  user:
+    index:
+      title: 'Users'
+    show:
+      title: 'User'
+    edit:
+      title: 'Edit -> User'
+  role:
+    index:
+      title: 'Roles'
+    show:
+      title: 'Role'
+    new:
+      title: 'New Role'
+    edit:
+      title: 'Edit -> Role'
+  work:
+    index:
+      title: 'Operation log'
+  group:
+    index:
+      title: 'Groups'
+    show:
+      title: 'Group'
+    new:
+      title: 'New Group'
+    edit:
+      title: 'Edit -> Group'
   activerecord:
     models:
+      work: 'Operation log'
       user: 'User'
+      role: 'Role'
+      group: 'Group'
     attributes:
-      proposal:
-        status: 'Status'
-        status_name: 'Status name'
-        creator: 'Creator'
-        creator_id: 'Użytkownik'
+      work:
+        created_at: 'Created at'
+        created_by: 'Author'
+        action: 'Action'
+        trackable_type: 'Object'
+        trackable_id: 'Id'
+        parameters: 'Data'
+      user:
+        wso2is_userid: 'WSO2IS userid'
+        email: 'Email'
+        first_name: 'First name'
+        last_name: 'Last name'
+        user_name: 'WSO2IS username'
+        csu_confirmed: 'CSU confirmed'
+        csu_confirmed_at: 'CSU confirmed at'
+        csu_confirmed_by: 'CSU confirmed by'
+        sign_in_count: 'Sign in count'
+        current_sign_in_at: 'Current sign in at'
+        last_sign_in_at: 'Last sign in at'
+        current_sign_in_ip: 'Current sign in - IP'
+        last_sign_in_ip: 'Last sign in - IP'
+        note: 'Note'
+        fullname: 'Name'
+      role:
         name: 'Name'
-        given_names: 'Given names'
-        pesel: 'Pesel'
-        citizenship_code: "Citizenship"
-        birth_date: "Birth date"
-        birth_place: "Birth place"
-        family_name: "Family name"
-        phone: 'Phone'
-        address_city: 'City'
-        address_street: 'Street'
-        address_house: 'House'
-        address_number: 'Number'
-        address_postal_code: 'Postal code'
-        c_address_city: 'City'
-        c_address_street: 'Street'
-        c_address_house: 'House'
-        c_address_number: 'Number'
-        c_address_postal_code: 'Postal code'
-        category: 'Service'
-        category_name: 'Service'
-        exam_id: 'Exam session'
-        exam_fullname: 'Exam session'
-        exam_date_exam: 'Exam date'
-        division_id: 'Category'
-        division_fullname: 'Category'
-        division_min_years_old: 'Minimum years old'
-        exam_fee_id: 'Required fee'
-        exam_fee_price: 'Required fee'
-        bank_pdf: 'Bank confirmation of the transfer'
-        face_image: 'Photo'
-        consent_pdf: 'Parent consent'
-        confirm_that_the_data_is_correct: 'The above data is true, which I confirm'
-        not_approved_comment: 'Reason for rejecting the application'
+        activities: 'Privileges'
+        note: 'Note'
+      group:
+        name: 'Name'
+        note: 'Note'
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"

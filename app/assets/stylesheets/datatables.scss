@@ -123,6 +123,20 @@ table.dataTable tfoot th {
   background-color: #FF8C8C !important;
 }
 
+/*
+.datatable-cell-create {
+  background-color: #DFF0D8 !important;
+}
+*/
+
+.datatable-cell-update {
+  background-color: #FFFFE0 !important; //LightYellow
+}
+
+.datatable-cell-destroy {
+  background-color: #f2dede !important; 
+}
+
 
 
 .dataTables_processing {

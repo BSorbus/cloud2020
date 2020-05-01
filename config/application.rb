@@ -26,11 +26,12 @@ module Cloud2020
 
     config.time_zone = 'Warsaw'
 
-    config.middleware.use Rack::Attack
     config.i18n.default_locale = :pl
     config.i18n.available_locales = [:pl, :en]
 
     #config.active_storage.variant_processor = :vips
+
+    config.middleware.use Rack::Attack
 
   end
 end

@@ -1,32 +1,44 @@
 class Role < ApplicationRecord
-  include ActionView::Helpers::UrlHelper # for link_to
-  #delegate :url_helpers, to: 'Rails.application.routes'
+  include ActionView::Helpers::TextHelper # for truncate
 
   # relations
-  has_and_belongs_to_many :users
+  # has_and_belongs_to_many :users
+  has_many :approvals #, dependent: :destroy
+  has_many :users, through: :approvals
+
+
+  belongs_to :author, class_name: "User"
+  has_many :works, as: :trackable
 
   # validates
   validates :name, presence: true,
                     length: { in: 1..100 },
                     uniqueness: { case_sensitive: false }
 
+  # callbacks
+
+
+  def log_work(action = '', action_user_id = nil)
+    worker_id = action_user_id || self.author_id
+
+    Work.create!(trackable_type: 'Role', trackable_id: self.id, action: "#{action}", author_id: worker_id, 
+      parameters: self.to_json(except: [:author_id], include: {author: {only: [:id, :user_name, :email]}}))
+  end
+
+  def log_work_approvals(action = '', action_user_id = nil)
+    worker_id = action_user_id || self.author_id
+
+    Work.create!(trackable_type: 'Role', trackable_id: self.id, action: "#{action}", author_id: worker_id, 
+      parameters: self.to_json(only: [:name], include: { approvals: {only: [:created_at], include: {user: {only: [:user_name, :email]}, 
+                                                          author: {only: [:id, :user_name, :email]}}} }))
+  end
+
   def fullname
     "#{name}"
   end
 
-
-  def name_as_link
-    link_to "#{self.name}", "#{url_helpers.role_path(self)}"
-    # "<a href=#{url_helpers.role_path(self)}>#{self.name}</a>".html_safe
-  end
-
-
-  def role_link_add_remove(user, has_role)
-    if has_role
-      "<div style='text-align: center'><button ajax-path='#{url_helpers.role_user_path(role_id: self.id, id: user)}' ajax-method='DELETE' class='btn btn-xs btn-danger glyphicon glyphicon-minus'></button></div>".html_safe
-    else
-      "<div style='text-align: center'><button ajax-path='#{url_helpers.role_users_path(role_id: self.id, id: user)}' ajax-method='POST' class='btn btn-xs btn-success glyphicon glyphicon-plus'></button></div>".html_safe
-    end
+  def note_truncate
+    truncate(Loofah.fragment(self.note).text, length: 100)
   end
 
 end

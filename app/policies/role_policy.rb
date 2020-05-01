@@ -7,11 +7,11 @@ class RolePolicy < ApplicationPolicy
   end
 
   def index?
-    user_activities.include? 'role:index'
+    user_activities.include?('role:index')
   end
 
   def show?
-    user_activities.include? 'role:show'
+    user_activities.include?('role:show')
   end
 
   def new?
@@ -19,7 +19,7 @@ class RolePolicy < ApplicationPolicy
   end
 
   def create?
-    user_activities.include? 'role:create'
+    user_activities.include?('role:create')
   end
 
   def edit?
@@ -27,21 +27,21 @@ class RolePolicy < ApplicationPolicy
   end
 
   def update?
-    user_activities.include? 'role:update'
+    user_activities.include?('role:update')
   end
 
   def destroy?
-    user_activities.include? 'role:delete'
+    user_activities.include?('role:delete')
   end
  
+  def work?
+    user_activities.include?('role:work') || user_activities.include?('all:work')
+  end
+
   def add_remove_role_user?
-    user_activities.include? 'role:add_remove_role_user'
+    user_activities.include?('role:add_remove_role_user')
   end
   
-  # def work?
-  #   user_activities.include? 'role:work'
-  # end
-
   class Scope < Struct.new(:user, :scope)
     def resolve
       scope

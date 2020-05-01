@@ -7,11 +7,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    user_activities.include? 'user:index'
+    user_activities.include?('user:index')
   end
 
   def show?
-    user_activities.include? 'user:show'
+    user_activities.include?('user:show')
   end
 
   def new?
@@ -19,7 +19,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    user_activities.include? 'user:create'
+    user_activities.include?('user:create')
   end
 
   def edit?
@@ -27,16 +27,16 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user_activities.include? 'user:update'
+    user_activities.include?('user:update')
   end
 
   def destroy?
-    user_activities.include? 'user:delete'
+    user_activities.include?('user:delete')
   end
  
-  # def work?
-  #   user_activities.include? 'user:work'
-  # end
+  def work?
+    user_activities.include?('user:work') || user_activities.include?('all:work')
+  end
  
   class Scope < Struct.new(:user, :scope)
     def resolve

@@ -38,8 +38,6 @@ $btn-default-bg:         lighten(#BECC25, 48.5%) !default;
 // import the CSS framework
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "bootstrap-datetimepicker";
-
 
 html, body {
   height: 100%;
@@ -57,7 +55,12 @@ main {
   @extend .container;
   width: 100%;
   padding-bottom: 15px;
-  margin-top: 93px; // accommodate the navbar 51, 52 if hover:border-bottom 
+  @media (max-width: 767px) {
+    margin-top: 52px; 
+  };
+  @media (min-width: 768px) {
+    margin-top: 93px;
+  };
   //margin-top: 2.0em; 
   a {
     text-decoration: none !important;
@@ -66,6 +69,7 @@ main {
     text-decoration: none !important;
   };
 }
+
 
 footer {
   flex-shrink: 0;
@@ -84,26 +88,54 @@ footer {
   a:hover {
     text-decoration: underline !important;
   };
+
+  .row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+    .thumbnail {
+      background-color: inherit;
+      border-color: #666;
+      height: 75%;
+      display: flex;
+      padding: 0px;
+      flex-direction: column;
+      .caption {
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      };
+      .img:hover {
+        -webkit-transform: scale(1.02);
+        -moz-transform: scale(1.02);
+        transform: scale(1.02);
+
+        -webkit-box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.55);
+        -moz-box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.55);
+        box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.55);
+      };
+    }
+  }
 }
 
 
-.deviseform {
-  padding-top: 25px;  
-}
-
-.glyp-index-title {
+.colored-title {
   color: $brand-primary;
-  //color: #BECC25;
 }
 
 .index-title {
-  color: $brand-primary;
   letter-spacing: 1px;
 }
 
-.modal .modal-body {
-    //max-height: 70vh;
-    //overflow-y: auto;
+
+.modal-dialog {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content {
+  height: 100%; /* = 100% of the .modal-dialog block */
 }
 
 .center {
@@ -132,6 +164,15 @@ footer {
   margin-bottom: 0px;
 }
 
+.hr-without-margins {
+  margin-top: 3px;  /*default: 20px; */
+  margin-bottom: 12px;
+}
+
+.hr-with-minimum-margins {
+  margin-top: 6px;  /*default: 20px; */
+  margin-bottom: 6px;
+}
 
 #error_explanation {
   @extend .alert;
@@ -199,27 +240,83 @@ legend.my-fieldset {
 }
 
 
-.breadcrumb > li + li:before {
-    color: #ccc;
-    content: "> ";
-    padding: 0 5px;
+.input-file-field {
+  display:  block;
+  width: 100%; 
+  height: 64px;
+  border-width: 2px;
+  border-style: dashed; 
+  background-color: $btn-default-bg;  
 }
 
-/*
-.carousel-caption {
-    right: 5%;
-    text-align: right;
-    background-color: black;
-    max-width: 300px;
-    left: auto;
-    padding:5px;
+.well-accessorization {
+  @extend .well;
+  background-color: lighten(#BECC25, 48.5%);
+  padding-bottom: 1px;
+  margin-bottom: 10px;
 }
-*/
+
+.top-bottom-buffer { 
+  margin-top: -10px; 
+  margin-bottom: -18px; 
+}
+
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -1,5em;
+  margin-left: -1,5em;  
+}
+
+
+.accordion-toggle {
+  text-decoration: none !important;
+}
+
+
+pre {
+    display: block;
+    //font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0px;
+    white-space: pre;
+    margin: 0 0;
+    padding: 0;
+    border: none;
+    line-height: 1.0;
+}
+
+
+.dragablecolor {
+  background-color: #5bc0de !important;
+}
+
+.over {
+  background-color: #5bc0de !important;
+  //background-color: lighten(#BECC25, 48.5%) !important;
+  //border-color: green !important;
+  //border: 2px solid !important;
+}
+
 
 .carousel-caption {
-  left: 5px;
-  top: 5px;
-  text-align: left;
-  padding-top: 0px;
-  padding-left: 20px;
+    position: absolute;
+    left: 0;
+    top: 0px; 
+    padding-left: 1%;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #fff;
+    text-align: left;
+    z-index: 10;
+}
+
+
+.carousel-indicators {
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+  padding-left: 10%;
+  height: 22px;
 }

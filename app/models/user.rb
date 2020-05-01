@@ -1,18 +1,63 @@
 class User < ApplicationRecord
-  include ActionView::Helpers::UrlHelper # for link_to
-  #delegate :url_helpers, to: 'Rails.application.routes'
+  include ActionView::Helpers::TextHelper # for truncate
 
   devise :saml_authenticatable, :trackable
 
-  has_and_belongs_to_many :roles
+  # relations
+  # has_and_belongs_to_many :roles
+  has_many :approvals #, dependent: :destroy
+  has_many :roles, through: :approvals
 
+
+  has_many :members #, dependent: :destroy
+  has_many :groups, through: :members
+
+  belongs_to :author, class_name: "User", optional: true
+  has_many :works, as: :trackable
+
+  # validates
+  validates :user_name, presence: true,
+                    length: { in: 1..100 }
+
+  validates :email, presence: true,
+                    length: { in: 1..100 },
+                    uniqueness: { case_sensitive: false }
+
+  # callbacks
+  before_save do
+    self.email.downcase! if self.email
+  end
   after_commit :set_default_role, on: :create
+
 
   def set_default_role
     # role = CreateRoleService.new.proposal_writer
     # self.roles << role 
   end
   
+  def log_work(action = '', action_user_id = nil)
+    worker_id = action_user_id || self.author_id
+
+    Work.create!(trackable_type: 'User', trackable_id: self.id, action: "#{action}", author_id: worker_id, 
+      parameters: self.to_json(except: [:author_id], include: {author: {only: [:id, :user_name, :email]}}))
+  end
+
+  def log_work_members(action = '', action_user_id = nil)
+    worker_id = action_user_id || self.author_id
+
+    Work.create!(trackable_type: 'User', trackable_id: self.id, action: "#{action}", author_id: worker_id, 
+      parameters: self.to_json(only: [:user_name, :email], include: { members: {only: [:created_at], include: {group: {only: [:name]}, 
+                                                          author: {only: [:id, :user_name, :email]}}} }))
+  end
+
+  def log_work_approvals(action = '', action_user_id = nil)
+    worker_id = action_user_id || self.author_id
+
+    Work.create!(trackable_type: 'User', trackable_id: self.id, action: "#{action}", author_id: worker_id, 
+      parameters: self.to_json(only: [:user_name, :email], include: { approvals: {only: [:created_at], include: {role: {only: [:name]}, 
+                                                          author: {only: [:id, :user_name, :email]}}} }))
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
@@ -21,40 +66,8 @@ class User < ApplicationRecord
     "#{name} (#{email})"
   end
 
-  def name_as_link
-    link_to "#{self.user_name}", "#{url_helpers.user_path(self)}"
-    # "<a href=#{url_helpers.user_path(self)}>#{self.name}</a>".html_safe
-  end
-
-  def user_link_add_remove(role, has_user)
-    if has_user
-      "<div style='text-align: center'><button ajax-path='#{url_helpers.role_user_path(role_id: role, id: self.id)}' ajax-method='DELETE' class='btn btn-xs btn-danger glyphicon glyphicon-minus'></button></div>".html_safe
-    else
-      "<div style='text-align: center'><button ajax-path='#{url_helpers.role_users_path(role_id: role, id: self.id)}' ajax-method='POST' class='btn btn-xs btn-success glyphicon glyphicon-plus'></button></div>".html_safe
-    end
-  end
-
-  # def self.load_saml_data attributes
-  #   user = where(email: attributes['email']).first_or_create do |u|
-  #     u.email = attributes['email']
-  #     u.first_name = attributes['first_name']
-  #     u.last_name = attributes['last_name']
-  #     u.username = attributes['username']
-  #   end
-  #   user.save!
-  #   user
-  # end
-
-
-  # def set_user_saml_attributes(user,attributes)
-  #   attribute_map.each do |k,v|
-  #     Rails.logger.info "Setting: #{v}, #{attributes[k]}"
-  #     user.send "#{v}=", attributes[k]
-  #   end
-  # end
-
-  before_save do
-    self.email.downcase! if self.email
+  def note_truncate
+    truncate(Loofah.fragment(self.note).text, length: 100)
   end
 
 end

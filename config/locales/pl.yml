@@ -22,11 +22,52 @@ pl:
       slide_0: 'Dostęp do dokumentów może być prosty.'
       slide_1: 'Wystarczy jedno kliknięcie...'
       slide_2: '...aby zobaczyć cały świat'
+  management: 'Zarządzanie'
+  table_action: 'Akcja'
+  table_role_granted: 'Przyznane?'
+  table_group_member: 'Jest członkiem?'
+  user:
+    index:
+      title: 'Użytkownicy'
+    show:
+      title: 'Użytkownik'
+    edit:
+      title: 'Edycja -> Użytkownik'
+  role:
+    index:
+      title: 'Role'
+    show:
+      title: 'Rola'
+    new:
+      title: 'Nowa Rola'
+    edit:
+      title: 'Edycja -> Rola'
+  work:
+    index:
+      title: 'Dziennik operacji'
+  group:
+    index:
+      title: 'Grupy'
+    show:
+      title: 'Grupa'
+    new:
+      title: 'Nowa Grupa'
+    edit:
+      title: 'Edycja -> Grupa'
   activerecord:
     models:
+      work: 'Dziennik operacji'
       user: 'Użytkownik'
       role: 'Rola'
+      group: 'Grupa'
     attributes:
+      work:
+        created_at: 'Data'
+        created_by: 'Autor'
+        action: 'Operacja'
+        trackable_type: 'Obiekt'
+        trackable_id: 'Identyfikator'
+        parameters: 'Dane'
       user:
         wso2is_userid: 'WSO2IS userid'
         email: 'Email'
@@ -41,6 +82,15 @@ pl:
         last_sign_in_at: 'Ostatnio zalogowany'
         current_sign_in_ip: 'Aktualnie zalogowany - IP'
         last_sign_in_ip: 'Ostatnio zalogowany - IP'
+        note: 'Uwagi'
+        fullname: 'Nazwa'
+      role:
+        name: 'Nazwa'
+        activities: 'Uprawnienia'
+        note: 'Uwagi'
+      group:
+        name: 'Nazwa'
+        note: 'Uwagi'
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"

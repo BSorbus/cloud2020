@@ -19,9 +19,12 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
 
+      t.text :note, default: ""
+      t.references :author, foreign_key: false, index: true
+
       t.timestamps
     end
 
-    add_index :users, :email,                unique: true
+    add_index :users, :email, unique: true
   end
 end

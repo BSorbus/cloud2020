@@ -15,6 +15,34 @@ Rails.application.routes.draw do
 
     resources :uke_regulations, only: [:index]
 
+    resources :works, only: [:index] do
+      post 'datatables_index', on: :collection # for User
+      post 'datatables_index_trackable', on: :collection # for Trackable
+      post 'datatables_index_user', on: :collection # for User
+    end
+
+    resources :users do
+      get 'select2_index', on: :collection
+      get 'datatables_index', on: :collection
+      get 'datatables_index_role', on: :collection # Displays users for showed role
+      get 'datatables_index_group', on: :collection # Displays users for showed group
+      resources :attachments, module: :users, only: [:create] do
+        post 'create_folder', on: :collection
+      end
+    end
+
+    resources :roles do
+      get 'datatables_index', on: :collection
+      get 'datatables_index_user', on: :collection # Displays roles for showed user
+      resources :users, only: [:create, :destroy], controller: 'roles/users'
+    end    
+
+    resources :groups do
+      get 'select2_index', on: :collection
+      get 'datatables_index', on: :collection
+      get 'datatables_index_user', on: :collection # Displays groups for showed user
+      resources :users, only: [:create, :destroy], controller: 'groups/users'
+    end    
 
     get 'datatables/lang'
     get 'static_pages/home'

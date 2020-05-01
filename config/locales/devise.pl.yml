@@ -31,7 +31,7 @@ pl:
       timeout: "Sesja wygasła, zaloguj się ponownie by kontynuować."
       unauthenticated: "Aby kontynuować musisz się zalogować."
       unconfirmed: "Aby kontynuować musisz aktywować swoje konto."
-      deleted_account: "Konto zostało usunięte lub wyłączone!"  
+      deleted_account: "Konto zostało wyłączone!"  
     mailer:
       confirmation_instructions:
         subject: "POLA - Instrukcja aktywacji konta"

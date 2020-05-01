@@ -20,4 +20,5 @@
 //= require bootstrap
 //= require bootstrap-datetimepicker
 //= require toastr
+//= require trix
 //= require_tree .

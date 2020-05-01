@@ -1,0 +1,46 @@
+<br>
+<div class="container-fluid"> 
+  <div class="row">
+    <div class="col-sm-2">
+      <ul  class="nav nav-pills brand-pills nav-stacked">
+
+        <li class="brand-nav active">
+          <a href="#group_show" data-toggle="tab"><%= group_show_legend %></a>
+        </li>
+
+        <% if policy(:user).index? %>
+          <li class="brand-nav brand-nav-level-1">
+            <a href="#users" data-toggle="tab"><%= user_index_legend %></a>
+          </li>
+        <% end %>
+
+        <% if policy(:group).work? %>
+          <li class="brand-nav brand-nav-level-1">
+            <a href="#works" data-toggle="tab"><%= work_index_legend %></a>
+          </li>
+        <% end %>
+ 
+      </ul>
+    </div>
+    <div class="col-sm-10">
+      <div class="tab-content clearfix">
+
+        <div class="tab-pane active" id="group_show">
+          <%= render 'data', input_disabled: true, subtitle: group_info_legend(@group) %>
+        </div>
+
+        <div class="tab-pane" id="users">
+          <%= render 'users', subtitle: group_info_legend(@group) %>
+        </div>
+
+        <div class="tab-pane" id="works">
+          <%= render 'works/works_tab', trackable_type: "Group", trackable_id: @group.id, subtitle: group_info_legend(@group) %>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
