@@ -51,7 +51,7 @@ class User < ApplicationRecord
   end
 
   def fullname
-    "#{name} (#{email})"
+    "#{email} (#{name})"
   end
 
   def note_truncate

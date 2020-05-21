@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     authorize :user, :index?
     #params[:q] = (params[:q]).upcase
     params[:q] = params[:q]
-    @users = User.order(:user_name).finder_user(params[:q])
+    @users = User.order(:email, :last_name, :first_name).finder_user(params[:q])
     @users_on_page = @users.page(params[:page]).per(params[:page_limit])
     
     render json: { 

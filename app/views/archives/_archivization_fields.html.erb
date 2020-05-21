@@ -65,20 +65,53 @@
       }
     };
 
-    function formatGroupSelection(item) {
-      if (item.id) {
-        var groupName = item.data_obj.fullname;
-        return  "<span>" + groupName + "</span>";
-      } else {
-        return "";
-      }
+    // function formatGroupSelection(item) {
+    //   if (item.id) {
+    //     var groupName = item.data_obj.fullname;
+    //     return  "<span>" + groupName + "</span>";
+    //   } else {
+    //     return "";
+    //   }
+    // };
+
+    function formatGroupSelection(item, container) {
+      container.append($('<span class="selected-item"></span>').text(item.data_obj.fullname));
+      $("<span class='pull-right'><a><button type='button' class='btn btn-xs btn-default'><%= t('helpers.links.show_link') %></button></a></span>")
+        .appendTo(container)
+        .mousedown(function(e) {
+          e.stopPropagation();            
+        })
+        .click(function(e) {
+          e.preventDefault();
+          // alert('Selection Click on formatSelection!');
+
+          $.ajax({
+            // url: "/<%= locale %>/groups/" + item.id + "/edit.js",
+            url: "/<%= locale %>/groups/" + item.id + ".js",
+            type: "GET",
+            success: function (response) {
+              select2groupObj.select2('close');
+            },
+            error: function (jqXHR, exception) {
+              console.log(jqXHR);
+              if (jqXHR.status == 401) {
+                window.location.reload();
+              } else {
+                getErrorMessage(jqXHR, exception);
+              }
+            }
+          });
+
+        });
     };
+
 
     function formatGroupResult(item, container, query, escapeMarkup) {
       if (item.id) {    
         var $option = $("<span></span>");
 
-        var $preview = $("<span class='pull-right'><a><%= t('helpers.links.show_link') %></a></span>");
+//        var $preview = $("<span class='pull-right'><a><%= t('helpers.links.show_link') %></a></span>");
+        var $preview = $("<span class='pull-right'><a><button type='button' class='btn btn-xs btn-default'><%= t('helpers.links.show_link') %></button></a></span>");
         $preview.prop("href", item.id);
         $preview.on('mouseup', function (evt) {
           // Select2 will remove the dropdown on `mouseup`, which will prevent any `click` events from being triggered
@@ -154,7 +187,7 @@
       formatNoMatches: function(term) {
         // toastr['info']("<%= locale %>");
 
-        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return groupAddJsActionExternal(this, document.activeElement.id );' data-term='"+ term +"' ><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
+        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return groupAddJsActionExternal(this, document.activeElement.id );' data-term='" + term + "'><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
 
         // jest OK
         // return "Brak danych: " + term + "<span class='pull-right'><a href='#' onclick='return myJsActionExternal(this, document.activeElement.id );' data-term='"+term+"' >dodaj</a></span>";

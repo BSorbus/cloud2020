@@ -59,11 +59,11 @@
 
             <div class='members-sub-form'>
               <%#= f.fields_for :members do |member_form|  %>
-              <%= f.fields_for :members, @group.members.joins(:user).order(:user_name, :email).reload do |member_form|  %>
+              <%= f.fields_for :members, @group.members.joins(:user).order(:email, :last_name, :first_name).reload do |member_form|  %>
                 <%= render 'member_fields', f: member_form %> 
               <% end %>
             </div>
-            <%= link_to_add_fields( t("helpers.links.link_to_add_fields_nested__to_group"), f, :members) %>
+            <%= link_to_add_fields( t("helpers.links.link_to_add_fields_nested"), f, :members) %>
 
           </div>
 

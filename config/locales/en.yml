@@ -351,7 +351,6 @@ en:
       close: "Close"
       filter: "Filtruj dane"
       link_to_add_fields_nested: '[ + Add row ]'
-      link_to_add_fields_nested__to_group: '[ + Add to Group]'
       link_to_remove_fields_nested: '[ - Remove row ]'
       link_to_remove_fields_nested_small: '[ - ]'
       not_exist_in_list:  'No entry in the selection list?'

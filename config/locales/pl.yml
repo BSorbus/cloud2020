@@ -391,7 +391,6 @@ pl:
       close: "Zamknij"
       filter: "Filtruj dane"
       link_to_add_fields_nested: '[ + Dodaj wiersz ]'
-      link_to_add_fields_nested__to_group: '[ + Dodaj do Grupy]'
       link_to_remove_fields_nested: '[ - Usuń wiersz ]'
       link_to_remove_fields_nested_small: '[ - ]'
       not_exist_in_list:  'Nie ma pozycji na liście wyboru?'

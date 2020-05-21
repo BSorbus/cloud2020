@@ -100,6 +100,34 @@
       }
     };
 
+    // function formatUserSelection(item) {
+    //   if (item.id) {
+
+    //       // hook = document.activeElement.id;
+    //       var $option2 = $("<span></span>");
+    //       var $preview2 = $("<span class='pull-right'><a><%= t('helpers.links.new') %></a></span>");
+    //       $preview2.prop("href", item.id);
+    //       $preview2.on('mouseup', function (evt) {
+    //         // Select2 will remove the dropdown on `mouseup`, which will prevent any `click` events from being triggered
+    //         // So we need to block the propagation of the `mouseup` event
+    //         evt.stopPropagation();
+    //       });
+        
+    //       $preview2.on('click', function (evt) {
+    //         alert('clik!');
+
+    //       });
+          
+    //       $option2.text( item.data_obj.fullname );
+    //       $option2.append($preview2);
+          
+    //       return $option2;
+
+    //   } else {
+    //     return "";
+    //   }
+    // };
+
     function formatUserResult(item, container, query, escapeMarkup) {
       if (item.id) {
         if (item.id === '*') {
@@ -227,7 +255,7 @@
       formatNoMatches: function(term) {
         // toastr['info']("<%= locale %>");
 
-        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return userAddJsActionExternal(this, document.activeElement.id );' data-term='"+term.toLowerCase() +"' ><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
+        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return userAddJsActionExternal(this, document.activeElement.id );' data-term='" + term.toLowerCase() + "'><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
 
         // jest OK
         // return "Brak danych: " + term + "<span class='pull-right'><a href='#' onclick='return myJsActionExternal(this, document.activeElement.id );' data-term='"+term+"' >dodaj</a></span>";
