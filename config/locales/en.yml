@@ -277,6 +277,9 @@ en:
       month: Month
       second: Seconds
       year: Year
+  success:
+    messages:
+      make_user_in_select2: ' - is already stored in the database and you will find it in the user list.'
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -337,6 +340,7 @@ en:
       confirm: "Are you sure?"
       confirm_destroy: 'Are you sure delete: "%{data}"?'
       confirm_add: 'Are you sure you want to add this entry?'
+      confirm_add_user: ' - Are you sure you want to add this entry to your user base?'
       confirm_send_mail: 'Are you sure you want to send e-mail to %{data}?'
       destroy: "Delete"
       destroy_account: "Cancel my account"

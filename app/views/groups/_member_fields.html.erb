@@ -47,7 +47,7 @@
 
     //check valid email
     if (validateEmail(emailForAdd)) { 
-      if (confirm("<%= t('helpers.links.confirm_add') %>")) {
+      if (confirm( emailForAdd + "<%= t('helpers.links.confirm_add_user') %>") ) {
 
         $.ajax({
           url: '/<%= locale %>/users.json',
@@ -56,7 +56,8 @@
             user: {"email": emailForAdd}
           },
           success: function (response) {
-            toastr['success']('wiersz został pomyślnie dodany');
+            // toastr['success']('wiersz został pomyślnie dodany');
+            alert( response.fullname + "<%= t('success.messages.make_user_in_select2') %>" );
           },
           error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr);

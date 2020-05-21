@@ -310,6 +310,9 @@ pl:
   help_block_text:
     select2_item: 'Wprowadź nazwę miejscowości i ewentualnie ulicy. Możesz ograniczyć listę podając nazwę gminy i/lub powiatu i/lub województwa. Wyrazy oddzielaj spacją. Np. osielsko grzybo kujaw'
     select2_no_results: Brak danych
+  success:
+    messages:
+      make_user_in_select2: ' - jest już zapisany w bazie danych i znajdziesz go na liście użytkowników.'
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -377,6 +380,7 @@ pl:
       confirm: "Czy na pewno?"
       confirm_destroy: 'Na pewno chcesz usunąć wpis: "%{data}"?'
       confirm_add: 'Czy na pewno chcesz dodać ten wpis?'
+      confirm_add_user: ' - Czy na pewno chcesz dodać do bazy użytkowników ten wpis?'
       confirm_send_mail: 'Na pewno chcesz wysłać email o udostepnieniu składnicy do %{data}?'
       destroy: "Usuń"
       destroy_account: "Usuń moje konto"
