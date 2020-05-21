@@ -61,6 +61,14 @@
 
 </div>
 <div class="modal-footer">
+
+  <% if policy(@group).edit? %>
+    <%= link_to edit_group_path(@group), remote: true, class: "btn btn-primary" do %>
+      <span class="fa fa-edit"></span>
+      <%= t("helpers.links.edit") %>
+    <% end %>
+  <% end %>
+
   <% if @for_archive.present? %>
     <% if policy(@for_archive).send_link_archive_show_uuid_by_email? %>
       <%= link_to send_link_archive_show_uuid_by_email_archive_path(uuid: @for_archive.archive_uuid, users_ids: @group.users.ids ),
@@ -69,7 +77,7 @@
                           data: { confirm: t('helpers.links.confirm_send_mail', data: t('to_all')) }, 
                           class: "btn btn-default" do %>
         <span class="fa fa-envelope"></span>
-        <%= t("helpers.links.send_email") %>
+        <%= t("helpers.links.send_email_to_all") %>
       <% end %>
     <% end %>
   <% end %>

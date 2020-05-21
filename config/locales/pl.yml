@@ -370,6 +370,7 @@ pl:
       show: 'Pokaż szczegóły'
       show_link: 'Pokaż'
       new:  'Dodaj'
+      want_create: 'Czy utwórzyć?'
       edit: 'Edycja'
       back: 'Powrót'
       cancel: 'Wróć'

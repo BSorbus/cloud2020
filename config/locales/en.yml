@@ -330,6 +330,7 @@ en:
       show: "Show"
       show_link: 'Show'
       new: "Add"
+      want_create: 'You want to create?'
       edit: "Edit"
       back: "Back"
       cancel: "Cancel"

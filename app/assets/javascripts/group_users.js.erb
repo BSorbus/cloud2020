@@ -96,7 +96,6 @@ $(document).ready(function() {
     $.ajax({
       url: $(this).attr('ajax-path'),
       type: $(this).attr('ajax-method'),
-      dataType: 'json',
       success: function (response) {
         oGroupUserstable.draw();
         toastr.options = {

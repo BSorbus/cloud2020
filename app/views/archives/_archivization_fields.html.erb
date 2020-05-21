@@ -90,7 +90,8 @@
           // console.log('the link was clicked');
 
           $.ajax({
-            url: "/<%= locale %>/groups/" + item.id + "/edit.js",
+            // url: "/<%= locale %>/groups/" + item.id + "/edit.js",
+            url: "/<%= locale %>/groups/" + item.id + ".js",
             type: "GET",
             success: function (response) {
               select2groupObj.select2('close');
@@ -153,7 +154,7 @@
       formatNoMatches: function(term) {
         // toastr['info']("<%= locale %>");
 
-        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return groupAddJsActionExternal(this, document.activeElement.id );' data-term='"+ term +"' ><button type='button' class='btn btn-xs btn-primary'>+ <%= t('helpers.links.new') %></button></a></span>";
+        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return groupAddJsActionExternal(this, document.activeElement.id );' data-term='"+ term +"' ><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
 
         // jest OK
         // return "Brak danych: " + term + "<span class='pull-right'><a href='#' onclick='return myJsActionExternal(this, document.activeElement.id );' data-term='"+term+"' >dodaj</a></span>";

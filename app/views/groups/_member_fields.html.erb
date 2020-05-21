@@ -71,7 +71,8 @@
 
       }
     } else {
-      toastr['error']("<%= t('errors.messages.bad_email') %>");
+      // toastr['error']("<%= t('errors.messages.bad_email') %>");
+      alert( "<%= t('errors.messages.bad_email') %>" );
     };
 
     return false;
@@ -225,7 +226,7 @@
       formatNoMatches: function(term) {
         // toastr['info']("<%= locale %>");
 
-        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return userAddJsActionExternal(this, document.activeElement.id );' data-term='"+term.toLowerCase() +"' ><button type='button' class='btn btn-xs btn-success'>+ <%= t('helpers.links.new') %></button></a></span>";
+        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return userAddJsActionExternal(this, document.activeElement.id );' data-term='"+term.toLowerCase() +"' ><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
 
         // jest OK
         // return "Brak danych: " + term + "<span class='pull-right'><a href='#' onclick='return myJsActionExternal(this, document.activeElement.id );' data-term='"+term+"' >dodaj</a></span>";

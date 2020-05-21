@@ -23,7 +23,7 @@
       <p>W programie <strong>UKE Cloud</strong> została Ci udostępniona składnica plików</p>
       <p><%= link_to @archive_fullname, @archive_url_uuid, target: "_blank" %></p> 
       <spacer size="16"></spacer>
-      <h5 class="h5-small">Kliknij w link powyżej jeżeli chcesz przejść do składnicy.</h5> 
+      <h5 class="h5-small">(Kliknij w link powyżej jeżeli chcesz przejść do składnicy.)</h5> 
     </columns>
   </row>
 
@@ -33,8 +33,8 @@
 
   <row>
     <columns>
-      <h6 class="h6-small">Uwaga</h6> 
-      <h6 class="h6-small">Aby móc korzystać z zasobów składnicy musisz posiadać konto w Centralnym Systemie Uwierzytelniania UKE. Jeżeli nie posiadasz konta w CSU UKE kliknij w link powyżej a zostaniesz automatycznie przekierowany do właściwej strony. Pamiętaj, że Twój <span class="h5-small"><strong>adres e-mail</strong></span>, na który otrzymałeś tę wiadomość, <span class="h5-small"><strong>musi być zgodny</strong></span> z Twoim adresem e-mail konta w CSU UKE.</h6> 
+      <h5 class="h5-small">Uwaga</h5> 
+      <h5 class="h5-small">Aby móc korzystać z zasobów składnicy musisz posiadać konto w Centralnym Systemie Uwierzytelniania UKE. Jeżeli nie posiadasz konta w CSU UKE kliknij w link powyżej a zostaniesz automatycznie przekierowany do właściwej strony. Pamiętaj, że Twój <strong>adres e-mail</strong>, na który otrzymałeś tę wiadomość, <strong>musi być zgodny</strong> z Twoim adresem e-mail konta w CSU UKE.</h5> 
     </columns>
   </row>
 
