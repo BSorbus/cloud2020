@@ -2,8 +2,8 @@ en:
   logo_file: "logo_uke_en_do_lewej.png"
   logo_link: "http://www.uke.gov.pl/en/"
   to_all: 'all'
-  title: "UKE Cloud2020"
-  description: "UKE Cloud2020 supported for"
+  title: "UKE Cloud"
+  description: "UKE Cloud allows you to download files from the UKE storage facility"
   layouts:
     footer:
       brand: 'Office of Electronic Communications'

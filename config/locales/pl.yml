@@ -4,8 +4,8 @@ pl:
   to_all: 'wszystkich'
   logo_file: "logo_uke_pl_do_lewej.png"
   logo_link: "http://www.uke.gov.pl"
-  title: "UKE Cloud2020"
-  description: "UKE Cloud2020 umożliwia..."
+  title: "UKE Cloud"
+  description: "UKE Cloud umożliwia pobieranie plików ze składnicy UKE"
   layouts:
     footer:
       brand: 'Urząd Komunikacji Elektronicznej'
