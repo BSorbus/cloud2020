@@ -19,8 +19,9 @@ class User < ApplicationRecord
 
   validates :email, presence: true,
                     length: { in: 1..100 },
-                    uniqueness: { case_sensitive: false }
-
+                    uniqueness: { case_sensitive: false },
+                    format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
+                    
   # callbacks
   before_validation do
     self.email.downcase if self.email.present?

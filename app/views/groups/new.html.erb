@@ -3,6 +3,15 @@
   <div class="row">
     <div class="col-sm-2">
       <div class="center colored-title"><%= fa_icon("plus", size: '3x') %></div>
+      <h3 class="center colored-title"><%= t('helpers.links.new') %></h3>
+      <hr>
+      <ul  class="nav nav-pills brand-pills nav-stacked">
+        <li>
+        <%= link_to groups_path do %>
+          <%= back_to_index_legend %>
+        <% end %>
+        </li>
+      </ul>
     </div>
     <div class="col-sm-10">
       <fieldset class="my-fieldset">
