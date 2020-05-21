@@ -2,14 +2,9 @@
 
 namespace :cronjobs do
 
-  desc "Sending exam reminders"
-  task proposal_send_reminders: :environment do
-    Proposal.send_reminders
-  end
-
-  desc "Clean unsaved proposals"
-  task proposal_clean_unsaved: :environment do
-    Proposal.clean_unsaved
+  desc "Clean /tmp/zipownia"
+  task clean_zipownia: :environment do
+    system("rm -rf #{Rails.root}/tmp/zipownia")
   end
 
 end

@@ -51,6 +51,7 @@ $(document).ready(function() {
     ajax: { 
       url: $('#works-table').data('source'),
       type: "POST",
+      dataType: 'json',
       error: function (jqXHR, exception) {
         console.log(jqXHR);
         if (jqXHR.status == 401) {
@@ -126,6 +127,7 @@ $(document).ready(function() {
     ajax: { 
       url: $('#trackable-works').data('source'),
       type: "POST",
+      dataType: 'json',
       error: function (jqXHR, exception) {
         console.log(jqXHR);
         if (jqXHR.status == 401) {
@@ -208,6 +210,7 @@ $(document).ready(function() {
     ajax: { 
       url: $('#user-works').data('source'),
       type: "POST",
+      dataType: 'json',
       error: function (jqXHR, exception) {
         console.log(jqXHR);
         if (jqXHR.status == 401) {

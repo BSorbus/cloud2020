@@ -4,8 +4,6 @@ class WorksController < ApplicationController
 
 
   def index
-    #@works = PublicWork::Work.order(created_at: :desc).all
-    #@works = Work.order(created_at: :desc).all
     authorize :work, :index?
   end
 

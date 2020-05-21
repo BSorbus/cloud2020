@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_214856) do
+ActiveRecord::Schema.define(version: 2020_04_15_214859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,38 @@ ActiveRecord::Schema.define(version: 2020_04_15_214856) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_approvals_on_author_id"
-    t.index ["role_id", "user_id"], name: "index_approvals_on_role_id_and_user_id", unique: true
     t.index ["role_id"], name: "index_approvals_on_role_id"
-    t.index ["user_id", "role_id"], name: "index_approvals_on_user_id_and_role_id", unique: true
     t.index ["user_id"], name: "index_approvals_on_user_id"
+  end
+
+  create_table "archives", force: :cascade do |t|
+    t.uuid "archive_uuid"
+    t.string "name"
+    t.text "note", default: ""
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["archive_uuid"], name: "index_archives_on_archive_uuid"
+    t.index ["author_id"], name: "index_archives_on_author_id"
+  end
+
+  create_table "archivization_types", force: :cascade do |t|
+    t.string "name"
+    t.string "activities", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_archivization_types_on_name"
+  end
+
+  create_table "archivizations", force: :cascade do |t|
+    t.bigint "archive_id"
+    t.bigint "group_id"
+    t.bigint "archivization_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["archive_id"], name: "index_archivizations_on_archive_id"
+    t.index ["archivization_type_id"], name: "index_archivizations_on_archivization_type_id"
+    t.index ["group_id"], name: "index_archivizations_on_group_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -53,9 +81,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214856) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_members_on_author_id"
-    t.index ["group_id", "user_id"], name: "index_members_on_group_id_and_user_id", unique: true
     t.index ["group_id"], name: "index_members_on_group_id"
-    t.index ["user_id", "group_id"], name: "index_members_on_user_id_and_group_id", unique: true
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
@@ -106,6 +132,9 @@ ActiveRecord::Schema.define(version: 2020_04_15_214856) do
 
   add_foreign_key "approvals", "roles"
   add_foreign_key "approvals", "users"
+  add_foreign_key "archivizations", "archives"
+  add_foreign_key "archivizations", "archivization_types"
+  add_foreign_key "archivizations", "groups"
   add_foreign_key "members", "groups"
   add_foreign_key "members", "users"
 end

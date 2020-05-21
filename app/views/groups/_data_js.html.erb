@@ -1,0 +1,78 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h4 id="myModalLabel"><strong><%= group_info_legend(@group) %></strong></h4>
+</div>
+<div class="modal-body">
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <%= @group.note.html_safe %>
+    </div> <!--/col-sm-6 -->
+
+    <div class="form-group col-sm-12">
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+<!-- 
+            <th><%= User.human_attribute_name(:user_name) %></th>
+ -->
+            <th><%= User.human_attribute_name(:email) %></th>
+            <th><%= User.human_attribute_name(:first_name) %></th>
+            <th><%= User.human_attribute_name(:last_name) %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @group.users.order(:user_name, :email).each do |rec| %>
+            <tr>
+<!-- 
+              <td class="col-sm-3"><%= rec.user_name %></td>
+ -->
+              <td class="col-sm-5"><%= rec.email %></td>
+              <td class="col-sm-3"><%= rec.first_name %></td>
+              <td class="col-sm-3"><%= rec.last_name %></td>
+              <td class="col-sm-1">
+
+                <% if @for_archive.present? %>
+                  <% if policy(@for_archive).send_link_archive_show_uuid_by_email? %>
+                    <%= link_to send_link_archive_show_uuid_by_email_archive_path(uuid: @for_archive.archive_uuid, users_ids: [rec.id] ),
+                                        method: :get,
+                                        remote: true,
+                                        data: { confirm: t('helpers.links.confirm_send_mail', data: rec.fullname) }, 
+                                        class: "btn btn-xs btn-default" do %>
+                      <span class="fa fa-envelope"></span>
+                      <%= t("helpers.links.send_email") %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>  <!-- /row -->
+
+
+</div>
+<div class="modal-footer">
+  <% if @for_archive.present? %>
+    <% if policy(@for_archive).send_link_archive_show_uuid_by_email? %>
+      <%= link_to send_link_archive_show_uuid_by_email_archive_path(uuid: @for_archive.archive_uuid, users_ids: @group.users.ids ),
+                          method: :get,
+                          remote: true,
+                          data: { confirm: t('helpers.links.confirm_send_mail', data: t('to_all')) }, 
+                          class: "btn btn-default" do %>
+        <span class="fa fa-envelope"></span>
+        <%= t("helpers.links.send_email") %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><%= t('helpers.links.close') %></button>
+</div>

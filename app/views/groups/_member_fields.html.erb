@@ -1,0 +1,243 @@
+<div class="fields">
+  <div class='row' >
+    <div class="form-group required col-sm-9">
+      <%= f.hidden_field :user_id, 
+                        class: "form-control input-sm select2user", 
+                        placeholder: t('placeholder.select2user'),
+                        style: "width:100%",
+                        "data-locale": "#{params[:locale]}" %>
+    </div>
+
+
+    <div class="form-group col-sm-2">
+      <%= f.hidden_field :_destroy %>
+      <%= link_to t("helpers.links.link_to_remove_fields_nested_small"), '#',
+        onClick: "removeNestedFields(this); return false;", class: 'remove-link-button btn btn-sm btn-danger', title: t('tooltip.remove_fields_nested'), rel: 'tooltip' %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :author_id, value: current_user.id %>
+
+</div>
+
+<script>
+
+  function userAddJsActionExternal(that, idobj) {
+    // console.log('that', that);
+    // console.log(idobj, $("#"+idobj));
+    // console.log("$(that).attr('data-term')", $(that).attr('data-term'));
+
+    //$(this).attr('ajax-path')
+
+    //$("#"+idobj).val("bodex21@test.com").trigger("change");
+    //$("#"+idobj).val("123");
+
+    // $("#"+idobj).select2('data', {"data_obj": {"id": response.id, "fullname": response.fullname}, "id": response.id, text:'ENABLED_FROM_JS'});
+    // $("#"+idobj).select2('data', {"data_obj": {"id": 1, "fullname": 'cloud@uke.gov.pl'}, "id": 1, text:'ENABLED_FROM_JS'}, true);
+    // $("#"+idobj).select2().trigger("change");
+
+    // select2userObj.select2("close");
+
+   //$("#"+idobj).select2('val', 15, true);
+
+    //$("#"+idobj).select2().select2("close");
+
+    //remove spaces
+    var emailForAdd = $(that).attr('data-term').replace(/\s+/g, '');
+
+    //check valid email
+    if (validateEmail(emailForAdd)) { 
+      if (confirm("<%= t('helpers.links.confirm_add') %>")) {
+
+        $.ajax({
+          url: '/<%= locale %>/users.json',
+          type: 'POST',
+          data: {
+            user: {"email": emailForAdd}
+          },
+          success: function (response) {
+            toastr['success']('wiersz został pomyślnie dodany');
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr);
+            if (xhr.status == 401) {
+              window.location.reload();
+            } else {
+              getErrorMessage(xhr, thrownError);
+            }
+          }
+        }); 
+        //end $.ajax
+
+      }
+    } else {
+      toastr['error']("<%= t('errors.messages.bad_email') %>");
+    };
+
+    return false;
+  };
+
+
+    function initUserSelection(element, callback) {
+      var id=$(element).val();
+      if (id!=="") {
+        $.get( "/<%= locale %>/users/"+id+".json", function(data_from_json) {
+          if(data_from_json)
+            // callback({ id: data_from_json.id, text: data_from_json.fullname });
+          return callback({ data_obj: data_from_json, id: data_from_json.id });
+        });
+      }
+    };
+
+    function formatUserSelection(item) {
+      if (item.id) {
+        var userName = item.data_obj.fullname;
+        return  "<span>" + userName + "</span>";
+      } else {
+        return "";
+      }
+    };
+
+    function formatUserResult(item, container, query, escapeMarkup) {
+      if (item.id) {
+        if (item.id === '*') {
+
+          // hook = document.activeElement.id;
+          var $option = $("<span></span>");
+          var $preview = $("<span class='pull-right'><a><%= t('helpers.links.new') %></a></span>");
+          $preview.prop("href", item.id);
+          $preview.on('mouseup', function (evt) {
+            // Select2 will remove the dropdown on `mouseup`, which will prevent any `click` events from being triggered
+            // So we need to block the propagation of the `mouseup` event
+            evt.stopPropagation();
+          });
+        
+          $preview.on('click', function (evt) {
+            if (validateEmail(item.data_obj.fullname)) { 
+              if (confirm('Czy na pewno chcesz dodać nowy wpis?')) {
+
+                $.ajax({
+                  url: '/<%= locale %>/users.json',
+                  type: 'POST',
+                  data: {
+                    user: {"email": item.data_obj.fullname}
+                  },
+                  success: function (response) {
+                    //select2userObj.val(response.id); == to samo == select2userObj.select2("val", response.id);
+
+                    //$("#"+hook).select2().val(response.id).trigger("change");
+                    //$("#"+hook).val(response.id).trigger("change", true);
+
+                    // select2userObj.select2('data', {"data_obj": {"id": response.id, "fullname": response.fullname}, "id": response.id, text:'ENABLED_FROM_JS'});
+                    //select2userObj.select2("close");
+                    //$("#"+hook).val(response.fullname).trigger("change", true);
+                    //$("#"+hook).select2().select2("close");
+
+                    //$("#"+hook).val(response.fullname).trigger("change");
+
+                    //$("#"+hook).empty().append('<option value="id">' + response.fullname +'</option>').val(response.id).trigger('change');
+                    $("#"+hook).select2().select2("close");
+
+                    toastr['success']('wiersz został pomyślnie dodany');
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr);
+                    if (xhr.status == 401) {
+                      window.location.reload();
+                    } else {
+                      getErrorMessage(xhr, thrownError);
+                    }
+                  }
+                }); 
+                //end $.ajax
+
+              };
+            } else {
+              alert('Podany adres e-mail jest niepoprawny');                        
+            }
+
+          });
+          
+          $option.text( item.data_obj.fullname + " (* niezapisany)");
+          $option.append($preview);
+          
+          return $option;
+
+
+        } else {
+          var userName = item.data_obj.fullname;
+          return  "<span>" + userName + "</span>";          
+        }
+      } else {
+        return "";
+      }
+    };
+
+    var select2userObj = $('.select2user').select2({
+      minimumInputLength: 0,
+      maximumInputLength: 75,
+      allowClear: false,
+      ajax: {
+        url: "/<%= locale %>/users/select2_index.json",
+        dataType: 'json',
+        quietMillis: 250,
+        type: 'GET',
+        data: function(term, page) {
+          // console.log( "2.", $("#"+document.activeElement.id ).val() );
+          return {
+            q: term,
+            page_limit: 10,
+            page: page
+          };
+        },
+        results: function(data, page) {
+          //var more = (page * 10) < data.total_count;
+          var more = (page * 10) < data.meta.total_count;
+          var users = $.map(data.users, function(user, i) {
+            // return { id: user.id, text: user.fullname };
+            return { data_obj: user, id: user.id};
+          });
+          return { results: users, more: more };
+        }
+      },
+      formatAjaxError: function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        if (jqXHR.status == 401) {
+          window.location.reload();
+        } else {
+          getErrorMessage(jqXHR, jqXHR.status);
+        }
+        return errorThrown + " " + jqXHR.responseText;
+      },
+      // createSearchChoice: function (term, data) {
+      //   if ($(data).filter(function () {
+      //     // return this.text.localeCompare(term) === 0;
+      //     return this.data_obj.fullname.localeCompare(term) === 0;
+      //   }).length === 0) {
+      //     //{"more":false,"results":[{"id":"whatever","text":"new-tag (new)"}] };
+      //     //return { id: term, text: term + " (*)" };
+      //     return { id: "*", data_obj: {"id": "*", "fullname": term}, more: false };
+      //   }
+      // },
+      // query: function(options) {
+      //   console.log('query fired');
+      // };
+      formatNoMatches: function(term) {
+        // toastr['info']("<%= locale %>");
+
+        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return userAddJsActionExternal(this, document.activeElement.id );' data-term='"+term.toLowerCase() +"' ><button type='button' class='btn btn-xs btn-success'>+ <%= t('helpers.links.new') %></button></a></span>";
+
+        // jest OK
+        // return "Brak danych: " + term + "<span class='pull-right'><a href='#' onclick='return myJsActionExternal(this, document.activeElement.id );' data-term='"+term+"' >dodaj</a></span>";
+
+      },
+      initSelection: initUserSelection, 
+      formatSelection: formatUserSelection, // format selected row
+      formatResult: formatUserResult, // format rows on list
+      dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+      escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+    });
+
+</script>
+
+

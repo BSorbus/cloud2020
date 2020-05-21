@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
     resources :users do
       get 'select2_index', on: :collection
-      get 'datatables_index', on: :collection
+      post 'datatables_index', on: :collection
       get 'datatables_index_role', on: :collection # Displays users for showed role
       get 'datatables_index_group', on: :collection # Displays users for showed group
       resources :attachments, module: :users, only: [:create] do
@@ -32,17 +32,34 @@ Rails.application.routes.draw do
     end
 
     resources :roles do
-      get 'datatables_index', on: :collection
+      post 'datatables_index', on: :collection
       get 'datatables_index_user', on: :collection # Displays roles for showed user
       resources :users, only: [:create, :destroy], controller: 'roles/users'
     end    
 
     resources :groups do
       get 'select2_index', on: :collection
-      get 'datatables_index', on: :collection
+      post 'datatables_index', on: :collection
       get 'datatables_index_user', on: :collection # Displays groups for showed user
       resources :users, only: [:create, :destroy], controller: 'groups/users'
     end    
+
+    resources :archives, except: [:destroy] do
+      post 'datatables_index', on: :collection
+      # resources :components, module: :archives, only: [:create] do
+      #   post 'create_folder', on: :collection
+      # end
+    end
+
+    resources :archives, only: [], param: :uuid do
+      get 'show_uuid', on: :member
+      # get 'edit_uuid', on: :member
+      # patch 'update_uuid', on: :member
+      # get 'download_uuid', on: :member
+      delete 'destroy_uuid', on: :member
+      get 'send_link_archive_show_uuid_by_email', on: :member
+    end
+
 
     get 'datatables/lang'
     get 'static_pages/home'

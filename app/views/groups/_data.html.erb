@@ -4,10 +4,6 @@
     <div class="row">
 
       <div class="col-sm-12">
-        <% input_disabled ||= false  
-           #if input_disabled is not passed to the partial it doesn't crash. 
-           # We default it to false 
-        %>
 
         <%= form_errors_for @group %>
 
@@ -37,12 +33,12 @@
 
         <div class="row">
           <div class="col-sm-12">
-
-            <%= link_to groups_path, class: "btn btn-default" do %>
+<!-- 
+            <%#= link_to groups_path, class: "btn btn-default" do %>
               <span class="fa fa-list"></span>
-              <%= t("helpers.links.index") %>
-            <% end %>
-
+              <%#= t("helpers.links.index") %>
+            <%# end %>
+ -->
             <% if policy(@group).destroy? %>
               <%= link_to group_path(@group),
                                   method: :delete,

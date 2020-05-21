@@ -31,6 +31,7 @@ class RolesController < ApplicationController
   # GET /roles/new
   def new
     @role = Role.new
+    @role.author = current_user
     authorize @role, :new?
   end
 

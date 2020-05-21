@@ -1,6 +1,7 @@
 en:
   logo_file: "logo_uke_en_do_lewej.png"
   logo_link: "http://www.uke.gov.pl/en/"
+  to_all: 'all'
   title: "UKE Cloud2020"
   description: "UKE Cloud2020 supported for"
   layouts:
@@ -24,6 +25,7 @@ en:
   table_action: 'Action'
   table_role_granted: 'Granted?'
   table_group_member: 'Is a member?'
+  last_updated: 'Last updated'
   user:
     index:
       title: 'Users'
@@ -52,12 +54,26 @@ en:
       title: 'New Group'
     edit:
       title: 'Edit -> Group'
+    fieldset:
+      members_title: 'Members:'
+  archive:
+    index:
+      title: 'Archives'
+    show:
+      title: 'Archive'
+    new:
+      title: 'New Archive'
+    edit:
+      title: 'Edit -> Archive'
+    fieldset:
+      archivizations_title: 'Group Permission'
   activerecord:
     models:
       work: 'Operation log'
       user: 'User'
       role: 'Role'
       group: 'Group'
+      archive: 'Archive'
     attributes:
       work:
         created_at: 'Created at'
@@ -84,11 +100,38 @@ en:
         fullname: 'Name'
       role:
         name: 'Name'
-        activities: 'Privileges'
+        activities: 'Permissions'
         note: 'Note'
       group:
         name: 'Name'
         note: 'Note'
+      group/members:
+        user_id: 'User'
+        group_id: 'Group'
+        user: 'User'
+        group: 'Group'
+      archive:
+        name: 'Name'
+        note: 'Note'
+        folders_count: 'Folders count'
+        files_count: 'Files count'
+        files_size_sum: 'Sum'
+        author_id: 'Author'
+        author: 'Author'
+      archivization:
+        archive_id: 'Archive'
+        group_id: 'Group'
+        archivization_type_id: 'Permissions'
+        archive: 'Archive'
+        group: 'Group'
+        archivization_type: 'Permissions'
+      archive/archivizations:
+        archive_id: 'Archive'
+        group_id: 'Gruop'
+        archivization_type_id: 'Permissions'
+        archive: 'Archive'
+        group: 'Group'
+        archivization_type: 'Permissions'
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"
@@ -103,9 +146,9 @@ en:
         required: 'nie może być puste'
     successfull:
       messages:
-        created: 'Wpis: "%{data}" został pomyślnie utworzony.'
-        updated: 'Wpis: "%{data}" został pomyślnie zaktualizowany.'
-        destroyed: 'Wpis: "%{data}" został pomyślnie usunięty.'
+        created: 'The entry: "%{data}" has been successfully created.'
+        updated: 'The entry: "%{data}" has been successfully updated.'
+        destroyed: 'The entry: "%{data}" has been successfully destroyed.'
         add_role: 'Użytkownikowi "%{parent}" pomyślnie dodano rolę "%{child}".'
         remove_role: 'Użytkownikowi "%{parent}" została pomyślnie usunięta rola "%{child}".'
         account_off: 'Pomyślnie wyłączono konto "%{data}".'
@@ -128,12 +171,13 @@ en:
       create?: ' SECURITY: You cannot create users!'
       destroy?: ' SECURITY: You cannot destroy users!'
       add_remove_role_user?: ' SECURITY: You cannot add/remove roles for users!'
-    project_policy:
-      index?: ' SECURITY: You cannot watch list of projects!'
-      show?: ' SECURITY: You cannot watch this project!'
-      update?: ' SECURITY: You cannot edit this project!'
-      create?: ' SECURITY: You cannot create projects!'
-      destroy?: ' SECURITY: You cannot destroy this project!'
+    group_policy:
+      index?: ' SECURITY: You cannot watch list of groups!'
+      show?: ' SECURITY: You cannot watch this group!'
+      update?: ' SECURITY: You cannot edit this group!'
+      create?: ' SECURITY: You cannot create groups!'
+      destroy?: ' SECURITY: You cannot destroy groups!'
+      add_remove_group_user?: ' SECURITY: You cannot add/remove groups for users!'
   date:
     abbr_day_names:
     - Sun
@@ -266,6 +310,7 @@ en:
         one: is the wrong length (should be 1 character)
         other: is the wrong length (should be %{count} characters)
       other_than: must be other than %{count}
+      bad_email: invalid email address
     template:
       body: 'There were problems with the following fields:'
       header:
@@ -281,27 +326,52 @@ en:
       update: Update %{model}
     links:
       index: "Index"
+      back_to_index: "Back to list"
       show: "Show"
+      show_link: 'Show'
       new: "Add"
       edit: "Edit"
       back: "Back"
       cancel: "Cancel"
       confirm: "Are you sure?"
       confirm_destroy: 'Are you sure delete: "%{data}"?'
+      confirm_add: 'Are you sure you want to add this entry?'
+      confirm_send_mail: 'Are you sure you want to send e-mail to %{data}?'
       destroy: "Delete"
       destroy_account: "Cancel my account"
       send_email: "Send email"
+      send_email_to_all: "Send email to all"
+      email_has_been_sent: 'Email has been sent'
       download: "Download"
+      close: "Close"
       filter: "Filtruj dane"
-      link_to_add_fields_nested: '[ + Add ]'
-      link_to_remove_fields_nested: '[ - Remove ]'
+      link_to_add_fields_nested: '[ + Add row ]'
+      link_to_add_fields_nested__to_group: '[ + Add to Group]'
+      link_to_remove_fields_nested: '[ - Remove row ]'
       link_to_remove_fields_nested_small: '[ - ]'
+      not_exist_in_list:  'No entry in the selection list?'
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"
       new: "New %{model}"
       delete: "Delete %{model}"
       change_your_password: "Change your password"
+  tooltip:
+    show: 'Show'
+    new: 'Add'
+    edit: 'Edit'
+    destroy: 'Destroy'
+    download: 'Download'
+    send_email: 'Send email'
+    add_fields_nested: 'Add next row'
+    remove_fields_nested: 'Remove row'
+  help_block_text:
+    select2user: 'Search by Name, Email. Separate words by space'
+    fileuploaddragdrop: 'Select a file(-s) or drag and drop'
+    select2_no_results: No results 
+  placeholder:
+    select2user: 'Select User'
+    select2group: 'Select Group'
   number:
     currency:
       format:

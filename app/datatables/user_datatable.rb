@@ -23,8 +23,6 @@ class UserDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id:                   record.id,
-        # name:                 record.name_as_link(params[:locale]),
-        # email:                record.email_as_link(params[:locale]),
         name:                 link_to( record.name, user_path(record.id) ),
         email:                link_to( record.email, user_path(record.id) ),
         note:                 record.note_truncate,

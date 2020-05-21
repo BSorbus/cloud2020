@@ -6,19 +6,19 @@ class UsersController < ApplicationController
 
   def datatables_index_role
     respond_to do |format|
-      format.json{ render json: RoleUsersDatatable.new(params, view_context: view_context, only_for_current_role_id: params[:role_id]) }
+      format.json { render json: RoleUsersDatatable.new(params, view_context: view_context, only_for_current_role_id: params[:role_id]) }
     end
   end
 
   def datatables_index_group
     respond_to do |format|
-      format.json{ render json: GroupUsersDatatable.new(params, view_context: view_context, only_for_current_group_id: params[:group_id]) }
+      format.json { render json: GroupUsersDatatable.new(params, view_context: view_context, only_for_current_group_id: params[:group_id]) }
     end
   end
 
   def datatables_index
     respond_to do |format|
-      format.json{ render json: UserDatatable.new(params, view_context: view_context) }
+      format.json { render json: UserDatatable.new(params, view_context: view_context) }
     end
   end
 
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     authorize :user, :index?
     #params[:q] = (params[:q]).upcase
     params[:q] = params[:q]
-    @users = User.order(:name).finder_user(params[:q])
+    @users = User.order(:user_name).finder_user(params[:q])
     @users_on_page = @users.page(params[:page]).per(params[:page_limit])
     
     render json: { 
@@ -66,8 +66,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         @user.log_work('create', current_user.id)
-        flash[:success] = t('activerecord.successfull.messages.created', data: @user.fullname)
-        format.html { redirect_to @user }
+        format.html { 
+          flash[:success] = t('activerecord.successfull.messages.created', data: @user.fullname)
+          redirect_to @user 
+        }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -83,8 +85,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         @user.log_work('update', current_user.id)
-        flash[:success] = t('activerecord.successfull.messages.updated', data: @user.fullname)
-        format.html { redirect_to @user }
+        format.html { 
+          flash[:success] = t('activerecord.successfull.messages.updated', data: @user.fullname)
+          redirect_to @user 
+        }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -119,7 +123,7 @@ class UsersController < ApplicationController
     def user_params
       # params.require(:user).permit(:email, :user_name, :first_name, :last_name, :note, :author_id)
       defaults = { author_id: "#{current_user.id}" }
-      params.require(:user).permit(:note, :author_id).reverse_merge(defaults)
+      params.require(:user).permit(:email, :note, :author_id).reverse_merge(defaults)
     end
 
 end

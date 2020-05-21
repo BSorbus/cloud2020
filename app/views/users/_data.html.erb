@@ -79,12 +79,12 @@
 
         <div class="row">
           <div class="col-sm-12">
-
-            <%= link_to users_path, class: "btn btn-default" do %>
+<!-- 
+            <%#= link_to users_path, class: "btn btn-default" do %>
               <span class="fa fa-list"></span>
-              <%= t("helpers.links.index") %>
-            <% end %>
-
+              <%#= t("helpers.links.index") %>
+            <%# end %>
+ -->
             <% if policy(@user).destroy? %>
               <%= link_to user_path(@user),
                                   method: :delete,

@@ -4,7 +4,7 @@ $(document).ready(function() {
     minimumInputLength: 1,
     allowClear: false,
     ajax: {
-      url: "/groups/select2_index.json",
+      url: "/en/groups/select2_index.json",
       dataType: 'json',
       quietMillis: 250,
       type: 'GET',
@@ -36,7 +36,7 @@ $(document).ready(function() {
     initSelection: function(element, callback) {
       var id=$(element).val();
       if (id!=="") {
-        $.get("/groups/"+id+".json", function(data_from_json) {
+        $.get("/en/groups/"+id+".json", function(data_from_json) {
           if(data_from_json)
             callback({ id: data_from_json.id, text: data_from_json.fullname });
         });

@@ -12,6 +12,8 @@ function getErrorMessage(jqXHR, exception) {
   } else if (jqXHR.status == 404) {
     //msg = 'Requested page not found. [404]';
     msg = '[404] - Nie znalazłem takiej strony.';
+  } else if (jqXHR.status == 409) {
+    msg = '[409] - Konflikt. Żądanie nie może być zrealizowane.';
   } else if (jqXHR.status == 500) {
     msg = '[500] - Internal Server Error [500].';
   } else if (exception === 'parsererror') {
@@ -23,7 +25,13 @@ function getErrorMessage(jqXHR, exception) {
   } else {
     msg = 'Uncaught Error.\n' + jqXHR.responseText;
   };
-  alert(msg)
 
-  //$('#post').html(msg);
+  if (jqXHR.responseText) {
+    msg += '<br>' + jqXHR.responseText;
+  };
+
+
+  toastr['error'](msg, 'Error', {timeOut: 15000});
+
+  //alert(msg)
 };

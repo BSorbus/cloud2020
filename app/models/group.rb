@@ -1,19 +1,15 @@
 class Group < ApplicationRecord
   include ActionView::Helpers::TextHelper
 
-  delegate :url_helpers, to: 'Rails.application.routes'
-
   # relations
-  has_many :members #, dependent: :destroy
+  has_many :members, dependent: :destroy
   has_many :users, through: :members
+
+  has_many :archivizations, dependent: :destroy
+  has_many :accesses_archives, through: :archivizations, source: :archive
 
   belongs_to :author, class_name: "User"
   has_many :works, as: :trackable
-
-
-  # has_many :archivizations, dependent: :destroy
-  # has_many :accesses_archives, through: :archivizations, source: :archive
-
 
   # validates
   validates :name, presence: true,
@@ -23,23 +19,28 @@ class Group < ApplicationRecord
   # callbacks
 
  
+  # additionals
+  # accepts_nested_attributes_for :members, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :members, allow_destroy: true, :reject_if => proc { |attributes| attributes['user_id'].blank? }
+
   def log_work(action = '', action_user_id = nil)
     worker_id = action_user_id || self.author_id
 
     Work.create!(trackable_type: 'Group', trackable_id: self.id, action: "#{action}", author_id: worker_id, 
-      parameters: self.to_json(except: [:author_id], include: {author: {only: [:id, :user_name, :email]}}))
-  end
-
-  def log_work_members(action = '', action_user_id = nil)
-    worker_id = action_user_id || self.author_id
-
-    Work.create!(trackable_type: 'Group', trackable_id: self.id, action: "#{action}", author_id: worker_id, 
-      parameters: self.to_json(only: [:name], include: { members: {only: [:created_at], include: {user: {only: [:user_name, :email]}, 
-                                                          author: {only: [:id, :user_name, :email]}}} }))
+      parameters: self.to_json(except: [:author_id], include: { author: {only: [:id, :user_name, :email]}, 
+                                                                members: {only: [:id, :created_at], 
+                                                                  include: {user: {only: [:id, :user_name, :email]}, 
+                                                                            group: {only: [:id, :name]},
+                                                                            author: {only: [:id, :user_name, :email]} }
+                                                                  } }))
   end
 
   def fullname
     "#{name}"
+  end
+
+  def fullname_was
+    "#{name_was}"
   end
 
   def note_truncate

@@ -50,7 +50,8 @@ $(document).ready(function() {
     stateDuration: 60 * 60 * 24 * 7,
     ajax: { 
       url: $('#users-table').data('source'),
-      type: "GET",
+      type: "POST",
+      dataType: 'json',
       error: function (jqXHR, exception) {
         console.log(jqXHR);
         if (jqXHR.status == 401) {

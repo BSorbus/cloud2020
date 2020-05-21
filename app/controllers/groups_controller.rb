@@ -6,7 +6,13 @@ class GroupsController < ApplicationController
 
   def datatables_index_user
     respond_to do |format|
-      format.json{ render json: UserGroupsDatatable.new(params, view_context: view_context, only_for_current_user_id: params[:user_id]) }
+      format.json { render json: UserGroupsDatatable.new(params, view_context: view_context, only_for_current_user_id: params[:user_id]) }
+    end
+  end
+
+  def datatables_index
+    respond_to do |format|
+      format.json { render json: GroupDatatable.new(params, view_context: view_context) }
     end
   end
 
@@ -22,12 +28,6 @@ class GroupsController < ApplicationController
     } 
   end
 
-  def datatables_index
-    respond_to do |format|
-      format.json{ render json: GroupDatatable.new(params, view_context: view_context) }
-    end
-  end
-
   # GET /groups
   # GET /groups.json
   def index
@@ -37,12 +37,15 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @for_archive = Archive.find_by(archive_uuid: params[:archive_uuid]) if params[:archive_uuid].present? 
     authorize @group, :show?
   end
 
   # GET /groups/new
   def new
     @group = Group.new
+    @group.name = params[:group][:name].strip if params.dig(:group, :name).present? 
+    @group.author = current_user
     authorize @group, :new?
   end
 
@@ -59,12 +62,16 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         @group.log_work('create', current_user.id)
-        flash[:success] = t('activerecord.successfull.messages.created', data: @group.fullname)
-        format.html { redirect_to @group }
+        format.html { 
+          flash[:success] = t('activerecord.successfull.messages.created', data: @group.fullname)
+          redirect_to @group 
+        }
         format.json { render :show, status: :created, location: @group }
+        format.js { render :create }
       else
         format.html { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }
+        format.js { render :new }
       end
     end
   end
@@ -77,12 +84,16 @@ class GroupsController < ApplicationController
       # if @group.update(name: params[:group][:name], note: params[:group][:note], special: params[:group][:special],activities: params[:group][:activities].split)
       if @group.update(group_params)
         @group.log_work('update', current_user.id)
-        flash[:success] = t('activerecord.successfull.messages.updated', data: @group.fullname)
-        format.html { redirect_to @group }
+        format.html { 
+          flash[:success] = t('activerecord.successfull.messages.updated', data: @group.fullname)
+          redirect_to @group 
+        }
         format.json { render :show, status: :ok, location: @group }
+        format.js { render :update }
       else
         format.html { render :edit }
         format.json { render json: @group.errors, status: :unprocessable_entity }
+        format.js { render :edit }
       end
     end
   end
@@ -112,7 +123,7 @@ class GroupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
       defaults = { author_id: "#{current_user.id}" }
-      params.require(:group).permit(:name, :note, :author_id).reverse_merge(defaults)
+      params.require(:group).permit(:name, :note, :author_id, members_attributes: [:id, :user_id, :author_id, :_destroy]).reverse_merge(defaults)
     end
 
 end

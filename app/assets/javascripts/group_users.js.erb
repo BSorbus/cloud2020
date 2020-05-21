@@ -49,6 +49,7 @@ $(document).ready(function() {
     ajax: { 
       url: $('#group-users-table').data('source'),
       type: "GET",
+      dataType: 'json',
       error: function (jqXHR, exception) {
         console.log(jqXHR);
         if (jqXHR.status == 401) {
@@ -95,7 +96,7 @@ $(document).ready(function() {
     $.ajax({
       url: $(this).attr('ajax-path'),
       type: $(this).attr('ajax-method'),
-      async: false,
+      dataType: 'json',
       success: function (response) {
         oGroupUserstable.draw();
         toastr.options = {

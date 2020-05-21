@@ -1,6 +1,7 @@
 pl:
   "true": "Tak"
   "false": "Nie"
+  to_all: 'wszystkich'
   logo_file: "logo_uke_pl_do_lewej.png"
   logo_link: "http://www.uke.gov.pl"
   title: "UKE Cloud2020"
@@ -26,6 +27,7 @@ pl:
   table_action: 'Akcja'
   table_role_granted: 'Przyznane?'
   table_group_member: 'Jest członkiem?'
+  last_updated: 'Ostatnia aktualizacja'
   user:
     index:
       title: 'Użytkownicy'
@@ -54,12 +56,33 @@ pl:
       title: 'Nowa Grupa'
     edit:
       title: 'Edycja -> Grupa'
+    fieldset:
+      members_title: 'Członkowie:'
+  archive:
+    index:
+      title: 'Składnice'
+    show:
+      title: 'Składnica'
+    new:
+      title: 'Nowa Składnica'
+    edit:
+      title: 'Edycja -> Skłdnica'
+    fieldset:
+      archivizations_title: 'Uprawnienia Grup'
+  component:
+    components_tab:
+      folder_submit: 'Utwórz'
+    index:
+      title: 'Załączniki'
+    edit:
+      title: 'Edycja -> Załącznik'
   activerecord:
     models:
       work: 'Dziennik operacji'
       user: 'Użytkownik'
       role: 'Rola'
       group: 'Grupa'
+      archive: 'Składnica'
     attributes:
       work:
         created_at: 'Data'
@@ -91,6 +114,34 @@ pl:
       group:
         name: 'Nazwa'
         note: 'Uwagi'
+      group/members:
+        user_id: 'Użytkownik'
+        group_id: 'Grupa'
+        user: 'Użytkownik'
+        group: 'Grupa'
+      archive:
+        name: 'Nazwa'
+        note: 'Uwagi'
+        folders_count: 'Ilość folderów'
+        files_count: 'Ilość plików'
+        files_size_sum: 'Suma'
+        author_id: 'Autor'
+        author: 'Autor'
+        archivizations: 'Uprawnienia Grup'
+      archivization:
+        archive_id: 'Składnica'
+        group_id: 'Grupa'
+        archivization_type_id: 'Uprawnienia'
+        archive: 'Składnica'
+        group: 'Grupa'
+        archivization_type: 'Uprawnienia'
+      archive/archivizations:
+        archive_id: 'Składnica'
+        group_id: 'Grupa'
+        archivization_type_id: 'Uprawnienia'
+        archive: 'Składnica'
+        group: 'Grupa'
+        archivization_type: 'Uprawnienia'
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"
@@ -120,7 +171,7 @@ pl:
     role_policy:
       index?: ' BRAK UPRAWNIEŃ: Nie możesz wyświetlać listy ról!'
       show?: ' BRAK UPRAWNIEŃ: Nie możesz oglądać szczegółów roli!'
-      update?: ' BRAK UPRAWNIEŃ: Nie możesz edytować danych ról!'
+      update?: ' BRAK UPRAWNIEŃ: Nie możesz edytować danych roli!'
       create?: ' BRAK UPRAWNIEŃ: Nie możesz tworzyć ról!'
       destroy?: ' BRAK UPRAWNIEŃ: Nie możesz usuwać ról!'
       add_remove_role_user?: ' BRAK UPRAWNIEŃ: Nie możesz do ról dowawać ani usuwać użytkowników!'
@@ -131,13 +182,13 @@ pl:
       create?: ' BRAK UPRAWNIEŃ: Nie możesz tworzyć użytkowników!'
       destroy?: ' BRAK UPRAWNIEŃ: Nie możesz usuwać użytkowników!'
       add_remove_role_user?: ' BRAK UPRAWNIEŃ: Nie możesz użytkownikom dodawać ani usuwać ról!'
-    proposal_policy:
-      index?: ' BRAK UPRAWNIEŃ: Nie możesz wyświetlać listy zgłoszeń!'
-      show?: ' BRAK UPRAWNIEŃ: Nie możesz oglądać szczegółów tego zgłoszenia!'
-      show_self?: ' BRAK UPRAWNIEŃ: Nie możesz oglądać szczegółów zgłoszenia, którego nie jesteś autorem!'
-      update?: ' BRAK UPRAWNIEŃ: Nie możesz edytować danych tego zgłoszenia!'
-      create?: ' BRAK UPRAWNIEŃ: Nie możesz tworzyć zgłoszenia!'
-      destroy?: ' BRAK UPRAWNIEŃ: Nie możesz usuwać tego zgłoszenia!'
+    group_policy:
+      index?: ' BRAK UPRAWNIEŃ: Nie możesz wyświetlać listy grup!'
+      show?: ' BRAK UPRAWNIEŃ: Nie możesz oglądać szczegółów grupy!'
+      update?: ' BRAK UPRAWNIEŃ: Nie możesz edytować danych grupy!'
+      create?: ' BRAK UPRAWNIEŃ: Nie możesz tworzyć grup!'
+      destroy?: ' BRAK UPRAWNIEŃ: Nie możesz usuwać grup!'
+      add_remove_group_user?: ' BRAK UPRAWNIEŃ: Nie możesz do grup dowawać ani usuwać użytkowników!'
   date:
     abbr_day_names:
     - nie
@@ -258,6 +309,7 @@ pl:
       year: Rok
   help_block_text:
     select2_item: 'Wprowadź nazwę miejscowości i ewentualnie ulicy. Możesz ograniczyć listę podając nazwę gminy i/lub powiatu i/lub województwa. Wyrazy oddzielaj spacją. Np. osielsko grzybo kujaw'
+    select2_no_results: Brak danych
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -296,6 +348,7 @@ pl:
         one: ma nieprawidłową długość (powinna wynosić jeden znak)
         other: ma nieprawidłową długość (powinna wynosić %{count} znaków)
       other_than: musi być inna niż %{count}
+      bad_email: nieprawidłowy adres e-mail
     template:
       body: 'Błędy dotyczą następujących pól:'
       header:
@@ -313,33 +366,52 @@ pl:
       update: Aktualizuj %{model}
     links:
       index: 'Lista'
+      back_to_index: 'Powrót do listy'
       show: 'Pokaż szczegóły'
+      show_link: 'Pokaż'
       new:  'Dodaj'
       edit: 'Edycja'
       back: 'Powrót'
       cancel: 'Wróć'
-      cancel_wizard: 'Rezygnuję'
       confirm: "Czy na pewno?"
       confirm_destroy: 'Na pewno chcesz usunąć wpis: "%{data}"?'
+      confirm_add: 'Czy na pewno chcesz dodać ten wpis?'
+      confirm_send_mail: 'Na pewno chcesz wysłać email o udostepnieniu składnicy do %{data}?'
       destroy: "Usuń"
       destroy_account: "Usuń moje konto"
-      confirm_annulled: 'Na pewno chcesz anulować "%{data}"?'
-      confirm_create_correction_exam: 'Chcesz utworzyć Zgłoszenie na egzamin poprawkowy?'
-      confirm_cancel_wizard: 'Na pewno chcesz zrezygnować ?'
-      annulled: "Anuluj zgłoszenie"
-      create_correction_exam: Utwórz Zgłoszenie na egzamin poprawkowy
       send_email: "Wyślij email"
+      send_email_to_all: "Wyślij email do wszystkich"
+      email_has_been_sent: 'Email został wysłany'
       download: "Pobierz"
+      close: "Zamknij"
       filter: "Filtruj dane"
-      link_to_add_fields_nested: '[ + Dodaj ]'
-      link_to_remove_fields_nested: '[ - Usuń ]'
+      link_to_add_fields_nested: '[ + Dodaj wiersz ]'
+      link_to_add_fields_nested__to_group: '[ + Dodaj do Grupy]'
+      link_to_remove_fields_nested: '[ - Usuń wiersz ]'
       link_to_remove_fields_nested_small: '[ - ]'
+      not_exist_in_list:  'Nie ma pozycji na liście wyboru?'
     titles:
       edit: "Edycja %{model}"
       save: "Zapisz %{model}"
       new: "Nowy %{model}"
       delete: "Usuń %{model}"
       change_your_password: "Zmiań swoje hasło"
+  tooltip:
+    show: 'Pokaż'
+    new: 'Dodaj'
+    edit: 'Edycja'
+    destroy: 'Usuń'
+    download: 'Pobierz'
+    send_email: 'Wyślij email'
+    add_fields_nested: 'Dodaj kolejny wiersz'
+    remove_fields_nested: 'Usuń wiersz'
+  help_block_text:
+    select2user: 'Szukanie po: Nazwa, Email. Warunki oddzielaj spacją'
+    fileuploaddragdrop: 'Wybierz plik(-i) lub przeciągnij i upuść'
+    select2_no_results: Brak wyników
+  placeholder:
+    select2user: 'Wybierz Użytkownika'
+    select2group: 'Wybierz Grupę'
   number:
     currency:
       format:

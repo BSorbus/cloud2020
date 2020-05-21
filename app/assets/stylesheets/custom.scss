@@ -130,12 +130,29 @@ footer {
 
 
 .modal-dialog {
-    max-height: 90vh;
-    overflow-y: auto;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-content {
   height: 100%; /* = 100% of the .modal-dialog block */
+}
+
+/*
+.modal.fade {
+  position: fixed;
+//  z-index: -1 !important;
+}
+*/
+
+
+
+trix-toolbar .trix-button--icon-attach {
+  display: none;
+}
+
+trix-toolbar .trix-button-group--file-tools {
+  display: none;
 }
 
 .center {
