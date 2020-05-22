@@ -5,7 +5,8 @@ class UkeRegulationsController < ApplicationController
   # GET /uke_regulations
   # GET /uke_regulations.json
   def index
-    unless Rails.env.development?
+    # unless Rails.env.development?
+    if false
       uke_regulation_obj = UkeRegulation.new(user_name: current_user.email)
       if uke_regulation_obj.check_acceptance
         if JSON.parse(uke_regulation_obj.response.body)['accepted']
