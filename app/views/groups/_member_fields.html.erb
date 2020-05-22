@@ -23,14 +23,10 @@
 <script>
 
   function userAddJsActionExternal(that) {
-    console.log('userAddJsActionExternal -> that', that);
-
+    // console.log('userAddJsActionExternal -> that', that);
     var select2ObjContextId = $(that).attr('data-select2-context-id');
-
-    // $("#"+select2ObjContextId).select2("val", 12).trigger("change"); 
     //remove spaces
     var emailForAdd = $(that).attr('data-term').replace(/\s+/g, '');
-
     //check valid email
     if (validateEmail(emailForAdd)) { 
       if (confirm( emailForAdd + "<%= t('helpers.links.confirm_add_user') %>") ) {

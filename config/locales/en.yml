@@ -279,7 +279,7 @@ en:
       year: Year
   success:
     messages:
-      make_user_in_select2: ' - is already stored in the database and you will find it in the user list.'
+      make_user_in_select2: ' has been successfully created.'
   errors:
     format: "%{attribute} %{message}"
     messages:

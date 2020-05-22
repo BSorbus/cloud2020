@@ -312,7 +312,7 @@ pl:
     select2_no_results: Brak danych
   success:
     messages:
-      make_user_in_select2: ' - jest już zapisany w bazie danych i znajdziesz go na liście użytkowników.'
+      make_user_in_select2: ' został pomyślnie utworzony.'
   errors:
     format: "%{attribute} %{message}"
     messages:

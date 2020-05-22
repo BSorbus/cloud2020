@@ -130,22 +130,21 @@ class ArchivesController < ApplicationController
   def send_link_archive_show_uuid_by_email
     authorize @archive, :send_link_archive_show_uuid_by_email?
 
-    # params[:users_ids].each do |i|
-    #   user = User.find(i)
-    #   ArchiveMailer.link_archive_show_uuid_email(archive, user).deliver_later
-    # end
-    # #flash[:success] = t('activerecord.successfull.messages.created', data: @event.fullname)
-    #redirect_to @archive, notice: "Email status about \"#{@archive.fullname}\" was successfully sent."
+    if params[:users_ids].blank?
+      respond_to do |format|
+        format.js { render :blank_users_ids }
+      end
+    else
+      params[:users_ids].each do |i|
+        user = User.find(i)
+        ArchiveMailer.link_archive_show_uuid(@archive, user).deliver_later
+      end
+      # #flash[:success] = t('activerecord.successfull.messages.created', data: @event.fullname)
+      # redirect_to @archive, notice: "Email status about \"#{@archive.fullname}\" was successfully sent."
 
-    params[:users_ids].each do |i|
-      user = User.find(i)
-      ArchiveMailer.link_archive_show_uuid(@archive, user).deliver_later
-    end
-    # #flash[:success] = t('activerecord.successfull.messages.created', data: @event.fullname)
-    # redirect_to @archive, notice: "Email status about \"#{@archive.fullname}\" was successfully sent."
-
-    respond_to do |format|
-      format.js
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
