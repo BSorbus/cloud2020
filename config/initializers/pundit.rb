@@ -25,6 +25,10 @@ module PunditHelper
     end
   end  
 
+  def skip_authorization
+    @_pundit_policy_authorized = true
+  end
+  
 end
 
 ApplicationController.send :include, PunditHelper

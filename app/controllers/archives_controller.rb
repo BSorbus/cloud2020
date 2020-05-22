@@ -35,10 +35,16 @@ class ArchivesController < ApplicationController
   end
 
   def show_uuid
-    authorize @archive, :show?
-    respond_to do |format|
-      # format.html { render :show_uuid }
-      format.html { render :show }
+    unless @archive.present?
+      flash[:error] = t('errors.messages.not_found_resource')
+      skip_authorization
+      redirect_to root_path()
+    else
+      authorize @archive, :show?
+      respond_to do |format|
+        # format.html { render :show_uuid }
+        format.html { render :show }
+      end
     end
   end
 
@@ -150,7 +156,7 @@ class ArchivesController < ApplicationController
     end
 
     def set_archive_by_uuid
-      @archive = Archive.find_by!(archive_uuid: params[:uuid])
+      @archive = Archive.find_by(archive_uuid: params[:uuid])
     end
 
     # Only allow a list of trusted parameters through.

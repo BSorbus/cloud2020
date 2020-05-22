@@ -352,6 +352,7 @@ pl:
         other: ma nieprawidłową długość (powinna wynosić %{count} znaków)
       other_than: musi być inna niż %{count}
       bad_email: nieprawidłowy adres e-mail
+      not_found_resource: Nie znalazłem takiego zasobu
     template:
       body: 'Błędy dotyczą następujących pól:'
       header:
