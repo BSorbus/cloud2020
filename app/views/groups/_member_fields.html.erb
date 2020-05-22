@@ -22,26 +22,12 @@
 
 <script>
 
-  function userAddJsActionExternal(that, idobj) {
-    // console.log('that', that);
-    // console.log(idobj, $("#"+idobj));
-    // console.log("$(that).attr('data-term')", $(that).attr('data-term'));
+  function userAddJsActionExternal(that) {
+    console.log('userAddJsActionExternal -> that', that);
 
-    //$(this).attr('ajax-path')
+    var select2ObjContextId = $(that).attr('data-select2-context-id');
 
-    //$("#"+idobj).val("bodex21@test.com").trigger("change");
-    //$("#"+idobj).val("123");
-
-    // $("#"+idobj).select2('data', {"data_obj": {"id": response.id, "fullname": response.fullname}, "id": response.id, text:'ENABLED_FROM_JS'});
-    // $("#"+idobj).select2('data', {"data_obj": {"id": 1, "fullname": 'cloud@uke.gov.pl'}, "id": 1, text:'ENABLED_FROM_JS'}, true);
-    // $("#"+idobj).select2().trigger("change");
-
-    // select2userObj.select2("close");
-
-   //$("#"+idobj).select2('val', 15, true);
-
-    //$("#"+idobj).select2().select2("close");
-
+    // $("#"+select2ObjContextId).select2("val", 12).trigger("change"); 
     //remove spaces
     var emailForAdd = $(that).attr('data-term').replace(/\s+/g, '');
 
@@ -56,8 +42,8 @@
             user: {"email": emailForAdd}
           },
           success: function (response) {
-            // toastr['success']('wiersz został pomyślnie dodany');
-            alert( response.fullname + "<%= t('success.messages.make_user_in_select2') %>" );
+            $("#"+select2ObjContextId).select2("val", response.id).trigger("change"); 
+            toastr['success'](response.fullname + "<%= t('success.messages.make_user_in_select2') %>");
           },
           error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr);
@@ -91,7 +77,9 @@
       }
     };
 
-    function formatUserSelection(item) {
+    function formatUserSelection(item, container) {
+      console.log("formatUserSelection -> container", container);
+      console.log("formatUserSelection -> container.context", container.context);
       if (item.id) {
         var userName = item.data_obj.fullname;
         return  "<span>" + userName + "</span>";
@@ -129,6 +117,8 @@
     // };
 
     function formatUserResult(item, container, query, escapeMarkup) {
+      console.log("formatUserResult -> container", container);
+      console.log("formatUserResult -> container.context", container.context);
       if (item.id) {
         if (item.id === '*') {
 
@@ -255,7 +245,11 @@
       formatNoMatches: function(term) {
         // toastr['info']("<%= locale %>");
 
-        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return userAddJsActionExternal(this, document.activeElement.id );' data-term='" + term.toLowerCase() + "'><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
+        console.log("formatNoMatches -> this", this);
+        console.log("formatNoMatches -> this.context.id", this.context.id);
+        var select2ObjContextId = this.context.id;
+
+        return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return userAddJsActionExternal(this, document.activeElement.id );' data-term='" + term.toLowerCase() + "' data-select2-context-id='" + select2ObjContextId + "'><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
 
         // jest OK
         // return "Brak danych: " + term + "<span class='pull-right'><a href='#' onclick='return myJsActionExternal(this, document.activeElement.id );' data-term='"+term+"' >dodaj</a></span>";

@@ -90,7 +90,8 @@
             url: "/<%= locale %>/groups/" + item.id + ".js",
             type: "GET",
             success: function (response) {
-              select2groupObj.select2('close');
+              //select2groupObj.select2('close');
+              // mogla zmienic sie nazwa grupy, wiec byc moze warto odswiezyc row?
             },
             error: function (jqXHR, exception) {
               console.log(jqXHR);
@@ -110,7 +111,6 @@
       if (item.id) {    
         var $option = $("<span></span>");
 
-//        var $preview = $("<span class='pull-right'><a><%= t('helpers.links.show_link') %></a></span>");
         var $preview = $("<span class='pull-right'><a><button type='button' class='btn btn-xs btn-default'><%= t('helpers.links.show_link') %></button></a></span>");
         $preview.prop("href", item.id);
         $preview.on('mouseup', function (evt) {
