@@ -9,11 +9,10 @@ $(document).ready(function() {
       // 0-ID 
       dt.columns(':gt(1)').visible(true);
 
-      // revert colReorder
-      // dziala:        // $($.fn.dataTable.tables(true)).DataTable().colReorder.reset();
-      // dziala takze:  // oAttachmentableAttachmentsTable.colReorder.reset();
-      // i to równiez:
       dt.colReorder.reset();
+      dt.state.clear();
+      dt.search('');
+      dt.draw();
     }  
   };
 
@@ -75,8 +74,11 @@ $(document).ready(function() {
     serverSide: true,
     deferRender: true,
     searchDelay: 500,
-    //stateSave: true,
+    stateSave: true,
     stateDuration: 60 * 60 * 24 * 7,
+    colReorder: {
+      fixedColumnsLeft: 2
+    },
     ajax: { 
       url: $('#archives-table').data('source'),
       type: "POST",
@@ -111,9 +113,13 @@ $(document).ready(function() {
     order: [[ 1, "asc" ]],
     language: {
       url: $('#archives-table').data('locale_url')
+    },
+    stateSaveCallback: function(settings,data) {
+      localStorage.setItem( 'DataTables_archives-table_/en-pl/archives', JSON.stringify(data) )
+    },
+    stateLoadCallback: function(settings) {
+      return JSON.parse( localStorage.getItem( 'DataTables_archives-table_/en-pl/archives' ) )
     }
-
-
   });
 
 

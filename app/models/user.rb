@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+
+  USER_DEFAULT_FIRST_NAME = "nowy"
+  USER_DEFAULT_LAST_NAME  = "użytkownik"
+  USER_DEFAULT_USER_NAME  = "nowy użytkownik"
+
   include ActionView::Helpers::TextHelper # for truncate
 
   devise :saml_authenticatable, :trackable
@@ -26,9 +31,9 @@ class User < ApplicationRecord
   before_validation do
     self.email.downcase if self.email.present?
     
-    self.user_name = "nowy użytkownik" if self.user_name.blank?
-    self.first_name = "nowy" if self.first_name.blank?
-    self.last_name = "użytkownik" if self.last_name.blank?
+    self.user_name  = USER_DEFAULT_USER_NAME  if self.user_name.blank?
+    self.first_name = USER_DEFAULT_FIRST_NAME if self.first_name.blank?
+    self.last_name  = USER_DEFAULT_LAST_NAME  if self.last_name.blank?
   end
   after_commit :set_default_role, on: :create
 
@@ -53,6 +58,14 @@ class User < ApplicationRecord
 
   def fullname
     "#{email} (#{name})"
+  end
+
+  def last_name_to_display
+    (last_name == USER_DEFAULT_LAST_NAME || last_name.blank?) ? "" : last_name    
+  end
+
+  def first_name_to_display
+    (first_name == USER_DEFAULT_FIRST_NAME || first_name.blank?) ? "" : first_name    
   end
 
   def note_truncate

@@ -49,7 +49,9 @@
                   <%# Archivization.includes(:group, :archive).where(archive: @archive).order('groups.name').each do |archivization| %>
                   <% @archive.archivizations.includes(:group).order('groups.name').each do |archivization| %>
                     <tr>
-                      <td class="col-sm-4"><%= link_to( archivization.group.fullname, group_path(archivization.group.id, archive_uuid: @archive.archive_uuid), remote: true ) %></td>
+                      <td class="col-sm-4">
+                        <%= link_to( archivization.group.fullname, group_path(archivization.group.id, archive_uuid: @archive.archive_uuid), remote: true ) %>
+                      </td>
                       <td class="col-sm-6"><%= archivization.archivization_type.try(:name) %></td>
                     </tr>
                   <% end %>

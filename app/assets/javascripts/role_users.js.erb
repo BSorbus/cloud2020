@@ -9,11 +9,10 @@ $(document).ready(function() {
       // 0-ID 
       dt.columns(':gt(1)').visible(true);
 
-      // revert colReorder
-      // dziala:        // $($.fn.dataTable.tables(true)).DataTable().colReorder.reset();
-      // dziala takze:  // oAttachmentableAttachmentsTable.colReorder.reset();
-      // i to równiez:
       dt.colReorder.reset();
+      dt.state.clear();
+      dt.search('');
+      dt.draw();
     }  
   };
 

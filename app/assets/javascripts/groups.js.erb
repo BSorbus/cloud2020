@@ -9,11 +9,10 @@ $(document).ready(function() {
       // 0-ID 
       dt.columns(':gt(1)').visible(true);
 
-      // revert colReorder
-      // dziala:        // $($.fn.dataTable.tables(true)).DataTable().colReorder.reset();
-      // dziala takze:  // oAttachmentableAttachmentsTable.colReorder.reset();
-      // i to równiez:
       dt.colReorder.reset();
+      dt.state.clear();
+      dt.search('');
+      dt.draw();
     }  
   };
 
@@ -48,6 +47,9 @@ $(document).ready(function() {
     searchDelay: 500,
     stateSave: true,
     stateDuration: 60 * 60 * 24 * 7,
+    colReorder: {
+      fixedColumnsLeft: 2
+    },
     ajax: { 
       url: $('#groups-table').data('source'),
       type: "POST",
