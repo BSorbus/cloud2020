@@ -11,7 +11,7 @@ $(document).ready(function() {
 
       dt.colReorder.reset();
       dt.state.clear();
-      dt.search('');
+      // dt.search('');
       dt.draw();
     }  
   };
@@ -45,6 +45,9 @@ $(document).ready(function() {
     serverSide: true,
     deferRender: true,
     searchDelay: 500,
+    colReorder: {
+      fixedColumnsLeft: 2
+    },
     ajax: { 
       url: $('#user-roles-table').data('source'),
       type: "GET",

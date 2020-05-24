@@ -1,4 +1,77 @@
 <div>
-  <h4>/views/archives/help_new_edit_js_sub.pl.html.erb</h4>
-  <h3>PL</h3>
+
+  <blockquote>
+  	<h4 class="text-justify">Tworzyć Składnice mogą jedynie użytkownicy posiadający uprawnienie <strong>"Kreator Składnic"</strong> lub <strong>"Administrator Składnic"</strong>. Aktualizować istniejące Składnice mogą jedynie "Administratorzy Składnic", jej twórca lub osoby, które należą do grupy, której nadano uprawnienie modyfikowania tej Składnicy.</h4>
+  </blockquote>	
+
+  <br>
+  <h4>
+  	Tworzenie (aktualizacja) Składnicy wymaga:
+  </h4>
+
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+	  <div class="panel panel-brand">
+	    <div class="panel-heading" role="tab" id="headingOne">
+	      <h4 class="panel-title">
+	        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+	          1. Określenia <strong>Nazwy</strong> i opisu Składnicy
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+	      <div class="panel-body">
+<!-- 
+	      	<div class="img-in-modal"><%#= image_tag("projekt_pit2.png") %></div>
+ -->
+	        <h4 class="text-justify">
+	        	<strong><i>Nazwa</i></strong> Składnicy musi być <strong>unikalna</strong> i winna odzwierciedlać jej przeznaczenie, np.: "PROJEKT PIT2" lub "Dokumentacja BI.WUR.5101.956.2020" <br>
+	        	W polu <strong><i>Uwagi</i></strong> wskazane jest wprowadzenie krótkiego opisu dotyczącego przeznaczenia składnicy, np.: "Składnica wymiany plików związanych z projektem PIT2" lub "Składnica udostępnionych akt w sprawie BI.WUR.5101.956.2020"
+	        </h4>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="panel panel-brand">
+	    <div class="panel-heading" role="tab" id="headingTwo">
+	      <h4 class="panel-title">
+	        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+	          2. Nadania <strong>uprawnień dostępu do Składnicy</strong>
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+	      <div class="panel-body">
+	      	<h4 class="text-justify">
+	      		Nadanie <strong>uprawnień dostępu do Składnicy</strong> określa w jaki sposób użytkownicy będący członkami określonej grupy widzą i mogą obsługiwać <strong>Składnicę</strong> (Składnicę, a nie pliki wewnątrz tej Składnicy!). Uprawnienia dotyczące definiowanej Składnicy określają wartości listy zaczynające się od <strong>"Zarządzanie Składnicą: "</strong>
+	      		<br><br>
+	      		<strong>Zarządzanie Składnicą: [Odczyt]</strong>
+	      		<br> 
+	      		To uprawnienie pozwala danej grupie czytać informacje dotyczące składnicy. To standardowe uprawnienie nadaj wszystkim Grupom użytkowników, którzy mają czytać informacje o tej Składnicy i nie mają mieć prawa modyfikowania jej <i>Nazwy</i>, <i>opisu</i>, ani <i>Uprawnień Grup</i>.
+	      		<br><br>
+	      		<strong>Zarządzanie Składnicą: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień]</strong><br>
+	      		To zaawansowane uprawnienie winno być przyznane tylko tym Grupom użytkowników, którzy będą zarządzać daną Składnicą. Bądź ostrożny z nadawaniem tego uprawnienia i <span class="text-danger"><strong>bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom, w skład których wchodzą użytkownicy spoza UKE</strong></span>.
+	      		<br><br>
+	      		<strong>Zarządzanie Składnicą: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień, Usuwanie, Audyt]</strong><br> 
+        		To najbardziej zaawansowane uprawnienie winno być przyznane tylko Administratorom oraz Audytorom. <span class="text-danger"><strong>Bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom, w skład których wchodzą użytkownicy spoza UKE</strong></span>.
+	      	</h4>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="panel panel-brand">
+	    <div class="panel-heading" role="tab" id="headingThree">
+	      <h4 class="panel-title">
+	        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+	          3. Nadania <strong>uprawnień dostępu do Plików wewnątrz</strong> Składnicy
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+	      <div class="panel-body">
+	      	<h4 class="text-justify">
+	      		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+	      	</h4>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 </div>

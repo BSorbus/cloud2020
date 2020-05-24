@@ -10,7 +10,7 @@ $(document).ready(function() {
       dt.columns(':gt(1)').visible(true);
 
       dt.colReorder.reset();
-      dt.state.clear();
+      // dt.state.clear();
       dt.search('');
       dt.draw();
     }  
@@ -45,6 +45,9 @@ $(document).ready(function() {
     serverSide: true,
     deferRender: true,
     searchDelay: 500,
+    colReorder: {
+      fixedColumnsLeft: 2
+    },
     ajax: { 
       url: $('#user-groups-table').data('source'),
       type: "GET",

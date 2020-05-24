@@ -138,6 +138,14 @@ footer {
   height: 100%; /* = 100% of the .modal-dialog block */
 }
 
+// make all images responsive by default
+.img-in-modal {
+  /*display: block;*/
+  max-width: 100%;
+  /*width: 100px;*/
+  /*height: auto;*/
+}
+
 /*
 .modal.fade {
   position: fixed;
@@ -336,4 +344,12 @@ pre {
   bottom: 0;
   padding-left: 10%;
   height: 22px;
+}
+
+.panel-brand {
+  border-color: #ddd;
+  .panel-heading {
+    background: $btn-default-bg; 
+    color: $brand-primary;
+  } 
 }

@@ -38,27 +38,27 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
 
   private
 
-  def get_raw_records
-    data = Archive.joins(:author, accesses_groups: {users: []})
-            .includes(archivizations: [:archivization_type]).references(:author, accesses_groups: [:user])
+    def get_raw_records
+      data = Archive.joins(:author, accesses_groups: {users: []})
+              .includes(archivizations: [:archivization_type]).references(:author, accesses_groups: [:user])
 
-    options[:eager_filter].present? ? data.for_user_in_archivizations(options[:eager_filter]).all : data.all
+      options[:eager_filter].present? ? data.for_user_in_archivizations(options[:eager_filter]).all : data.all
 
-  end
+    end
 
-  def folders_count_badge(rec)
-    count = 11 #rec.components.where(component_file: nil).size
-    "<span class='badge alert-info pull-right'> #{count} </span></div>"
-  end
+    def folders_count_badge(rec)
+      count = 11 #rec.components.where(component_file: nil).size
+      "<span class='badge alert-info pull-right'> #{count} </span></div>"
+    end
 
-  def files_count_badge(rec)
-    count = 222 #rec.components.where.not(component_file: nil).size
-    "<span class='badge alert-info pull-right'> #{count} </span></div>"
-  end
+    def files_count_badge(rec)
+      count = 222 #rec.components.where.not(component_file: nil).size
+      "<span class='badge alert-info pull-right'> #{count} </span></div>"
+    end
 
-  def files_size_sum(rec)
-    # rec.components.where.not(component_file: nil).map {|a| a.component_file.file.size }.sum
-    1234567
-  end
+    def files_size_sum(rec)
+      # rec.components.where.not(component_file: nil).map {|a| a.component_file.file.size }.sum
+      1234567
+    end
 
 end

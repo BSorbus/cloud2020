@@ -10,7 +10,9 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th><%= User.human_attribute_name(:name) %></th>
+              <th><%= User.human_attribute_name(:email) %></th>
+              <th><%= User.human_attribute_name(:last_name) %></th>
+              <th><%= User.human_attribute_name(:first_name) %></th>
               <th><%= User.human_attribute_name(:note) %></th>
               <th><%= t('table_group_member') %></th>
               <th><%= t('table_action') %></th>

@@ -30,9 +30,9 @@ class RoleDatatable < AjaxDatatablesRails::ActiveRecord
 
   private
 
-  def get_raw_records
-    Role.distinct
-  end
+    def get_raw_records
+      Role.distinct
+    end
 
 
   # ==== These methods represent the basic operations to perform on records

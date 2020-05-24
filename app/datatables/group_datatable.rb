@@ -28,9 +28,9 @@ class GroupDatatable < AjaxDatatablesRails::ActiveRecord
 
   private
 
-  def get_raw_records
-    Group.distinct
-  end
+    def get_raw_records
+      Group.distinct
+    end
 
 
   # ==== These methods represent the basic operations to perform on records

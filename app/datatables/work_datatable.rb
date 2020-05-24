@@ -39,23 +39,23 @@ class WorkDatatable < AjaxDatatablesRails::ActiveRecord
 
   private
 
-  def get_raw_records
-    if (options[:trackable_id]).present? && (options[:trackable_type]).present?
-      Work.where(trackable_id: options[:trackable_id], trackable_type: options[:trackable_type]).includes(:author).references(:author).all
-    elsif (options[:only_for_current_user_id]).present?
-      Work.where(user_id: options[:only_for_current_user_id]).includes(:author).references(:author).all
-    else
-      Work.includes(:author).references(:author).all
+    def get_raw_records
+      if (options[:trackable_id]).present? && (options[:trackable_type]).present?
+        Work.where(trackable_id: options[:trackable_id], trackable_type: options[:trackable_type]).includes(:author).references(:author).all
+      elsif (options[:only_for_current_user_id]).present?
+        Work.where(user_id: options[:only_for_current_user_id]).includes(:author).references(:author).all
+      else
+        Work.includes(:author).references(:author).all
+      end
     end
-  end
 
-  def link_to_polymorphic_trackable(rec)
-    if rec.trackable
-      link_to truncate(rec.trackable.fullname, length: 100), Rails.application.routes.url_helpers.url_for(only_path: true, action: 'show', controller: rec.trackable_type.pluralize.downcase, id: rec.trackable_id, locale: params[:locale])
-    else
-      rec.trackable_id
-    end  
-  end
+    def link_to_polymorphic_trackable(rec)
+      if rec.trackable
+        link_to truncate(rec.trackable.fullname, length: 100), Rails.application.routes.url_helpers.url_for(only_path: true, action: 'show', controller: rec.trackable_type.pluralize.downcase, id: rec.trackable_id, locale: params[:locale])
+      else
+        rec.trackable_id
+      end  
+    end
 
   # ==== These methods represent the basic operations to perform on records
   # and feel free to override them
