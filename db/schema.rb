@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_214859) do
+ActiveRecord::Schema.define(version: 2020_05_24_213813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214859) do
     t.string "activities", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "need_more_privilage", default: false
     t.index ["name"], name: "index_archivization_types_on_name"
   end
 

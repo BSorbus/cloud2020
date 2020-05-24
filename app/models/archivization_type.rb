@@ -1,9 +1,5 @@
 class ArchivizationType < ApplicationRecord
 
-  ARCHIVIZATION_TYPE_ODCZYT = 1
-  ARCHIVIZATION_TYPE_ODCZYT_ZAPIS = 2
-  ARCHIVIZATION_TYPE_ODCZYT_ZAPIS_USUWANIE = 3
- 
   # relations
   has_many :archivizations, dependent: :nullify
 
@@ -13,5 +9,8 @@ class ArchivizationType < ApplicationRecord
                     uniqueness: { case_sensitive: false }
 
 
+  def self.for_user_more_privilage(user_has_more_privilage)
+    (user_has_more_privilage == true) ? all : where(need_more_privilage: false)
+  end
 
 end

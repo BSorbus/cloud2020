@@ -9,10 +9,17 @@
     </div>
 
     <div class="form-group required col-sm-6">
-      <%= f.select :archivization_type_id, 
+<!-- 
+      <%#= f.select :archivization_type_id, 
             ArchivizationType.all.order(:name).collect {|v| [ "#{v[:name]}", v[:id] ] },
             { include_blank: true }, 
             { autofocus: false, class: 'form-control input-sm', disabled: false } %>
+ -->
+      <%= f.select :archivization_type_id, 
+            ArchivizationType.for_user_more_privilage( policy(:archive).more_privilage_in_role? ).order(:id).collect {|v| [ "#{v[:name]}", v[:id] ] },
+            { include_blank: true }, 
+            { autofocus: false, class: 'form-control input-sm', disabled: false } %>
+
     </div>
 
     <div class="form-group col-sm-1">

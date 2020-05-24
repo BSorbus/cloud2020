@@ -50,6 +50,10 @@ class ArchivePolicy < ApplicationPolicy
     user_activities.include?('archive:index')
   end
 
+  def more_privilage_in_role?
+    user_activities.include?('archive:more_privilage')
+  end
+
   def index?
     user_activities.include?('archive:index') || user_in_any_group_activities.include?('archive:index')
   end
