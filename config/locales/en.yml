@@ -355,6 +355,7 @@ en:
       link_to_remove_fields_nested: '[ - Remove row ]'
       link_to_remove_fields_nested_small: '[ - ]'
       not_exist_in_list:  'No entry in the selection list?'
+      help:  'Help'
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

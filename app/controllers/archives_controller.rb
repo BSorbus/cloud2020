@@ -1,6 +1,6 @@
 class ArchivesController < ApplicationController
   before_action :authenticate_user!
-  after_action :verify_authorized, except: [:index, :datatables_index]
+  after_action :verify_authorized, except: [:index, :datatables_index, :help_new_edit]
   before_action :set_archive, only: [:show, :edit, :update, :destroy]
   before_action :set_archive_by_uuid, only: [:show_uuid, :destroy_uuid, :send_link_archive_show_uuid_by_email]
 
@@ -53,6 +53,9 @@ class ArchivesController < ApplicationController
     @archive = Archive.new
     @archive.author = current_user
     authorize @archive, :new?
+  end
+
+  def help_new_edit
   end
 
   # GET /archives/1/edit

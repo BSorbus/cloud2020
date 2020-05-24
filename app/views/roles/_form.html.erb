@@ -61,7 +61,6 @@
           <%#= link_to :back, class: "btn btn-default" do %>
  -->
           <%= link_to role.new_record? ? roles_path() : role_path(role), class: "btn btn-default" do %>
-
             <span class="glyphicon glyphicon-arrow-left"></span>
             <%= t("helpers.links.back") %>
           <% end %>

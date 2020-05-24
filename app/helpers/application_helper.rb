@@ -5,6 +5,10 @@ module ApplicationHelper
     fa_icon('list', text: t("helpers.links.back_to_index"))
   end
 
+  def help_legend
+    fa_icon('info-circle', text: t("helpers.links.help"))
+  end
+
   def last_updated_legend(obj)
     if obj.new_record?
       ""

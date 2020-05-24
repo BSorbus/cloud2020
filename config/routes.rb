@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       # resources :components, module: :archives, only: [:create] do
       #   post 'create_folder', on: :collection
       # end
+      get 'help_new_edit', on: :collection
     end
 
     resources :archives, only: [], param: :uuid do
