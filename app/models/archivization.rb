@@ -1,7 +1,7 @@
 class Archivization < ApplicationRecord
 
   # relations
-  belongs_to :archive
+  belongs_to :archive, touch: true
   belongs_to :group
   belongs_to :archivization_type
 

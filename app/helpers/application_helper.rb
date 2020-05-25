@@ -10,11 +10,7 @@ module ApplicationHelper
   end
 
   def last_updated_legend(obj)
-    if obj.new_record?
-      ""
-    else
-      t('last_updated') + ": " + obj.updated_at.strftime("%Y-%m-%d %H:%M:%S") + ", " + obj.author.fullname
-    end
+    obj.new_record? ? "" :  t('last_updated') + ": " + obj.updated_at.strftime("%Y-%m-%d %H:%M:%S") + ", " + obj.author.fullname
   end
 
   # for layouts/messages
