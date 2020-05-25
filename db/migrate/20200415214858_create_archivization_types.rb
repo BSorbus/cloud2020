@@ -7,7 +7,7 @@ class CreateArchivizationTypes < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    a_type = ArchivizationType.find_or_create_by!(name: "Zarządzanie Składnicą: [Odczyt]") do |ta|
+    a_type = ArchivizationType.find_or_create_by!(name: "Składnica: [Odczyt]") do |ta|
       ta.activities += %w(archive:index archive:show)
       ta.save!
     end
@@ -19,13 +19,13 @@ class CreateArchivizationTypes < ActiveRecord::Migration[5.2]
     # end
     # puts 'CREATED ArchivizationType: ' << a_type.name
 
-    a_type = ArchivizationType.find_or_create_by!(name: "Zarządzanie Składnicą: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień]") do |ta|
+    a_type = ArchivizationType.find_or_create_by!(name: "Składnica: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień]") do |ta|
       ta.activities += %w(archive:index archive:show archive:update archive:add_remove_archive_group)
       ta.save!
     end
     puts 'CREATED ArchivizationType: ' << a_type.name
 
-    a_type = ArchivizationType.find_or_create_by!(name: "Zarządzanie Składnicą: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień, Usuwanie, Audyt]") do |ta|
+    a_type = ArchivizationType.find_or_create_by!(name: "Składnica: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień, Usuwanie, Audyt]") do |ta|
       ta.activities += %w(archive:index archive:show archive:update archive:add_remove_archive_group archive:delete archive:work)
       ta.save!
     end

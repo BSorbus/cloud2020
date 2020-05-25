@@ -1,6 +1,6 @@
 <div class="fields">
   <div class='row' >
-    <div class="form-group required col-sm-4">
+    <div class="form-group required col-sm-5">
       <%= f.hidden_field :group_id, 
                         class: "form-control input-sm select2group", 
                         placeholder: t('placeholder.select2group'),
@@ -8,13 +8,7 @@
                         "data-locale": "#{params[:locale]}" %>
     </div>
 
-    <div class="form-group required col-sm-6">
-<!-- 
-      <%#= f.select :archivization_type_id, 
-            ArchivizationType.all.order(:name).collect {|v| [ "#{v[:name]}", v[:id] ] },
-            { include_blank: true }, 
-            { autofocus: false, class: 'form-control input-sm', disabled: false } %>
- -->
+    <div class="form-group required col-sm-5">
       <%= f.select :archivization_type_id, 
             ArchivizationType.for_user_more_privilage( policy(:archive).more_privilage_in_role? ).order(:id).collect {|v| [ "#{v[:name]}", v[:id] ] },
             { include_blank: true }, 
@@ -22,7 +16,7 @@
 
     </div>
 
-    <div class="form-group col-sm-1">
+    <div class="form-group col-sm-2">
       <%= f.hidden_field :_destroy %>
       <%= link_to t("helpers.links.link_to_remove_fields_nested_small"), '#',
         onClick: "removeNestedFields(this); return false;", class: 'remove-link-button btn btn-sm btn-danger', title: t('tooltip.remove_fields_nested'), rel: 'tooltip' %>

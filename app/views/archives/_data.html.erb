@@ -43,16 +43,18 @@
                   <tr>
                     <th><%= Archivization.human_attribute_name(:group) %></th>
                     <th><%= Archivization.human_attribute_name(:archivization_type) %></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <%# Archivization.includes(:group, :archive).where(archive: @archive).order('groups.name').each do |archivization| %>
                   <% @archive.archivizations.includes(:group).order('groups.name').each do |archivization| %>
                     <tr>
-                      <td class="col-sm-4">
+                      <td class="col-sm-5">
                         <%= link_to( archivization.group.fullname, group_path(archivization.group.id, archive_uuid: @archive.archive_uuid), remote: true ) %>
                       </td>
-                      <td class="col-sm-6"><%= archivization.archivization_type.try(:name) %></td>
+                      <td class="col-sm-5"><%= archivization.archivization_type.try(:name) %></td>
+                      <td class="col-sm-2"></td>
                     </tr>
                   <% end %>
                 </tbody>

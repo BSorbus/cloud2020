@@ -25,7 +25,7 @@
  -->
 	        <h4 class="text-justify">
 	        	<strong><i>Nazwa</i></strong> Składnicy musi być <strong>unikalna</strong> i winna odzwierciedlać jej przeznaczenie, np.: "PROJEKT PIT2" lub "Dokumentacja BI.WUR.5101.956.2020" <br>
-	        	W polu <strong><i>Uwagi</i></strong> wskazane jest wprowadzenie krótkiego opisu dotyczącego przeznaczenia składnicy, np.: "Składnica wymiany plików związanych z projektem PIT2" lub "Składnica udostępnionych akt w sprawie BI.WUR.5101.956.2020"
+	        	W polu <strong><i>Uwagi</i></strong> wskazane jest wprowadzenie krótkiego opisu dotyczącego przeznaczenia Składnicy, np.: "Składnica wymiany plików związanych z projektem PIT2" lub "Składnica udostępnionych akt w sprawie BI.WUR.5101.956.2020"
 	        </h4>
 	      </div>
 	    </div>
@@ -41,17 +41,19 @@
 	    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 	      <div class="panel-body">
 	      	<h4 class="text-justify">
-	      		Nadane <strong>uprawnienia dostępu do Składnicy</strong> definiują w jaki sposób użytkownicy będący członkami określonych grupy widzą i mogą obsługiwać daną <strong>Składnicę</strong> (Składnicę, a nie pliki wewnątrz tej Składnicy!). Siła uprawnień dotycząca definiowanej Składnicy określona jest wartością pozycji listy zaczynającą się od <strong>"Zarządzanie Składnicą: "</strong>
+	      		Nadane <strong>uprawnienia dostępu do Składnicy</strong> definiują w jaki sposób użytkownicy będący członkami określonych grupy widzą i mogą obsługiwać daną <strong>Składnicę</strong> (Składnicę, a nie pliki wewnątrz tej Składnicy!). Siła uprawnień dotycząca definiowanej Składnicy określona jest wartością pozycji listy zaczynającą się od <strong>"Składnica: "</strong>
 	      		<br><br>
-	      		<strong>Zarządzanie Składnicą: [Odczyt]</strong>
+	      		<strong>Składnica: [Odczyt]</strong>
 	      		<br> 
-	      		To uprawnienie pozwala danej grupie czytać informacje dotyczące składnicy. To standardowe uprawnienie nadaj wszystkim Grupom użytkowników, którzy mają czytać informacje o tej Składnicy i nie mają mieć prawa modyfikowania jej <i>Nazwy</i>, <i>opisu</i>, ani <i>Uprawnień Grup</i>.
-	      		<br><br>
-	      		<strong>Zarządzanie Składnicą: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień]</strong><br>
-	      		To zaawansowane uprawnienie winno być przyznane tylko tym Grupom użytkowników, którzy będą zarządzać daną Składnicą. Bądź ostrożny z nadawaniem tego uprawnienia i <span class="text-danger"><strong>bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom, w skład których wchodzą użytkownicy spoza UKE</strong></span>.
-	      		<br><br>
-	      		<strong>Zarządzanie Składnicą: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień, Usuwanie, Audyt]</strong><br> 
-        		To najbardziej zaawansowane uprawnienie winno być przyznane tylko Administratorom oraz Audytorom. <span class="text-danger"><strong>Bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom, w skład których wchodzą użytkownicy spoza UKE</strong></span>.
+	      		To uprawnienie pozwala użytkownikom należącym do Grupy czytać informacje dotyczące Składnicy. Nadaj to standardowe uprawnienie wszystkim Grupom, które mają mieć prawo korzystania z tej Składnicy.
+	      		<% if policy(:archive).more_privilage_in_role? %>
+		      		<br><br>
+		      		<strong>Składnica: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień]</strong><br>
+		      		To zaawansowane uprawnienie winno być przyznane tylko tym Grupom użytkowników, którzy będą zarządzać daną Składnicą. Bądź ostrożny z nadawaniem tego uprawnienia i <span class="text-danger"><strong>bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom, w skład których wchodzą użytkownicy spoza UKE</strong></span>.
+		      		<br><br>
+		      		<strong>Składnica: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień, Usuwanie, Audyt]</strong><br> 
+	        		To najbardziej zaawansowane uprawnienie winno być przyznane tylko Administratorom oraz Audytorom. <span class="text-danger"><strong>Bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom, w skład których wchodzą użytkownicy spoza UKE</strong></span>.
+        		<% end %>
 	      	</h4>
 	      </div>
 	    </div>
