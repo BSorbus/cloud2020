@@ -42,7 +42,6 @@ class ArchivesController < ApplicationController
     else
       authorize @archive, :show?
       respond_to do |format|
-        # format.html { render :show_uuid }
         format.html { render :show }
       end
     end

@@ -123,6 +123,25 @@ table.dataTable tfoot th {
   background-color: #FF8C8C !important;
 }
 
+.datatable-cell-archive-expired-on {
+  background-color: #FFCCCC !important;
+}
+
+.datatable-cell-archive-expires-today {
+  background-color: #FFCCCC !important;
+}
+
+.datatable-cell-archive-expires-today {
+  background-color: #FFE6CC !important;
+}
+
+.datatable-cell-archive-expiry-reminder {
+  background-color: #FFFFCC !important;
+}
+
+.datatable-cell-archive-expiry-ok {
+  background-color: #DFF0D8 !important;
+}
 
 
 .dataTables_processing {

@@ -101,7 +101,23 @@ $(document).ready(function() {
       { "data": "id", "visible": false },
       { "data": "name" }, 
       { "data": "note" },
-      { "data": "expiry_on" }, 
+      { "data": "expiry_on",
+        fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+          // sData - wartosc celi, oData - wiersza
+          if ( validateExpiryDate( new Date(sData), 0) > 0 ) {
+            $(nTd).addClass('datatable-cell-archive-expired-on');
+          }
+          else if ( validateExpiryDate( new Date(sData), 0) == 0 ) {
+            $(nTd).addClass('datatable-cell-archive-expires-today');
+          }
+          else if ( validateExpiryDate( new Date(sData), "<%= Rails.application.secrets.archive_reminder_before_expiry %>") > 0 ) {
+            $(nTd).addClass('datatable-cell-archive-expiry-reminder');
+          }
+          else {
+            $(nTd).addClass('datatable-cell-archive-expiry-ok');
+          }
+        }
+      }, 
       { "data": "folders_count", "sortable": false },
       { "data": "files_count", "sortable": false },
       { "data": "files_size_sum", "sortable": false }
