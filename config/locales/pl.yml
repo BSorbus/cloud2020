@@ -105,15 +105,15 @@ pl:
         last_sign_in_at: 'Ostatnio zalogowany'
         current_sign_in_ip: 'Aktualnie zalogowany - IP'
         last_sign_in_ip: 'Ostatnio zalogowany - IP'
-        note: 'Uwagi'
+        note: 'Opis i uwagi'
         fullname: 'Nazwa'
       role:
         name: 'Nazwa'
         activities: 'Uprawnienia'
-        note: 'Uwagi'
+        note: 'Opis i uwagi'
       group:
         name: 'Nazwa'
-        note: 'Uwagi'
+        note: 'Opis i uwagi'
       group/members:
         user_id: 'Użytkownik'
         group_id: 'Grupa'
@@ -121,7 +121,8 @@ pl:
         group: 'Grupa'
       archive:
         name: 'Nazwa'
-        note: 'Uwagi'
+        expiry_on: 'Dostęp wygasa'
+        note: 'Opis przeznaczenia, uwagi'
         folders_count: 'Ilość folderów'
         files_count: 'Ilość plików'
         files_size_sum: 'Suma'
@@ -374,7 +375,7 @@ pl:
       show: 'Pokaż szczegóły'
       show_link: 'Pokaż'
       new:  'Dodaj'
-      want_create: 'Czy utwórzyć?'
+      want_create: 'Czy utworzyć?'
       edit: 'Edycja'
       back: 'Powrót'
       cancel: 'Wróć'

@@ -96,15 +96,15 @@ en:
         last_sign_in_at: 'Last sign in at'
         current_sign_in_ip: 'Current sign in - IP'
         last_sign_in_ip: 'Last sign in - IP'
-        note: 'Note'
+        note: 'Description and comments'
         fullname: 'Name'
       role:
         name: 'Name'
         activities: 'Permissions'
-        note: 'Note'
+        note: 'Description and comments'
       group:
         name: 'Name'
-        note: 'Note'
+        note: 'Description and comments'
       group/members:
         user_id: 'User'
         group_id: 'Group'
@@ -112,7 +112,8 @@ en:
         group: 'Group'
       archive:
         name: 'Name'
-        note: 'Note'
+        expiry_on: 'access expires on'
+        note: 'Description of intended use, comments'
         folders_count: 'Folders count'
         files_count: 'Files count'
         files_size_sum: 'Sum'

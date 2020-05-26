@@ -26,8 +26,15 @@
           <div class="col-sm-6">
             <div class="row">
               <div class="form-group col-sm-12">
+<!-- 
                 <p><strong><%= Role.human_attribute_name(:note) %></strong></p>
                 <%= @role.note.html_safe %>
+ -->
+                <% if @role.note.html_safe.size > 0 %>
+                  <blockquote>
+                    <%= @role.note.html_safe %>
+                  </blockquote>
+                <% end %>
               </div>
             </div>
           </div> <!--/col-sm-6 -->

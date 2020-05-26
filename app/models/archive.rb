@@ -12,8 +12,13 @@ class Archive < ApplicationRecord
  
   # validates
   validates :name, presence: true,
-                    length: { in: 1..100 },
+                    length: { in: 1..75 },
                     uniqueness: { case_sensitive: false }
+
+  validates :note, length: { in: 0..500 }
+
+  validate :expiry_on_after_today
+  validates :expiry_on, presence: true
 
   validates :archivizations, presence: true
 
@@ -49,7 +54,7 @@ class Archive < ApplicationRecord
   end
 
   def note_truncate
-    truncate(Loofah.fragment(self.note).text, length: 100)
+    truncate(Loofah.fragment(self.note).text, length: 250)
   end
 
   def components_folders_count
@@ -70,4 +75,12 @@ class Archive < ApplicationRecord
       self.archive_uuid = SecureRandom.uuid unless self.archive_uuid.present?
     end 
 
+    def expiry_on_after_today
+      return if expiry_on.blank?
+     
+      if expiry_on < Time.zone.today
+        errors.add(:expiry_on, I18n.t('errors.messages.greater_than_or_equal_to', count: Time.zone.today.strftime('%Y-%m-%d')  ) ) 
+        throw :abort 
+      end 
+    end
 end

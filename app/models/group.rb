@@ -16,6 +16,8 @@ class Group < ApplicationRecord
                     length: { in: 1..100 },
                     uniqueness: { case_sensitive: false }
 
+  validates :note, length: { in: 0..500 }
+
   # callbacks
 
  

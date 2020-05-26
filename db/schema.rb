@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_213813) do
+ActiveRecord::Schema.define(version: 2020_04_15_214859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,20 +38,23 @@ ActiveRecord::Schema.define(version: 2020_05_24_213813) do
   create_table "archives", force: :cascade do |t|
     t.uuid "archive_uuid"
     t.string "name"
+    t.date "expiry_on"
     t.text "note", default: ""
     t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["archive_uuid"], name: "index_archives_on_archive_uuid"
     t.index ["author_id"], name: "index_archives_on_author_id"
+    t.index ["expiry_on"], name: "index_archives_on_expiry_on"
+    t.index ["name"], name: "index_archives_on_name"
   end
 
   create_table "archivization_types", force: :cascade do |t|
     t.string "name"
     t.string "activities", default: [], array: true
+    t.boolean "need_more_privilage", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "need_more_privilage", default: false
     t.index ["name"], name: "index_archivization_types_on_name"
   end
 
@@ -103,7 +106,7 @@ ActiveRecord::Schema.define(version: 2020_05_24_213813) do
     t.string "last_name"
     t.string "user_name"
     t.boolean "csu_confirmed"
-    t.date "csu_confirmed_at"
+    t.datetime "csu_confirmed_at"
     t.string "csu_confirmed_by"
     t.string "session_index"
     t.integer "sign_in_count", default: 0, null: false
@@ -117,6 +120,9 @@ ActiveRecord::Schema.define(version: 2020_05_24_213813) do
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_users_on_author_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["first_name"], name: "index_users_on_first_name"
+    t.index ["last_name"], name: "index_users_on_last_name"
+    t.index ["session_index"], name: "index_users_on_session_index"
   end
 
   create_table "works", force: :cascade do |t|

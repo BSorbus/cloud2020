@@ -52,6 +52,7 @@ class ArchivesController < ApplicationController
   def new
     @archive = Archive.new
     @archive.author = current_user
+    @archive.expiry_on = Time.zone.today + Rails.application.secrets.archive_default_days_expiry_on_create.days
     authorize @archive, :new?
   end
 

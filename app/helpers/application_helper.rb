@@ -34,6 +34,10 @@ module ApplicationHelper
     end
   end
 
+  def text_with_break_line(text_data)
+    Loofah.fragment(text_data.gsub("\r\n", "<br>")).scrub!(:strip).to_s.html_safe
+  end
+  
   # for nested_attribute
   def link_to_function(name, js, opts={})
     link_to name, '#', opts.merge({onclick: js})

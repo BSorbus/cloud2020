@@ -3,14 +3,14 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       t.string :wso2is_userid
       t.string :email, null: false
-      t.string :first_name
-      t.string :last_name
+      t.string :first_name, index: true
+      t.string :last_name, index: true
       t.string :user_name
       t.boolean :csu_confirmed
-      t.date :csu_confirmed_at
+      t.datetime :csu_confirmed_at
       t.string :csu_confirmed_by
       ## SAML
-      t.string :session_index
+      t.string :session_index, index: true
 
       ## Trackable
       t.integer  :sign_in_count, default: 0, null: false

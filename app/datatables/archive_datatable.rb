@@ -15,6 +15,7 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
       id:             { source: "Archive.id", cond: :eq, searchable: false, orderable: false },
       name:           { source: "Archive.name", cond: :like, searchable: true, orderable: true },
       note:           { source: "Archive.note", cond: :like, searchable: true, orderable: true },
+      expiry_on:      { source: "Archive.expiry_on", cond: :like, searchable: true, orderable: true },
       folders_count:  { source: "Archive.folders_count", cond: :like, searchable: false, orderable: false },
       files_count:    { source: "Archive.files_count", cond: :like, searchable: false, orderable: false },
       files_size_sum: { source: "Archive.files_size_sum", cond: :like, searchable: false, orderable: false }
@@ -28,6 +29,7 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
         id:             record.id,
         name:           link_to( record.fullname, show_uuid_archive_path(record.archive_uuid) ),
         note:           record.note_truncate,
+        expiry_on:      record.expiry_on.present? ? record.expiry_on.strftime("%Y-%m-%d") : '' ,
         folders_count:  folders_count_badge(record).html_safe,
         files_count:    files_count_badge(record).html_safe,
         files_size_sum: number_to_human_size(files_size_sum(record))

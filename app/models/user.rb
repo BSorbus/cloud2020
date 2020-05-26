@@ -26,14 +26,16 @@ class User < ApplicationRecord
                     length: { in: 1..100 },
                     uniqueness: { case_sensitive: false },
                     format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
+
+  validates :note, length: { in: 0..500 }
                     
   # callbacks
   before_validation do
     self.email.downcase if self.email.present?
     
-    self.user_name  = USER_DEFAULT_USER_NAME  if self.user_name.blank?
     self.first_name = USER_DEFAULT_FIRST_NAME if self.first_name.blank?
     self.last_name  = USER_DEFAULT_LAST_NAME  if self.last_name.blank?
+    self.user_name  = USER_DEFAULT_USER_NAME  if self.user_name.blank?
   end
   after_commit :set_default_role, on: :create
 

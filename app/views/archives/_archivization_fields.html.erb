@@ -34,7 +34,7 @@
     // console.log('groupAddJsActionExternal -> that', that);
     var select2ObjContextId = $(that).attr('data-select2-context-id');
     //remove spaces
-    var nameForAdd = $(that).attr('data-term').replace(/\s+/g, '');
+    var nameForAdd = $(that).attr('data-term');
     $.ajax({
       url: "/<%= locale %>/groups/new.js",
       type: "GET",
