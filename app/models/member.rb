@@ -7,7 +7,7 @@ class Member < ApplicationRecord
 
   # validates
   # validates :user_id, presence: true,  
-  #                     uniqueness: { scope: [:group_id], message: " - Użytkownik %{value} jest już przypisany do tej grupy" }  
+  #                     uniqueness: { scope: [:group_id] }  
 
   # validates :user, presence: true,  
   #                     uniqueness: { scope: [:group_id], message: " - Użytkownik %{value} %{attribute} %{model} jest już przypisany do tej grupy" }
@@ -15,14 +15,15 @@ class Member < ApplicationRecord
   # validates :user_id, presence: true,  
   #                     uniqueness: { scope: [:group_id],  
   #                                   message: ->(object, data) do
-  #                                     "#{object.user.fullname}  #{data[:value]} jest już przypisany do tej grupy"
+  #                                     "#{object.user.fullname} jest już przypisany do tej grupy"
   #                                   end } 
 
   validates :user_id, presence: true,  
                       uniqueness: { scope: [:group_id],  
                                     message: ->(object, data) do
-                                      "#{object.user.fullname} jest już przypisany do tej grupy"
+                                      I18n.t("activerecord.errors.messages.user_taken", user_name: "#{object.user.fullname}" )
                                     end } 
+
 
   def log_work_for_user(action = '', action_user_id = nil)
     worker_id = action_user_id || self.author_id

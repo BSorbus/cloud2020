@@ -144,6 +144,11 @@ pl:
         group: 'Grupa'
         archivization_type: 'Uprawnienia'
     errors:
+      # models:
+      #   member:
+      #     attributes:
+      #       user_id:
+      #         taken: użytkownik %{model} %{attribute} %{value} jest już przypisany do tej grupy
       messages:
         record_invalid: "Validation failed: %{errors}"
         restrict_dependent_destroy:
@@ -155,6 +160,8 @@ pl:
         account_off: 'Wystąpił błąd w czasie wyłączania konta "%{data}".'
         account_on: 'Wystąpił błąd w czasie włączania konta "%{data}".'
         required: 'nie może być puste'
+        group_taken: '"%{group_name}" z uprawnieniami "%{archivization_type}" jest już przypisana.'
+        user_taken: '"%{user_name}" jest już przypisany.'
     successfull:
       messages:
         created: 'Wpis: "%{data}" został pomyślnie utworzony.'
@@ -315,7 +322,7 @@ pl:
     messages:
       make_user_in_select2: ' został pomyślnie utworzony.'
   errors:
-    format: "%{attribute} %{message}"
+    format: "%{attribute} - %{message}"
     messages:
       accepted: musi zostać zaakceptowane
       blank: nie może być puste
