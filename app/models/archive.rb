@@ -42,8 +42,8 @@ class Archive < ApplicationRecord
     worker_id = action_user_id || self.author_id
 
     Work.create!(trackable_type: 'Archive', trackable_id: self.id, action: "#{action}", author_id: worker_id, 
-      parameters: self.to_json(except: [:user_id], 
-        include: {archivizations: {only: [:id], include: {group: {only: [:id, :name]}, archivization_type: {only: [:id, :name]}} }, 
+      parameters: self.to_json(except: [:user_id], include: {archivizations: {only: [:id], include: { group: {only: [:id, :name]}, 
+                                                                                                      archivization_type: {only: [:id, :name]}} }, 
                   author: {only: [:id, :user_name, :email]}}
       )
     )

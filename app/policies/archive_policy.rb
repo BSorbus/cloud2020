@@ -14,9 +14,9 @@ class ArchivePolicy < ApplicationPolicy
     #   permitted_array = [:title, :all_day, :start_date, :end_date, :note, :project_id, :event_status_id, :event_type_id, :errand_id, :user_id]
     # end
     if @model.class.to_s == 'Symbol'
-      permitted_array << [archivizations_attributes: [:id, :archives_id, :group_id, :archivization_type_id, :_destroy]] if user_activities.include?('archive:add_remove_archive_group') || user_activities.include?('archive:my_add_remove_archive_group')
+      permitted_array << [archivizations_attributes: [:id, :archives_id, :group_id, :archivization_type_id, :author_id, :_destroy]] if user_activities.include?('archive:add_remove_archive_group') || user_activities.include?('archive:my_add_remove_archive_group')
     else
-      permitted_array << [archivizations_attributes: [:id, :archives_id, :group_id, :archivization_type_id, :_destroy]] if ArchivePolicy.new(@user, @model).add_remove_archive_group?
+      permitted_array << [archivizations_attributes: [:id, :archives_id, :group_id, :archivization_type_id, :author_id, :_destroy]] if ArchivePolicy.new(@user, @model).add_remove_archive_group?
     end
     permitted_array
   end
@@ -59,7 +59,14 @@ class ArchivePolicy < ApplicationPolicy
   end
 
   def show?
-    user_activities.include?('archive:show') || (user_activities.include?('archive:my_show') && owner_access) || user_in_group_activities.include?('archive:show')
+    today = Time.zone.today
+    if @model.expiry_on >= today
+      # classic
+      user_activities.include?('archive:show') || (user_activities.include?('archive:my_show') && owner_access) || user_in_group_activities.include?('archive:show')
+    else
+      # expired
+      user_activities.include?('archive:show_expiried') || (user_activities.include?('archive:my_show_expiried') && owner_access) || user_in_group_activities.include?('archive:show_expiried')
+    end  
   end
 
   def new?

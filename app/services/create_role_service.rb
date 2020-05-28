@@ -76,7 +76,7 @@ class CreateRoleService
   # archives
   def archive_admin(creator_id=nil)
     role = Role.find_or_create_by!(name: "Administrator Składnic") do |role|
-      role.activities += %w(archive:index archive:show archive:create archive:update archive:delete archive:work archive:add_remove_archive_group)
+      role.activities += %w(archive:index archive:show archive:show_expiried archive:create archive:update archive:delete archive:work archive:add_remove_archive_group)
       role.note = "<div>Rola służy do zarządzania wszystkimi Składnicami.<br>(Przypisz tylko zaawansowanym Administratorom systemu)</div>"
       role.author_id = creator_id
       role.save!
@@ -92,7 +92,7 @@ class CreateRoleService
   end
   def archive_writer(creator_id=nil)
     role = Role.find_or_create_by!(name: "Kreator Składnic") do |role|
-      role.activities += %w(archive:index archive:create archive:my_show archive:my_update archive:my_delete archive:my_add_remove_archive_group)
+      role.activities += %w(archive:index archive:create archive:my_show archive:my_show_expiried archive:my_update archive:my_delete archive:my_add_remove_archive_group)
       role.note = "<div>Rola służy do tworzenia Składnic oraz zarządzania własnymi składnicami.<br>(Przypisz osobom, które będą tworzyły składnice)</div>"
       role.author_id = creator_id
       role.save!

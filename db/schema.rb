@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214859) do
     t.bigint "archivization_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["archive_id", "group_id", "archivization_type_id"], name: "archivizations_archive_id_group_id_archivization_type_id_idx", unique: true
     t.index ["archive_id"], name: "index_archivizations_on_archive_id"
     t.index ["archivization_type_id"], name: "index_archivizations_on_archivization_type_id"
     t.index ["group_id"], name: "index_archivizations_on_group_id"
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214859) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_members_on_author_id"
+    t.index ["group_id", "user_id"], name: "index_members_on_group_id_and_user_id", unique: true
     t.index ["group_id"], name: "index_members_on_group_id"
     t.index ["user_id"], name: "index_members_on_user_id"
   end

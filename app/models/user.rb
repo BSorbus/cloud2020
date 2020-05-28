@@ -37,14 +37,16 @@ class User < ApplicationRecord
     self.last_name  = USER_DEFAULT_LAST_NAME  if self.last_name.blank?
     self.user_name  = USER_DEFAULT_USER_NAME  if self.user_name.blank?
   end
-  after_commit :set_default_role, on: :create
+  after_commit :set_default_data, on: :create
 
-
-  def set_default_role
+  def set_default_data
     # if self.id != 1 # Jestśli to nie jest Administrator
     # role = Role.find(name: "Obserwator Składnic")
     # role = CreateRoleService.new.proposal_writer
     # self.roles << role 
+    if author_id.blank?
+      self.update_columns(author_id: id) 
+    end
   end
   
   def log_work(action = '', action_user_id = nil)
