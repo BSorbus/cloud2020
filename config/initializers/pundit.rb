@@ -24,7 +24,7 @@ module PunditHelper
       puts '------------------------------------------------------------------------'
       # redirect_to(:back) is being deprecated in Rails 5
       # redirect_to(request.referrer || root_path)
-      redirect_back( fallback_location: request.referrer || root_path )
+      redirect_back( fallback_location: request.referrer || root_path, allow_other_host: false )
     else
       head :forbidden
     end
