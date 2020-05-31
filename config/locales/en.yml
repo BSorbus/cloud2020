@@ -26,6 +26,9 @@ en:
   table_role_granted: 'Granted?'
   table_group_member: 'Is a member?'
   last_updated: 'Last updated'
+  file_upload:
+    in_progress: 'Downloaded:'
+    wait_to_save: 'The data is being saved...'
   user:
     index:
       title: 'Users'

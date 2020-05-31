@@ -28,6 +28,9 @@ pl:
   table_role_granted: 'Przyznane?'
   table_group_member: 'Jest członkiem?'
   last_updated: 'Ostatnia aktualizacja'
+  file_upload:
+    in_progress: 'Pobrano:'
+    wait_to_save: 'Trwa zapisywanie danych...'
   user:
     index:
       title: 'Użytkownicy'
