@@ -73,7 +73,7 @@ en:
     index:
       title: 'Attachments'
     edit:
-      title: 'Edit -> Attachment'
+      title: 'Edit'
   activerecord:
     models:
       work: 'Operation log'
@@ -81,6 +81,7 @@ en:
       role: 'Role'
       group: 'Group'
       archive: 'Archive'
+      component: 'Attachment'
     attributes:
       work:
         created_at: 'Created at'
@@ -140,7 +141,30 @@ en:
         archive: 'Archive'
         group: 'Group'
         archivization_type: 'Permissions'
+      component:
+        componentable: 'Attached to'
+        component_file: 'File/Folder'
+        component_file_identifier: 'Attachment'
+        file_content_type: 'Type'
+        file_size: 'Size'
+        file_size_or_badge: 'Info'
+        created_at: 'Created at'
+        updated_at: 'Updated at'
+        author_id: 'Author'
+        author: 'Author'
+        note: 'Description and comments'
+        name_if_folder: 'Folder'
+        name: 'Name'
     errors:
+      models:
+        component:
+          attributes:
+            name:
+              taken: "'%{value}' already exists"
+      #   member:
+      #     attributes:
+      #       user_id:
+      #         taken: użytkownik %{model} %{attribute} %{value} jest już przypisany do tej grupy
       messages:
         record_invalid: "Validation failed: %{errors}"
         restrict_dependent_destroy:
@@ -163,6 +187,7 @@ en:
         remove_role: 'Użytkownikowi "%{parent}" została pomyślnie usunięta rola "%{child}".'
         account_off: 'Pomyślnie wyłączono konto "%{data}".'
         account_on: 'Pomyślnie włączono konto "%{data}".'
+        moved: 'Has(have) been successfully moved'
   pundit:
     default: ' SECURITY: Access denied!'
     work_policy:
@@ -289,7 +314,9 @@ en:
       year: Year
   success:
     messages:
+      email_has_been_sent: 'Email has been sent'
       make_user_in_select2: ' has been successfully created.'
+      wait_zip_created: 'Wait, a ZIP file is being created'
   errors:
     format: "%{attribute} - %{message}"
     messages:
@@ -357,7 +384,6 @@ en:
       destroy_account: "Cancel my account"
       send_email: "Send email"
       send_email_to_all: "Send email to all"
-      email_has_been_sent: 'Email has been sent'
       download: "Download"
       close: "Close"
       filter: "Filtruj dane"

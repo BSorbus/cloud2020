@@ -30,8 +30,11 @@ function getErrorMessage(jqXHR, exception) {
     msg += '<br>' + jqXHR.responseText;
   };
 
-
-  toastr['error'](msg, 'Error', {timeOut: 15000});
+  if (jqXHR.status) {
+    toastr['error'](msg, 'Error ' + jqXHR.status, {timeOut: 15000});
+  } else {
+    toastr['error'](msg, 'Error', {timeOut: 15000});
+  }
 
   //alert(msg)
 };

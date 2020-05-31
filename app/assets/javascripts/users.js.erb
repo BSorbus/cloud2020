@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $.fn.dataTable.ext.buttons.user_reset_col_vis_and_reorder = {
     text: '<span class="text-primary fa fa-retweet"></span>',
-    titleAttr: 'Przywróć domyślne ustawienia kolumn',
+    // titleAttr: 'Przywróć domyślne ustawienia kolumn',
     className: 'btn btn-sm btn-default',
     action: function ( e, dt, button, config ) {
       // revert colVis  // dt.columns(config.show).visible(true);
@@ -23,20 +23,20 @@ $(document).ready(function() {
       {
         extend:    'colvis',
         text:      '<span class="text-primary fa fa-columns"></span>',
-        titleAttr: 'Pokaż/ukryj kolumny',
+        // titleAttr: 'Pokaż/ukryj kolumny',
         className: 'btn btn-sm btn-default',
         columns:   ':gt(1)' //exclude cols from list
       }, 
       {
         extend:    'copy',
         text:      '<span class="text-primary fa fa-clipboard"></span>',
-        titleAttr: 'Kopiuj do schowka',
+        // titleAttr: 'Kopiuj do schowka',
         className: 'btn btn-sm btn-default'
       },
       {
         extend:    'csv',
         text:      '<span class="text-primary fa fa-file-csv"></span>',
-        titleAttr: 'Kopiuj do CSV',
+        // titleAttr: 'Kopiuj do CSV',
         className: 'btn btn-sm btn-default'
       }
     ],
@@ -78,6 +78,12 @@ $(document).ready(function() {
     language: {
       //url: $('#ispc_tables-datatable').data('locale') "<%= Rails.application.routes.url_helpers.datatables_lang_path(locale: I18n.locale, format: :json) %>"
       url: $('#users-table').data('locale_url')
+    },
+    initComplete: function(settings, json) {
+      oUsertable.button(0).node().attr( 'title', oUsertable.i18n( 'buttons.revertColVisColReorder' ) );
+      oUsertable.button(1).node().attr( 'title', oUsertable.i18n( 'buttons.colvis' ) );
+      oUsertable.button(2).node().attr( 'title', oUsertable.i18n( 'buttons.copy' ) );
+      oUsertable.button(3).node().attr( 'title', oUsertable.i18n( 'buttons.csv' ) );
     },
     stateSaveCallback: function(settings,data) {
       localStorage.setItem( 'DataTables_users-table_/en-pl/users', JSON.stringify(data) )

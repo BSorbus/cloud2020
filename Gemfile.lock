@@ -72,7 +72,17 @@ GEM
     brakeman (4.8.2)
     builder (3.2.4)
     byebug (11.1.3)
+    carrierwave (2.1.0)
+      activemodel (>= 5.0.0)
+      activesupport (>= 5.0.0)
+      addressable (~> 2.6)
+      image_processing (~> 1.1)
+      mimemagic (>= 0.3.0)
+      mini_mime (>= 0.1.3)
     chronic (0.10.2)
+    closure_tree (7.1.0)
+      activerecord (>= 4.2.10)
+      with_advisory_lock (>= 4.0.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
@@ -91,6 +101,9 @@ GEM
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.12.2)
+    file_validators (2.3.0)
+      activemodel (>= 3.2)
+      mime-types (>= 1.0)
     font_awesome5_rails (1.1.1)
       railties (>= 4.2)
     foundation_emails (2.2.1.0)
@@ -109,6 +122,10 @@ GEM
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     jquery-datatables (1.10.19.1)
+    jquery-fileupload-rails (1.0.0)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      sassc
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -138,6 +155,9 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
+    mime-types (3.3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2020.0512)
     mimemagic (0.3.5)
     mina (1.2.3)
       open4 (~> 1.3.4)
@@ -235,6 +255,7 @@ GEM
     ruby-vips (2.0.17)
       ffi (~> 1.9)
     ruby_dep (1.5.0)
+    rubyzip (2.3.0)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -285,6 +306,8 @@ GEM
     websocket-extensions (0.1.4)
     whenever (1.0.0)
       chronic (>= 0.6.3)
+    with_advisory_lock (4.6.0)
+      activerecord (>= 4.2)
     zeitwerk (2.3.0)
 
 PLATFORMS
@@ -301,14 +324,17 @@ DEPENDENCIES
   bootstrap3-datetimepicker-rails (~> 4.14.30)
   brakeman
   byebug
+  carrierwave (~> 2.0)
+  closure_tree
   devise (>= 4.7.1)
   devise_saml_authenticatable
+  file_validators
   font_awesome5_rails
   hiredis
-  image_processing (~> 1.2)
   inky-rb
   jbuilder (~> 2.5)
   jquery-datatables (= 1.10.19.1)
+  jquery-fileupload-rails
   jquery-rails
   kaminari
   listen (>= 3.0.5, < 3.2)
@@ -326,6 +352,7 @@ DEPENDENCIES
   rails-i18n
   redis (~> 4.0)
   redis-rails
+  rubyzip
   sass-rails (~> 5.0)
   select2-rails (= 3.5.9.3)
   spring

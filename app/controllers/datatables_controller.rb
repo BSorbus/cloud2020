@@ -22,6 +22,17 @@ PL =  {
           "sSortAscending":  ": aktywuj, by posortować kolumnę rosnąco",
           "sSortDescending": ": aktywuj, by posortować kolumnę malejąco"
         },
+        "buttons": {
+            "revertColVisColReorder": "Przywróć domyślne ustawienia kolumn",
+            "colvis": "Pokaż/ukryj kolumny",
+            "copy": "Kopiuj do schowka",
+            "csv": "Kopiuj do CSV",
+            "selectAll": "Zaznacz wszystkie wiersze",
+            "selectNone": "Odznacz wszystkie wiersze",
+            "downloadSelected": "Pobierz zaznaczone jako plik ZIP",
+            "deleteSelected": "Usuń zaznaczone wiersze",
+            "onlyMyData": "Wszystkie/Tylko moje"
+        },
         "select": {
             "rows": {
                 "_": "<span class='text-primary'>%d wierszy zaznaczonych</span>",
@@ -55,6 +66,17 @@ EN =  {
         "oAria": {
           "sSortAscending":  ": activate to sort column ascending",
           "sSortDescending": ": activate to sort column descending"
+        },
+        "buttons": {
+            "revertColVisColReorder": "Revert to default columns settings",
+            "colvis": "Show/hide columns",
+            "copy": "Copy to clipboard",
+            "csv": "Copy to CSV",
+            "selectAll": "Select all rows",
+            "selectNone": "Unselect all rows",
+            "downloadSelected": "Download selected as ZIP file",
+            "deleteSelected": "Delete selected rows",
+            "onlyMyData": "All/Only my"
         },
         "select": {
             "rows": {

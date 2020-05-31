@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $.fn.dataTable.ext.buttons.archive_reset_col_vis_and_reorder = {
     text: '<span class="text-primary fa fa-retweet"></span>',
-    titleAttr: 'Przywróć domyślne ustawienia kolumn',
+    //titleAttr: 'Przywróć domyślne ustawienia kolumn',
     className: 'btn btn-sm btn-default',
     action: function ( e, dt, button, config ) {
       // revert colVis  // dt.columns(config.show).visible(true);
@@ -19,7 +19,7 @@ $(document).ready(function() {
   $.fn.dataTable.ext.buttons.archive_button_only_my_data = {
     //text: 'Wszystko',
     text: '<span class="text-primary fa fa-user-friends"></span>',
-    titleAttr: 'Wszystkie/tylko moje',
+    // titleAttr: 'Wszystkie/tylko moje',
     className: 'btn btn-sm btn-default',
     init: function ( dt, node, config ) {
       // button 4 na starcie wlaczony
@@ -51,20 +51,20 @@ $(document).ready(function() {
       {
         extend:    'colvis',
         text:      '<span class="text-primary fa fa-columns"></span>',
-        titleAttr: 'Pokaż/ukryj kolumny',
+        // titleAttr: 'Pokaż/ukryj kolumny',
         className: 'btn btn-sm btn-default',
         columns:   ':gt(1)' //exclude cols from list
       }, 
       {
         extend:    'copy',
         text:      '<span class="text-primary fa fa-clipboard"></span>',
-        titleAttr: 'Kopiuj do schowka',
+        // titleAttr: 'Kopiuj do schowka',
         className: 'btn btn-sm btn-default'
       },
       {
         extend:    'csv',
         text:      '<span class="text-primary fa fa-file-csv"></span>',
-        titleAttr: 'Kopiuj do CSV',
+        // titleAttr: 'Kopiuj do CSV',
         className: 'btn btn-sm btn-default'
       },
       'archive_button_only_my_data'
@@ -130,6 +130,13 @@ $(document).ready(function() {
     order: [[ 1, "asc" ]],
     language: {
       url: $('#archives-table').data('locale_url')
+    },
+    initComplete: function(settings, json) {
+      oArchivetable.button(0).node().attr( 'title', oArchivetable.i18n( 'buttons.revertColVisColReorder' ) );
+      oArchivetable.button(1).node().attr( 'title', oArchivetable.i18n( 'buttons.colvis' ) );
+      oArchivetable.button(2).node().attr( 'title', oArchivetable.i18n( 'buttons.copy' ) );
+      oArchivetable.button(3).node().attr( 'title', oArchivetable.i18n( 'buttons.csv' ) );
+      oArchivetable.button(4).node().attr( 'title', oArchivetable.i18n( 'buttons.onlyMyData' ) );
     },
     stateSaveCallback: function(settings,data) {
       localStorage.setItem( 'DataTables_archives-table_/en-pl/archives', JSON.stringify(data) )

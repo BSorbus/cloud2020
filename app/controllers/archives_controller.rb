@@ -71,6 +71,7 @@ class ArchivesController < ApplicationController
     authorize @archive, :create?
     respond_to do |format|
       if @archive.save
+        @archive.log_work('create', current_user.id)
         format.html { 
           flash[:success] = t('activerecord.successfull.messages.created', data: @archive.fullname)
           redirect_to show_uuid_archive_path(@archive.archive_uuid) 
@@ -90,6 +91,7 @@ class ArchivesController < ApplicationController
     authorize @archive, :update?
     respond_to do |format|
       if @archive.update(archive_params)
+        @archive.log_work('update', current_user.id)
         format.html { 
           flash[:success] = t('activerecord.successfull.messages.updated', data: @archive.fullname)
           redirect_to show_uuid_archive_path(@archive.archive_uuid) 
@@ -106,9 +108,10 @@ class ArchivesController < ApplicationController
   # DELETE /archives/1.json
   def destroy
     authorize @archive, :destroy?
+    destroyed_clone = @archive.clone
     if @archive.destroy
+      destroyed_clone.log_work('destroy', current_user.id)
       flash[:success] = t('activerecord.successfull.messages.destroyed', data: @archive.fullname)
-      @archive.log_work('destroy', current_user.id)
       redirect_to archives_url
     else 
       flash.now[:error] = t('activerecord.errors.messages.destroyed', data: @archive.fullname)
@@ -120,9 +123,10 @@ class ArchivesController < ApplicationController
   # DELETE /archives/1.json
   def destroy_uuid
     authorize @archive, :destroy?
+    destroyed_clone = @archive.clone
     if @archive.destroy
+      destroyed_clone.log_work('destroy', current_user.id)
       flash[:success] = t('activerecord.successfull.messages.destroyed', data: @archive.fullname)
-      @archive.log_work('destroy', current_user.id)
       redirect_to archives_url
     else 
       flash.now[:error] = t('activerecord.errors.messages.destroyed', data: @archive.fullname)
@@ -140,7 +144,7 @@ class ArchivesController < ApplicationController
     else
       params[:users_ids].each do |i|
         user = User.find(i)
-        ArchiveMailer.link_archive_show_uuid(@archive, user).deliver_later
+        ArchiveMailer.link_archive_show_uuid(@archive, user, current_user).deliver_later
       end
       # #flash[:success] = t('activerecord.successfull.messages.created', data: @event.fullname)
       # redirect_to @archive, notice: "Email status about \"#{@archive.fullname}\" was successfully sent."

@@ -93,5 +93,10 @@ gem 'inky-rb', require: 'inky'
 gem 'premailer-rails'
 gem 'trix-rails', require: 'trix'
 
+gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
-gem 'image_processing', '~> 1.2'
+gem 'jquery-fileupload-rails'
+gem 'file_validators'
+
+gem 'closure_tree'
+gem 'rubyzip'

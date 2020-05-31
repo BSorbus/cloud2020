@@ -75,7 +75,7 @@ pl:
     index:
       title: 'Załączniki'
     edit:
-      title: 'Edycja -> Załącznik'
+      title: 'Edycja'
   activerecord:
     models:
       work: 'Dziennik operacji'
@@ -83,6 +83,7 @@ pl:
       role: 'Rola'
       group: 'Grupa'
       archive: 'Składnica'
+      component: 'Załącznik'
     attributes:
       work:
         created_at: 'Data'
@@ -143,8 +144,26 @@ pl:
         archive: 'Składnica'
         group: 'Grupa'
         archivization_type: 'Uprawnienia'
+      component:
+        componentable: 'Załączony do'
+        component_file: 'Plik/Katalog'
+        component_file_identifier: 'Załącznik'
+        file_content_type: 'Typ'
+        file_size: 'Rozmiar'
+        file_size_or_badge: 'Info'
+        created_at: 'Utworzony'
+        updated_at: 'Aktualizacja'
+        author_id: 'Autor'
+        author: 'Autor'
+        note: 'Opis i uwagi'
+        name_if_folder: 'Katalog'
+        name: 'Nazwa'
     errors:
-      # models:
+      models:
+        component:
+          attributes:
+            name:
+              taken: "'%{value}' już istnieje"
       #   member:
       #     attributes:
       #       user_id:
@@ -167,11 +186,11 @@ pl:
         created: 'Wpis: "%{data}" został pomyślnie utworzony.'
         updated: 'Wpis: "%{data}" został pomyślnie zaktualizowany.'
         destroyed: 'Wpis: "%{data}" został pomyślnie usunięty.'
-        annulled: 'Wpis: "%{data}" został pomyślnie anulowany.'
         add_role: 'Użytkownikowi "%{parent}" pomyślnie dodano rolę "%{child}".'
         remove_role: 'Użytkownikowi "%{parent}" została pomyślnie usunięta rola "%{child}".'
         account_off: 'Pomyślnie wyłączono konto "%{data}".'
         account_on: 'Pomyślnie włączono konto "%{data}".'
+        moved: 'Został(-y) pomyślnie przeniesiony(-e)'
   pundit:
     default: ' BRAK UPRAWNIEŃ: Nie można wykonać tej czynności!'
     work_policy:
@@ -320,7 +339,9 @@ pl:
     select2_no_results: Brak danych
   success:
     messages:
+      email_has_been_sent: 'Email został wysłany'
       make_user_in_select2: ' został pomyślnie utworzony.'
+      wait_zip_created: 'Czekaj, trwa tworzenie pliku .ZIP'
   errors:
     format: "%{attribute} - %{message}"
     messages:
@@ -395,7 +416,6 @@ pl:
       destroy_account: "Usuń moje konto"
       send_email: "Wyślij email"
       send_email_to_all: "Wyślij email do wszystkich"
-      email_has_been_sent: 'Email został wysłany'
       download: "Pobierz"
       close: "Zamknij"
       filter: "Filtruj dane"

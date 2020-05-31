@@ -51,7 +51,7 @@ class WorkDatatable < AjaxDatatablesRails::ActiveRecord
 
     def link_to_polymorphic_trackable(rec)
       if rec.trackable
-        link_to truncate(rec.trackable.fullname, length: 100), Rails.application.routes.url_helpers.url_for(only_path: true, action: 'show', controller: rec.trackable_type.pluralize.downcase, id: rec.trackable_id, locale: params[:locale])
+        rec.url.html_safe
       else
         rec.trackable_id
       end  

@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   include ActionView::Helpers::TextHelper # for truncate
 
+  delegate :url_helpers, to: 'Rails.application.routes'
+
   devise :saml_authenticatable, :trackable
 
   # relations
@@ -51,8 +53,9 @@ class User < ApplicationRecord
   
   def log_work(action = '', action_user_id = nil)
     worker_id = action_user_id || self.author_id
+    url = "<a href=#{url_helpers.user_path(self.id, locale: :pl)}>#{self.fullname}</a>".html_safe
 
-    Work.create!(trackable_type: 'User', trackable_id: self.id, action: "#{action}", author_id: worker_id, 
+    Work.create!(trackable_type: 'User', trackable_id: self.id, action: "#{action}", author_id: worker_id, url: "#{url}", 
       parameters: self.to_json(except: [:author_id], include: {author: {only: [:id, :user_name, :email]}}))
   end
 

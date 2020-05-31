@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $.fn.dataTable.ext.buttons.group_reset_col_vis_and_reorder = {
     text: '<span class="text-primary fa fa-retweet"></span>',
-    titleAttr: 'Przywróć domyślne ustawienia kolumn',
+    // titleAttr: 'Przywróć domyślne ustawienia kolumn',
     className: 'btn btn-sm btn-default',
     action: function ( e, dt, button, config ) {
       // revert colVis  // dt.columns(config.show).visible(true);
@@ -23,20 +23,20 @@ $(document).ready(function() {
       {
         extend:    'colvis',
         text:      '<span class="text-primary fa fa-columns"></span>',
-        titleAttr: 'Pokaż/ukryj kolumny',
+        // titleAttr: 'Pokaż/ukryj kolumny',
         className: 'btn btn-sm btn-default',
         columns:   ':gt(1)' //exclude cols from list
       }, 
       {
         extend:    'copy',
         text:      '<span class="text-primary fa fa-clipboard"></span>',
-        titleAttr: 'Kopiuj do schowka',
+        // titleAttr: 'Kopiuj do schowka',
         className: 'btn btn-sm btn-default'
       },
       {
         extend:    'csv',
         text:      '<span class="text-primary fa fa-file-csv"></span>',
-        titleAttr: 'Kopiuj do CSV',
+        // titleAttr: 'Kopiuj do CSV',
         className: 'btn btn-sm btn-default'
       }
     ],
@@ -74,6 +74,12 @@ $(document).ready(function() {
     order: [[ 1, "asc" ]],
     language: {
       url: $('#groups-table').data('locale_url')
+    },
+    initComplete: function(settings, json) {
+      oGrouptable.button(0).node().attr( 'title', oGrouptable.i18n( 'buttons.revertColVisColReorder' ) );
+      oGrouptable.button(1).node().attr( 'title', oGrouptable.i18n( 'buttons.colvis' ) );
+      oGrouptable.button(2).node().attr( 'title', oGrouptable.i18n( 'buttons.copy' ) );
+      oGrouptable.button(3).node().attr( 'title', oGrouptable.i18n( 'buttons.csv' ) );
     },
     stateSaveCallback: function(settings,data) {
       localStorage.setItem( 'DataTables_groups-table_/en-pl/groups', JSON.stringify(data) )

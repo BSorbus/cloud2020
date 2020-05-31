@@ -4,9 +4,10 @@ puts "#####  RUN - 030_bi_users.rb  #####"
 
 def build_users_uke_bi_wit
   user = User.find_or_create_by!(email: "slawomir.biegaj@uke.gov.pl") do |row|
-    row.note = "Naczelnik WIT"
+    row.note = "<div>Naczelnik WIT</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wit_array << row.id
@@ -15,6 +16,7 @@ def build_users_uke_bi_wit
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wit_array << row.id
@@ -23,14 +25,16 @@ def build_users_uke_bi_wit
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wit_array << row.id
   end
   user = User.find_or_create_by!(email: "piotr.klaus@uke.gov.pl") do |row|
-    row.note = "1/4 etatu"
+    row.note = "<div>1/4 etatu</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
   end
 end
@@ -40,14 +44,16 @@ def build_users_uke_bi_wur
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wur_array << row.id
   end
   user = User.find_or_create_by!(email: "mariusz.krupa@uke.gov.pl") do |row|
-    row.note = "Naczelnik WUR"
+    row.note = "<div>Naczelnik WUR</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wur_array << row.id
@@ -56,6 +62,7 @@ def build_users_uke_bi_wur
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wur_array << row.id
@@ -64,6 +71,7 @@ def build_users_uke_bi_wur
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wur_array << row.id
@@ -72,6 +80,7 @@ def build_users_uke_bi_wur
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wur_array << row.id
@@ -80,9 +89,10 @@ end
 
 def build_users_uke_bi_wwt
   user = User.find_or_create_by!(email: "pawel.wodzinski@uke.gov.pl") do |row|
-    row.note = "Naczelnik WWT"
+    row.note = "<div>Naczelnik WWT</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wwt_array << row.id
@@ -91,6 +101,7 @@ def build_users_uke_bi_wwt
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wwt_array << row.id
@@ -99,6 +110,7 @@ def build_users_uke_bi_wwt
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wwt_array << row.id
@@ -107,6 +119,7 @@ def build_users_uke_bi_wwt
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
     @uke_bi_wwt_array << row.id
@@ -115,9 +128,10 @@ end
  
 def build_users_uke_bi_other
   user = User.find_or_create_by!(email: "radoslaw.michalek@uke.gov.pl") do |row|
-    row.note = "Dyrektor Biura Informatyki"
+    row.note = "<div>Dyrektor Biura Informatyki</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
   end
@@ -125,6 +139,7 @@ def build_users_uke_bi_other
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_bi_array << row.id
   end

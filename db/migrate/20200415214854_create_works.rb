@@ -4,6 +4,7 @@ class CreateWorks < ActiveRecord::Migration[5.2]
       t.references :trackable, polymorphic: true, index: true
       t.references :author, foreign_key: false, index: true
       t.string :action
+      t.string :url
       t.text :parameters
 
       t.timestamps

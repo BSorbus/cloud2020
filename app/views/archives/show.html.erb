@@ -7,13 +7,11 @@
           <a href="#archive_show" data-toggle="tab"><%= archive_show_legend %></a>
         </li>
 
-        <%# if @archive.access_components? %>
-          <%# if policy(:component).archive_index? %>
-            <li class="brand-nav brand-nav-level-1">
-              <a href="#components" data-toggle="tab"><%= component_index_legend %></a>
-            </li>
-          <%# end %>
-        <%# end %>
+        <% if policy(:component).archive_index? %>
+          <li class="brand-nav brand-nav-level-1">
+            <a href="#components" data-toggle="tab"><%= component_index_legend %></a>
+          </li>
+        <% end %>
 
         <% if policy(@archive).work? %>
           <li class="brand-nav brand-nav-level-1">
@@ -40,11 +38,9 @@
           <%= render 'data', input_disabled: true, subtitle: archive_info_legend(@archive) %>
         </div>
 
-        <%# if @archive.access_components? %>
-          <div class="tab-pane" id="components">
-            <%#= render 'components/components_tab', componentable: @archive, subtitle: archive_info_legend(@archive) %>
-          </div>
-        <%# end %>
+        <div class="tab-pane" id="components">
+          <%= render 'components/components_tab', componentable: @archive, subtitle: archive_info_legend(@archive) %>
+        </div>
 
         <div class="tab-pane" id="works">
           <%= render 'works/works_tab', trackable_type: "Archive", trackable_id: @archive.id, subtitle: archive_info_legend(@archive) %>

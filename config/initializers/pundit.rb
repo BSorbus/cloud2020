@@ -19,7 +19,12 @@ module PunditHelper
       render status: :forbidden, json: {error: "#{mess}" }
     elsif request.format == 'html'
       flash[:error] = "#{mess}"
-      redirect_to(request.referrer || root_path)
+      puts '------------pundit.rb user_not_authorized(exception)--------------------'
+      puts request.referrer
+      puts '------------------------------------------------------------------------'
+      # redirect_to(:back) is being deprecated in Rails 5
+      # redirect_to(request.referrer || root_path)
+      redirect_back( fallback_location: request.referrer || root_path )
     else
       head :forbidden
     end

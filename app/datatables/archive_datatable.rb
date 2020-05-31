@@ -49,18 +49,17 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
     end
 
     def folders_count_badge(rec)
-      count = 11 #rec.components.where(component_file: nil).size
+      count = rec.components.where(component_file: nil).size
       "<span class='badge alert-info pull-right'> #{count} </span></div>"
     end
 
     def files_count_badge(rec)
-      count = 222 #rec.components.where.not(component_file: nil).size
+      count = rec.components.where.not(component_file: nil).size
       "<span class='badge alert-info pull-right'> #{count} </span></div>"
     end
 
     def files_size_sum(rec)
-      # rec.components.where.not(component_file: nil).map {|a| a.component_file.file.size }.sum
-      1234567
+      rec.components.where.not(component_file: nil).map {|a| a.component_file.file.size }.sum
     end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_214859) do
+ActiveRecord::Schema.define(version: 2020_04_15_214861) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214859) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_approvals_on_author_id"
+    t.index ["role_id", "user_id"], name: "index_approvals_on_role_id_and_user_id", unique: true
     t.index ["role_id"], name: "index_approvals_on_role_id"
     t.index ["user_id"], name: "index_approvals_on_user_id"
   end
@@ -46,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214859) do
     t.index ["archive_uuid"], name: "index_archives_on_archive_uuid"
     t.index ["author_id"], name: "index_archives_on_author_id"
     t.index ["expiry_on"], name: "index_archives_on_expiry_on"
-    t.index ["name"], name: "index_archives_on_name"
+    t.index ["name"], name: "index_archives_on_name", unique: true
   end
 
   create_table "archivization_types", force: :cascade do |t|
@@ -70,6 +71,34 @@ ActiveRecord::Schema.define(version: 2020_04_15_214859) do
     t.index ["group_id"], name: "index_archivizations_on_group_id"
   end
 
+  create_table "component_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id", null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations", null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "component_anc_desc_idx", unique: true
+    t.index ["descendant_id"], name: "component_desc_idx"
+  end
+
+  create_table "components", force: :cascade do |t|
+    t.uuid "component_uuid"
+    t.string "component_file"
+    t.string "file_content_type"
+    t.string "file_size"
+    t.string "name"
+    t.string "name_if_folder"
+    t.bigint "parent_id"
+    t.text "note", default: ""
+    t.string "componentable_type"
+    t.bigint "componentable_id"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_components_on_author_id"
+    t.index ["componentable_type", "componentable_id"], name: "index_components_on_componentable_type_and_componentable_id"
+    t.index ["name"], name: "index_components_on_name"
+    t.index ["name_if_folder"], name: "index_components_on_name_if_folder"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.text "note", default: ""
@@ -77,6 +106,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214859) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_groups_on_author_id"
+    t.index ["name"], name: "index_groups_on_name", unique: true
   end
 
   create_table "members", force: :cascade do |t|
@@ -99,6 +129,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214859) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_roles_on_author_id"
+    t.index ["name"], name: "index_roles_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -132,6 +163,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214859) do
     t.bigint "trackable_id"
     t.bigint "author_id"
     t.string "action"
+    t.string "url"
     t.text "parameters"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -2,7 +2,7 @@ class CreateArchives < ActiveRecord::Migration[5.2]
   def change
     create_table :archives do |t|
       t.uuid :archive_uuid, index: true
-      t.string :name, index: true
+      t.string :name
       t.date :expiry_on, index: true
       t.text :note, default: ""
       t.references :author, foreign_key: false, index: true
@@ -10,5 +10,7 @@ class CreateArchives < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    add_index :archives, :name, unique: true
   end
 end

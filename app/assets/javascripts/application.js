@@ -20,5 +20,7 @@
 //= require bootstrap
 //= require bootstrap-datetimepicker
 //= require toastr
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require trix
 //= require_tree .

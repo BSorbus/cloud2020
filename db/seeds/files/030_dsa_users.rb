@@ -4,9 +4,10 @@ puts "#####  RUN - 030_bi_users.rb  #####"
 
 def build_users_uke_dsa_wgd
   user = User.find_or_create_by!(email: "joanna.antczak@uke.gov.pl") do |row|
-    row.note = "Naczelnik DSA-WGD"
+    row.note = "<div>Naczelnik DSA-WGD</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -15,6 +16,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -23,6 +25,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -31,6 +34,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -39,6 +43,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -47,6 +52,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -55,6 +61,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -63,6 +70,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -71,6 +79,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -79,6 +88,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -87,6 +97,7 @@ def build_users_uke_dsa_wgd
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wgd_array << row.id
@@ -95,9 +106,10 @@ end
 
 def build_users_uke_dsa_wmi
   user = User.find_or_create_by!(email: "marcin.blasiak@uke.gov.pl") do |row|
-    row.note = "Naczelnik DSA-WMI"
+    row.note = "<div>Naczelnik DSA-WMI</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wmi_array << row.id
@@ -106,6 +118,7 @@ def build_users_uke_dsa_wmi
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wmi_array << row.id
@@ -114,6 +127,7 @@ def build_users_uke_dsa_wmi
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wmi_array << row.id
@@ -122,6 +136,7 @@ def build_users_uke_dsa_wmi
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wmi_array << row.id
@@ -130,6 +145,7 @@ def build_users_uke_dsa_wmi
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wmi_array << row.id
@@ -138,6 +154,7 @@ def build_users_uke_dsa_wmi
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wmi_array << row.id
@@ -146,9 +163,10 @@ end
  
 def build_users_uke_dsa_wat
   user = User.find_or_create_by!(email: "dorota.oniszczuk@uke.gov.pl") do |row|
-    row.note = "Naczelnik DSA-WAT"
+    row.note = "<div>Naczelnik DSA-WAT</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wat_array << row.id
@@ -157,6 +175,7 @@ def build_users_uke_dsa_wat
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wat_array << row.id
@@ -165,6 +184,7 @@ def build_users_uke_dsa_wat
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wat_array << row.id
@@ -173,6 +193,7 @@ def build_users_uke_dsa_wat
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wat_array << row.id
@@ -181,6 +202,7 @@ def build_users_uke_dsa_wat
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wat_array << row.id
@@ -189,6 +211,7 @@ def build_users_uke_dsa_wat
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wat_array << row.id
@@ -197,9 +220,10 @@ end
  
 def build_users_uke_dsa_wme
   user = User.find_or_create_by!(email: "grzegorz.nieroda@uke.gov.pl") do |row|
-    row.note = "Naczelnik DSA-WME"
+    row.note = "<div>Naczelnik DSA-WME</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wme_array << row.id
@@ -208,6 +232,7 @@ def build_users_uke_dsa_wme
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wme_array << row.id
@@ -216,6 +241,7 @@ def build_users_uke_dsa_wme
     row.note = ""
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
     @uke_dsa_wme_array << row.id
@@ -224,16 +250,18 @@ end
  
 def build_users_uke_dsa_other
   user = User.find_or_create_by!(email: "agnieszka.gladysz@uke.gov.pl") do |row|
-    row.note = "Dyrektor Departamentu Strategii i Analiz"
+    row.note = "<div>Dyrektor Departamentu Strategii i Analiz</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
   end
   user = User.find_or_create_by!(email: "katarzyna.gredczyszyn@uke.gov.pl") do |row|
-    row.note = "Radca Prezesa"
+    row.note = "<div>Radca Prezesa</div>"
     row.author_id = 1
     row.save!
+    row.log_work('create', 1)
     puts 'CREATED USER: ' << row.email
     @uke_dsa_array << row.id
   end
