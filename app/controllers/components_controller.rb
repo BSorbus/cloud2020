@@ -17,28 +17,34 @@ class ComponentsController < ApplicationController
   end
 
   def download_uuid
-    component_authorize(@component, "download_uuid", @component.componentable_type.singularize.downcase)
-    @component.log_work('download_uuid_component', current_user.id)
+    unless @component.present?
+      flash[:error] = t('errors.messages.not_found_resource')
+      skip_authorization
+      redirect_to root_path()
+    else
+      component_authorize(@component, "download_uuid", @component.componentable_type.singularize.downcase)
+      @component.log_work('download_uuid_component', current_user.id)
 
-    respond_to do |format|
-      format.html { 
-        send_file "#{@component.component_file.path}", 
-          type: "#{@component.file_content_type}",
-          filename: @component.component_file.file.filename, 
-          dispostion: "inline", 
-          status: 200, 
-          stream: true, 
-          x_sendfile: true 
-      }
-      format.js { 
-        # @file_url_as_html = "/#{params[:controller]}/#{params[:component_uuid]}/#{params[:action]}.html"
-        @file_url_as_html = url_for( controller: params[:controller],
-                                    action: params[:action],
-                                    component_uuid:  params[:component_uuid],
-                                    format: 'html',
-                                    only_path: true)
-        render 'download_uuid' 
-      }
+      respond_to do |format|
+        format.html { 
+          send_file "#{@component.component_file.path}", 
+            type: "#{@component.file_content_type}",
+            filename: @component.component_file.file.filename, 
+            dispostion: "inline", 
+            status: 200, 
+            stream: true, 
+            x_sendfile: true 
+        }
+        format.js { 
+          # @file_url_as_html = "/#{params[:controller]}/#{params[:component_uuid]}/#{params[:action]}.html"
+          @file_url_as_html = url_for( controller: params[:controller],
+                                      action: params[:action],
+                                      component_uuid:  params[:component_uuid],
+                                      format: 'html',
+                                      only_path: true)
+          render 'download_uuid' 
+        }
+      end
     end
   end
 
