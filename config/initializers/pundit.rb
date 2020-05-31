@@ -2,6 +2,9 @@
 # Extends the ApplicationController to add Pundit for authorization.
 # Modify this file to change the behavior of a 'not authorized' error.
 # Be sure to restart your server when you modify this file.
+
+require 'uri'
+
 module PunditHelper
   extend ActiveSupport::Concern
 
@@ -20,8 +23,8 @@ module PunditHelper
     elsif request.format == 'html'
       flash[:error] = "#{mess}"
       referrer_or_root = request.referrer
-      if referrer_or_root.present? 
-        referrer_or_root = root_path unless referrer_or_root.host == "#{Rails.application.secrets[:domain_name]}"
+      if referrer_or_root.present?
+        referrer_or_root = root_path unless URI(referrer_or_root).host == "#{Rails.application.secrets[:domain_name]}"
       else
         referrer_or_root = root_path
       end
