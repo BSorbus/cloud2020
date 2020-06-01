@@ -3,5 +3,6 @@
   toastr['error']("<%= @component.errors.full_messages.join(', ').html_safe %>");
 <% else %>
   $('#componentable-components').DataTable().draw();
-  toastr['success']("<%= @component.component_file.file.filename %>" + '<br>...pobieranie zakończone');
+	toastr['success']("<%= @message %>");
+  // toastr['success']("<%= @component.component_file.file.filename %>" + '<br>...pobieranie zakończone');
 <% end %>

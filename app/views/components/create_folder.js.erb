@@ -6,6 +6,7 @@
     toastr['error']("<%= @component.errors.full_messages.join(', ').html_safe %>");
   <% else %>
     $('#componentable-components').DataTable().draw();
-    toastr['success']("<%= @component.name_if_folder %>" + '<br>...został utworzony');
+		toastr['success']("<%= @message %>");
+    // toastr['success']("<%= @component.name_if_folder %>" + '<br>...został utworzony');
   <% end %>
 <% end %>

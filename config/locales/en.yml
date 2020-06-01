@@ -146,6 +146,7 @@ en:
         archivization_type: 'Permissions'
       component:
         componentable: 'Attached to'
+        component_uuid: 'Link to download the file'
         component_file: 'File/Folder'
         component_file_identifier: 'Attachment'
         file_content_type: 'Type'
@@ -191,6 +192,7 @@ en:
         account_off: 'Pomyślnie wyłączono konto "%{data}".'
         account_on: 'Pomyślnie włączono konto "%{data}".'
         moved: 'Has(have) been successfully moved'
+        downloaded: '"%{data}" was successfully downloaded.'
   pundit:
     default: ' SECURITY: Access denied!'
     work_policy:

@@ -90,17 +90,6 @@ class ComponentsController < ApplicationController
     end
   end
 
-  # GET /components/1
-  # GET /components/1.json
-  def show
-    component_authorize(@component, "show", @component.componentable_type.singularize.downcase)
-
-    respond_to do |format|
-      format.html {redirect_to @component.componentable }
-      format.js { render 'show' }
-    end
-  end
-
   def show_uuid
     component_authorize(@component, "show_uuid", @component.componentable_type.singularize.downcase)
 
@@ -111,7 +100,16 @@ class ComponentsController < ApplicationController
       #format.js { render 'show_uuid.js.erb' }
       #format.js { render file: 'components/show_uuid.js.erb' }
       #format.js { render :show_uuid }
-      format.js { render 'show_uuid' }
+      format.js { 
+        @file_url_as_html = url_for( controller: params[:controller],
+                                    action: :download_uuid,
+                                    component_uuid:  params[:component_uuid],
+                                    format: 'html',
+                                    only_path: false)
+
+
+        render 'show_uuid' 
+      }
     end
   end
 
@@ -137,6 +135,8 @@ class ComponentsController < ApplicationController
 
     @component = @componentable.components.create(component_params)
     @component.log_work('upload_component', current_user.id)  if @component.errors.empty?
+
+    @message = I18n.t('activerecord.successfull.messages.downloaded', data: @component.fullname)
   end
 
   def create_folder
@@ -147,12 +147,17 @@ class ComponentsController < ApplicationController
       @component.log_work('create_directory', current_user.id) if @component.errors.empty?
 
       respond_to do |format|
-        format.js  { render status: :created, layout: false, file: 'components/create_folder.js.erb' }
+        format.js  { 
+          @message = I18n.t('activerecord.successfull.messages.created', data: @component.fullname)
+          render status: :created, layout: false, file: 'components/create_folder.js.erb' 
+        }
       end
     else
       respond_to do |format|
         @status = "forbidden"
-        format.js  { render status: :forbidden, layout: false, file: 'components/create_folder.js.erb' }
+        format.js  { 
+          render status: :forbidden, layout: false, file: 'components/create_folder.js.erb' 
+        }
       end
     end
   end
@@ -168,7 +173,10 @@ class ComponentsController < ApplicationController
           flash[:success] = t('activerecord.successfull.messages.updated', data: @component.fullname)
           redirect_to url_for(only_path: true, controller: @component.componentable_type.pluralize.downcase, action: 'show', id: @component.componentable.id) 
         }
-        format.js { render 'update_uuid' }
+        format.js { 
+          @message = I18n.t('activerecord.successfull.messages.updated', data: @component.fullname)
+          render 'update_uuid' 
+        }
       else
         format.html { render :edit }
         format.js { render 'edit_uuid' }

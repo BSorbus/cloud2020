@@ -149,6 +149,7 @@ pl:
         archivization_type: 'Uprawnienia'
       component:
         componentable: 'Załączony do'
+        component_uuid: 'Link do pobrania pliku'
         component_file: 'Plik/Katalog'
         component_file_identifier: 'Załącznik'
         file_content_type: 'Typ'
@@ -194,6 +195,7 @@ pl:
         account_off: 'Pomyślnie wyłączono konto "%{data}".'
         account_on: 'Pomyślnie włączono konto "%{data}".'
         moved: 'Został(-y) pomyślnie przeniesiony(-e)'
+        downloaded: '"%{data}" został pomyślnie pobrany.'
   pundit:
     default: ' BRAK UPRAWNIEŃ: Nie można wykonać tej czynności!'
     work_policy:

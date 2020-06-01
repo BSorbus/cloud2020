@@ -24,6 +24,7 @@ module PunditHelper
       flash[:error] = "#{mess}"
       referrer_or_root = request.referrer
       if referrer_or_root.present?
+        # No redirect to WSO2IS
         referrer_or_root = root_path unless URI(referrer_or_root).host == "#{Rails.application.secrets[:domain_name]}"
       else
         referrer_or_root = root_path
