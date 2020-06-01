@@ -12,7 +12,22 @@ class ComponentUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    # OK!
+    #{}"/home/bjarzab/www/cloud2020_storage/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    # OK!
+    # "/mnt/cloud_test/files/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "#{Rails.application.secrets[:carrierwave_store_dir]}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+  # zdefinowac w pliku secrets
+  def cache_dir
+    # should return path to cache dir
+    # OK!
+    #{}"/home/bjarzab/www/cloud2020_storage/tmp"
+    # OK! 
+    # "/mnt/cloud_test/files/tmp"
+    "#{Rails.application.secrets[:carrierwave_cache_dir]}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
