@@ -34,7 +34,7 @@ class Member < ApplicationRecord
     Work.create!(trackable_type: 'User', trackable_id: self.user.id, action: "#{action}", author_id: worker_id, url: "#{url}", 
       parameters: self.to_json(only: [:id, :created_at], include: {user: {only: [:id, :user_name, :email]}, 
                                                                    group: {only: [:id, :name]},
-                                                                   author: {only: [:id, :user_name, :email]} } ))
+                                                                   author: {only: [:id, :user_name, :email]} }, root: 'member' ))
   end
 
   def log_work_for_group(action = '', action_user_id = nil)
@@ -44,7 +44,7 @@ class Member < ApplicationRecord
     Work.create!(trackable_type: 'Group', trackable_id: self.group.id, action: "#{action}", author_id: worker_id, url: "#{url}", 
       parameters: self.to_json(only: [:id, :created_at], include: {user: {only: [:id, :user_name, :email]}, 
                                                                    group: {only: [:id, :name]},
-                                                                   author: {only: [:id, :user_name, :email]} }))
+                                                                   author: {only: [:id, :user_name, :email]} }, root: 'member'))
   end
 
 end

@@ -315,7 +315,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionpack-action_caching
-  actionpack-page_caching
+  actionpack-page_caching (>= 1.2.2)
   ajax-datatables-rails
   better_errors
   binding_of_caller

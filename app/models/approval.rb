@@ -15,7 +15,7 @@ class Approval < ApplicationRecord
     Work.create!(trackable_type: 'User', trackable_id: self.user.id, action: "#{action}", author_id: worker_id, url: "#{url}",
       parameters: self.to_json(only: [:id, :created_at], include: {user: {only: [:id, :user_name, :email]}, 
                                                                    role: {only: [:id, :name]},
-                                                                   author: {only: [:id, :user_name, :email]} } ))
+                                                                   author: {only: [:id, :user_name, :email]} }, root: 'approval' ))
   end
 
   def log_work_for_role(action = '', action_user_id = nil)
@@ -25,7 +25,7 @@ class Approval < ApplicationRecord
     Work.create!(trackable_type: 'Role', trackable_id: self.role.id, action: "#{action}", author_id: worker_id, url: "#{url}", 
       parameters: self.to_json(only: [:id, :created_at], include: {user: {only: [:id, :user_name, :email]}, 
                                                                    role: {only: [:id, :name]},
-                                                                   author: {only: [:id, :user_name, :email]} }))
+                                                                   author: {only: [:id, :user_name, :email]} }, root: 'approval'))
   end
 
 end

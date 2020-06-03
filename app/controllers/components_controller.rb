@@ -134,7 +134,7 @@ class ComponentsController < ApplicationController
     component_authorize(@component, "create", params[:controller].classify.deconstantize.singularize.downcase)
 
     @component = @componentable.components.create(component_params)
-    @component.log_work('upload_component', current_user.id)  if @component.errors.empty?
+    @component.log_work('upload_file', current_user.id)  if @component.errors.empty?
 
     @message = I18n.t('activerecord.successfull.messages.downloaded', data: @component.fullname)
   end

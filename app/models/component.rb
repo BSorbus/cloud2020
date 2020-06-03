@@ -58,9 +58,9 @@ class Component < ApplicationRecord
   end
 
   def log_work(action = '', action_user_id = nil)
+    worker_id = action_user_id || self.user_id
     # url_show_path = "#{self.componentable.class.to_s.downcase}_path"
     # trackable_url = eval( "Rails.application.routes.url_helpers.#{url_show_path}(only_path: true, controller: '#{self.componentable.class.to_s.pluralize.downcase}', action: 'show', id: #{self.componentable.id})")
-    # worker_id = action_user_id || self.user_id
 
     # Work.create!(trackable_type: "#{self.componentable.class.to_s}", trackable_id: self.componentable.id, trackable_url: trackable_url, action: "#{action}", user_id: worker_id, 
     #   parameters: self.to_json(except: [:user_id], include: {user: {only: [:id, :name, :email]}}))
@@ -72,8 +72,23 @@ class Component < ApplicationRecord
   # /pl/components/e9443d34-e9a8-469a-9acc-d30b276a3617/show_uuid.html
 
 
-    # worker_id = action_user_id || self.author_id
-    # trackable_url = eval( "helpers.link_to( #{self.fullname}, show_uuid_component_path( component_uuid: #{self.component_uuid}, locale: :pl), remote: true)")
+    archive_str = self.componentable.to_json(except: [:author_id], include: {author: {only: [:id, :user_name, :email]}}, root: 'archive' )
+    archive_hash = JSON.parse(archive_str)
+ 
+    component_str = self.to_json( except: [:author_id], include: {author: {only: [:id, :user_name, :email]} }, root: 'component' )
+    component_hash = JSON.parse(component_str)
+
+    # save for Archive Object
+    archive_with_component_hash = archive_hash.merge(component_hash)
+    archive_with_component_json = archive_with_component_hash.to_json 
+
+    url_archive = "<a href=#{url_helpers.show_uuid_archive_path(uuid: self.componentable.archive_uuid, locale: :pl)}>#{self.componentable.fullname}</a>".html_safe
+    Work.create!(trackable_type: 'Archive', trackable_id: self.componentable.id, action: "#{action}", author_id: worker_id, url: "#{url_archive}", parameters: archive_with_component_json)
+
+
+    # save for User Object
+    user = User.find(worker_id)
+    Work.create!(trackable_type: 'User', trackable_id: user.id, action: "#{action}", author_id: worker_id, url: "#{url_archive}", parameters: archive_with_component_json)
 
   end
 
@@ -81,7 +96,7 @@ class Component < ApplicationRecord
     destroyed_clone = self.clone
     destroyed_return = self.destroy
     if destroyed_return
-      destroyed_clone.log_work('destroy_attachment', current_user_id)
+      destroyed_clone.log_work('destroy_component', current_user_id)
     end
     return destroyed_return
   end
