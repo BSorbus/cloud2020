@@ -41,7 +41,7 @@
 	    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 	      <div class="panel-body">
 	      	<h4 class="text-justify">
-	      		Nadane <strong>uprawnienia dostępu do Składnicy</strong> definiują w jaki sposób użytkownicy będący członkami określonych grupy widzą i mogą obsługiwać daną <strong>Składnicę</strong> (Składnicę, a nie pliki wewnątrz tej Składnicy!). Siła uprawnień dotycząca definiowanej Składnicy określona jest wartością pozycji listy zaczynającą się od <strong>"Składnica: "</strong>
+	      		Nadane <strong>uprawnienia dostępu do Składnicy</strong> definiują w jaki sposób użytkownicy będący członkami określonych grupy widzą i mogą obsługiwać daną <strong>Składnicę</strong> (Składnicę, a nie pliki wewnątrz tej Składnicy!). Siła uprawnień dotycząca definiowanej Składnicy określana jest wartością pozycji listy zaczynającą się od <strong>"Składnica: "</strong>
 	      		<br><br>
 	      		<strong>Składnica: [Odczyt]</strong>
 	      		<br> 
@@ -49,10 +49,10 @@
 	      		<% if policy(:archive).more_privilage_in_role? %>
 		      		<br><br>
 		      		<strong>Składnica: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień]</strong><br>
-		      		To zaawansowane uprawnienie winno być przyznane tylko tym Grupom użytkowników, którzy będą zarządzać daną Składnicą. Bądź ostrożny z nadawaniem tego uprawnienia i <span class="text-danger"><strong>bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom, w skład których wchodzą użytkownicy spoza UKE</strong></span>.
+		      		To zaawansowane uprawnienie winno być przyznane tylko tym Grupom użytkowników, którzy będą zarządzać daną Składnicą. Bądź ostrożny z nadawaniem tego uprawnienia i <span class="text-danger"><strong>bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom w skład których wchodzą użytkownicy spoza UKE</strong></span>.
 		      		<br><br>
 		      		<strong>Składnica: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień, Usuwanie, Audyt]</strong><br> 
-	        		To najbardziej zaawansowane uprawnienie winno być przyznane tylko Administratorom oraz Audytorom. <span class="text-danger"><strong>Bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom, w skład których wchodzą użytkownicy spoza UKE</strong></span>.
+	        		To najbardziej zaawansowane uprawnienie winno być przyznane tylko Administratorom oraz Audytorom. <span class="text-danger"><strong>Bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom w skład których wchodzą użytkownicy spoza UKE</strong></span>.
         		<% end %>
 	      	</h4>
 	      </div>
@@ -69,7 +69,17 @@
 	    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 	      <div class="panel-body">
 	      	<h4 class="text-justify">
-	      		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+	      		Nadane <strong>uprawnienia dostępu do Plików</strong> definiują w jaki sposób użytkownicy będący członkami określonych grupy mogą obsługiwać dane <strong>wewnątrz</strong> Składnicy. Siła uprawnień dotycząca plików wewnątrz Składnicy określana jest wartością pozycji listy zaczynającą się od <strong>"Pliki wewnątrz: "</strong>
+	      		<br><br>
+	      		<strong>Pliki wewnątrz: [Odczyt]</strong>
+	      		<br> 
+	      		To uprawnienie pozwala użytkownikom należącym do Grupy czytać informacje dotyczące Pliku/Folderu oraz pobierać pliki. Nadaj to standardowe uprawnienie wszystkim Grupom, które mają mieć prawo korzystania z tej Składnicy.
+	      		<br><br>
+	      		<strong>Pliki wewnątrz: [Odczyt, Zapis, Usuwanie]</strong><br>
+	      		To uprawnienie winno być przyznane tym Grupom użytkowników, którzy będą dodwali i usuwali pliki oraz aktualizowali ich opis. Bądź ostrożny z nadawaniem tego uprawnienia Grupom w skład których wchodzą użytkownicy spoza UKE.
+	      		<br><br>
+	      		<strong>Pliki wewnątrz: [Odczyt, Zapis, Usuwanie, Audyt]</strong><br> 
+        		Siła dostępu jak powżej + możliwość przeglądania historii wpisów.
 	      	</h4>
 	      </div>
 	    </div>
