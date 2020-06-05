@@ -76,7 +76,7 @@ pl:
     components_tab:
       folder_submit: 'Utwórz'
     index:
-      title: 'Załączniki'
+      title: 'Pliki'
     edit:
       title: 'Edycja'
   activerecord:
@@ -151,7 +151,7 @@ pl:
         componentable: 'Załączony do'
         component_uuid: 'Link do pobrania pliku'
         component_file: 'Plik/Katalog'
-        component_file_identifier: 'Załącznik'
+        component_file_identifier: 'Plik'
         file_content_type: 'Typ'
         file_size: 'Rozmiar'
         file_size_or_badge: 'Info'
