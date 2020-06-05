@@ -37,6 +37,7 @@
 /config/credentials.yml.enc
 /config/master.key
 /config/secrets.yml
+/config/piwik.yml
 /config/deploy.rb
 /config/deploy.rb_test
 /config/deploy.rb_prod
