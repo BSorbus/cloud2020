@@ -51,6 +51,7 @@ class ArchivesController < ApplicationController
   def new
     @archive = Archive.new
     @archive.author = current_user
+    @archive.quota = Rails.application.secrets[:archive_default_quota]
     @archive.expiry_on = Time.zone.today + Rails.application.secrets.archive_default_days_expiry_on_create.days
     authorize @archive, :new?
   end
@@ -68,6 +69,7 @@ class ArchivesController < ApplicationController
   def create
     @archive = Archive.new(archive_params_create)
     @archive.author = current_user
+    @archive.quota = Rails.application.secrets[:archive_default_quota]
     authorize @archive, :create?
     respond_to do |format|
       if @archive.save

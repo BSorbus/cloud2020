@@ -1,4 +1,6 @@
 class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
+  include  ActionView::Helpers::NumberHelper
+
   extend Forwardable
 
   def_delegators :@view, :link_to, :show_uuid_archive_path
@@ -7,8 +9,6 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
     @view = opts[:view_context]
     super
   end
-
-  include  ActionView::Helpers::NumberHelper
 
   def view_columns
     @view_columns ||= {

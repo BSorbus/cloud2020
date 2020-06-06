@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_214861) do
+ActiveRecord::Schema.define(version: 2020_06_06_002356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214861) do
     t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "quota"
     t.index ["archive_uuid"], name: "index_archives_on_archive_uuid"
     t.index ["author_id"], name: "index_archives_on_author_id"
     t.index ["expiry_on"], name: "index_archives_on_expiry_on"

@@ -133,6 +133,7 @@ pl:
         author_id: 'Autor'
         author: 'Autor'
         archivizations: 'Uprawnienia Grup'
+        quota: 'Maksymalna wielkość wszystkich plików'
       archivization:
         archive_id: 'Składnica'
         group_id: 'Grupa'
@@ -162,6 +163,7 @@ pl:
         note: 'Opis i uwagi'
         name_if_folder: 'Katalog'
         name: 'Nazwa'
+        sum_file_size: 'Maksymalna wielkość wszystkich plików'
     errors:
       models:
         component:

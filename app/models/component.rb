@@ -1,5 +1,6 @@
 class Component < ApplicationRecord
   include ActionView::Helpers::TextHelper
+  include  ActionView::Helpers::NumberHelper
 
   delegate :url_helpers, to: 'Rails.application.routes'
 
@@ -27,6 +28,8 @@ class Component < ApplicationRecord
                                                     'application/x-python',
                                                     'application/x-vbs' ] },
                     file_size: { in: 1.byte..750.megabyte }, unless: -> { name_if_folder.present? }
+
+  validate :check_quota, on: :create, unless: -> { name_if_folder.present? }
 
   # callbacks
   before_validation :set_initial_data, on: :create
@@ -136,5 +139,15 @@ class Component < ApplicationRecord
     def set_initial_data
       self.component_uuid = SecureRandom.uuid unless self.component_uuid.present?
     end	
+
+    def check_quota
+      sum_files_size = self.componentable.components.where.not(component_file: nil).map {|a| a.component_file.file.size }.sum
+      current_file_size = component_file.file.size 
+      archive_quota = self.componentable.quota
+      if sum_files_size + current_file_size > archive_quota
+        errors.add(:sum_file_size, I18n.t('errors.messages.less_than', count: number_to_human_size(archive_quota)) ) 
+        throw :abort 
+      end 
+    end
 
 end

@@ -21,6 +21,11 @@
                 <%= @archive.expiry_on.present? ? @archive.expiry_on.strftime("%Y-%m-%d") : '' %>
               </div>
 
+              <div class="form-group col-sm-8">
+                <p><strong><%= Archive.human_attribute_name(:quota) %></strong></p>
+                <%= number_to_human_size(@archive.quota) %>
+              </div>
+
             </div>  <!-- /row -->
           </div>  <!-- /col-sm-6 -->
 

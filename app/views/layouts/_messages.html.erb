@@ -19,9 +19,13 @@
         "hideEasing": "linear",
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
-      }
+      };
 
-      toastr['<%= flash_class_name(name) %>']('<%= msg %>' )
+      if ('<%= flash_class_name(name) %>' === 'error') {
+        toastr['<%= flash_class_name(name) %>']('<%= msg %>', 'Error', {timeOut: 15000} );
+      } else {
+        toastr['<%= flash_class_name(name) %>']('<%= msg %>');
+      }
 
     </script>
   <% end %>

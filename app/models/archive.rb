@@ -90,18 +90,6 @@ class Archive < ApplicationRecord
     truncate(Loofah.fragment(self.note).text, length: 250)
   end
 
-  def components_folders_count
-    1
-  end
-
-  def components_files_count
-    2
-  end
-
-  def components_files_size_sum
-    1234567890
-  end
-
   private
   
     def set_initial_data
@@ -116,4 +104,5 @@ class Archive < ApplicationRecord
         throw :abort 
       end 
     end
+
 end
