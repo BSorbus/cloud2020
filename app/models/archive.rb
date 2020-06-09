@@ -8,6 +8,7 @@ class Archive < ApplicationRecord
 
   has_many :archivizations, dependent: :destroy
   has_many :accesses_groups, through: :archivizations, source: :group
+  has_many :accesses_users, through: :archivizations, source: :users
 
   has_many :components, as: :componentable, dependent: :destroy
   has_many :works, as: :trackable

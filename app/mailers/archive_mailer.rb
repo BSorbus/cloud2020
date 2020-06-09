@@ -6,7 +6,7 @@ class ArchiveMailer < ApplicationMailer
 
   default template_path: 'archive_mailer' # to make sure that your mailer uses the devise views
   default from: Rails.application.secrets.email_provider_username
-  default cc: Rails.application.secrets.email_provider_username
+  default bcc: Rails.application.secrets.email_provider_username
 
   after_action :attach_metadata
 
