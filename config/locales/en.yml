@@ -400,6 +400,7 @@ en:
       link_to_remove_fields_nested_small: '[ - ]'
       not_exist_in_list:  'No entry in the selection list?'
       help:  'Help'
+      copy_to_clipboard:  'Copy to Clipboard'
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

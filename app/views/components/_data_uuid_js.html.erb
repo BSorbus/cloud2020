@@ -16,11 +16,26 @@
             <%= @component.name_if_folder %>
           </div>
 
+          <div class="form-group col-sm-12">
+            <% if @component.note.html_safe.size > 0 %>
+              <blockquote>
+                <%= @component.note.html_safe %>
+              </blockquote>
+            <% end %>
+          </div> 
+
         <% else %>
 
           <div class="form-group col-sm-12">
             <p><strong><%= Component.human_attribute_name(:component_file_identifier) %></strong></p>
             <%= @component.component_file_identifier %>
+          </div> 
+          <div class="form-group col-sm-12">
+            <% if @component.note.html_safe.size > 0 %>
+              <blockquote>
+                <%= @component.note.html_safe %>
+              </blockquote>
+            <% end %>
           </div> 
           <div class="form-group col-sm-6">
             <p><strong><%= Component.human_attribute_name(:file_size) %></strong></p>
@@ -33,18 +48,25 @@
 
           <div class="form-group col-sm-12">
             <p><strong><%= Component.human_attribute_name(:component_uuid) %></strong></p>
-            <%= link_to( @file_url_as_html, @file_url_as_html ) %>
+            <div class="input-group">
+              <input id="foo" type="text" class="form-control" value='<%= @file_url_as_html %>' readonly='true'>
+              <span class="input-group-btn">
+                <button class="btn btn-primary btn-clip" type="button" data-clipboard-target="#foo"><%= fa_icon('clipboard', text: t('helpers.links.copy_to_clipboard') ) %></button>
+              </span>
+            </div><!-- /input-group -->
           </div> 
 
-        <% end %>
 
-        <div class="form-group col-sm-12">
-          <% if @component.note.html_safe.size > 0 %>
-            <blockquote>
-              <%= @component.note.html_safe %>
-            </blockquote>
-          <% end %>
-        </div> 
+<!-- Target -->
+<!-- 
+<input id="foo" value="https://github.com/zenorocha/clipboard.js.git">
+ -->
+<!-- Trigger -->
+<!-- 
+<button class="btn btn-primary btn-clip" type="button" data-clipboard-target="#foo">Click me</button>
+ -->
+
+        <% end %>
 
       </div>  <!-- /row -->
 
@@ -57,3 +79,30 @@
 <div class="modal-footer">
   <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Zamknij</button>
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){  
+
+//    var clipboard = new ClipboardJS('.btn-clip');
+    var clipboard = new ClipboardJS('.btn-clip', {
+        container: document.getElementById('modal')
+    });
+
+    clipboard.on('success', function(e) {
+        // console.info('Action:', e.action);
+        // console.info('Text:', e.text);
+        // console.info('Trigger:', e.trigger);
+
+        toastr['info']('Copy to Clipboard');        
+        e.clearSelection();
+    });
+
+clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+});
+
+  });
+
+</script>

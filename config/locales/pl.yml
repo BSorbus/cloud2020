@@ -431,6 +431,7 @@ pl:
       link_to_remove_fields_nested_small: '[ - ]'
       not_exist_in_list:  'Nie ma pozycji na liście wyboru?'
       help:  'Pomoc'
+      copy_to_clipboard:  'Kopiuj do Schowka'
     titles:
       edit: "Edycja %{model}"
       save: "Zapisz %{model}"

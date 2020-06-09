@@ -23,4 +23,5 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require trix
+//= require clipboard
 //= require_tree .
