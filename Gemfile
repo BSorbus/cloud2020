@@ -100,3 +100,7 @@ gem 'file_validators'
 
 gem 'closure_tree'
 gem 'rubyzip'
+
+# security alert
+gem "rack", ">= 2.2.3"
+gem "websocket-extensions", ">= 0.1.5"
