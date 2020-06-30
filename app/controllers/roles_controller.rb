@@ -5,8 +5,9 @@ class RolesController < ApplicationController
 
 
   def datatables_index_user
+    checked_filter = (params[:checked_only_filter].blank? || params[:checked_only_filter] == 'false' ) ? nil : true
     respond_to do |format|
-      format.json{ render json: UserRolesDatatable.new(params, view_context: view_context, only_for_current_user_id: params[:user_id]) }
+      format.json{ render json: UserRolesDatatable.new(params, view_context: view_context, only_for_current_user_id: params[:user_id], checked_only_filter: checked_filter) }
     end
   end
 

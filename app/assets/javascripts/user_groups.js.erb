@@ -16,6 +16,23 @@ $(document).ready(function() {
     }  
   };
 
+  $.fn.dataTable.ext.buttons.user_groups_button_only_checked = {
+    //text: 'Wszystko',
+    text: '<span class="text-primary fa fa-square"></span>',
+    // titleAttr: 'Wszystkie/tylko moje',
+    className: 'btn btn-sm btn-default',
+    action: function ( e, dt, node, config ) {
+      if (dt.button( 4 ).active() == false) {
+        dt.button( 4 ).text('<span class="text-primary fa fa-check-square"></span>');
+        dt.button( 4 ).active( true );
+      } else {
+        dt.button( 4 ).text('<span class="text-primary fa fa-square"></span>');
+        dt.button( 4 ).active( false );
+      };
+      dt.draw();
+    }
+  };
+
   var oUserGroupstable = $('#user-groups-table').DataTable({
     dom: '<"top" <"row" <"col-sm-9" <"pull-left"l><"pull-left"B> > <"col-sm-3 pull-right"f> > > rt <"bottom"ip><"clear">',
     buttons: [
@@ -38,7 +55,8 @@ $(document).ready(function() {
         text:      '<span class="text-primary fa fa-file-csv"></span>',
         // titleAttr: 'Kopiuj do CSV',
         className: 'btn btn-sm btn-default'
-      }
+      },
+      'user_groups_button_only_checked'
     ],
     responsive: true,
     processing: true,
@@ -52,6 +70,9 @@ $(document).ready(function() {
       url: $('#user-groups-table').data('source'),
       type: "GET",
       dataType: 'json',
+      data: function(d){
+        d.checked_only_filter = $('#user-groups-table').DataTable().button(4).active();
+      },
       error: function (jqXHR, exception) {
         console.log(jqXHR);
         if (jqXHR.status == 401) {
@@ -86,6 +107,7 @@ $(document).ready(function() {
       oUserGroupstable.button(1).node().attr( 'title', oUserGroupstable.i18n( 'buttons.colvis' ) );
       oUserGroupstable.button(2).node().attr( 'title', oUserGroupstable.i18n( 'buttons.copy' ) );
       oUserGroupstable.button(3).node().attr( 'title', oUserGroupstable.i18n( 'buttons.csv' ) );
+      oUserGroupstable.button(4).node().attr( 'title', oUserGroupstable.i18n( 'buttons.onlyChecked' ) );
     }
   });
 

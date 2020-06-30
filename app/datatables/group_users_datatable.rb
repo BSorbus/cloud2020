@@ -38,7 +38,11 @@ class GroupUsersDatatable < AjaxDatatablesRails::ActiveRecord
   private
 
     def get_raw_records
-      User.all
+      if options[:checked_only_filter].present?
+        Group.find(options[:only_for_current_group_id]).users
+      else
+        User.all
+      end
     end
 
     def link_last_name(rec)

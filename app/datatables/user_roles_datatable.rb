@@ -34,7 +34,11 @@ class UserRolesDatatable < AjaxDatatablesRails::ActiveRecord
   private
 
     def get_raw_records
-      Role.all
+      if options[:checked_only_filter].present?
+        User.find(options[:only_for_current_user_id]).roles
+      else
+        Role.all
+      end
     end
 
     def link_add_remove(rec, has_role)

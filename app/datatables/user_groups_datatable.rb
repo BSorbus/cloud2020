@@ -34,7 +34,11 @@ class UserGroupsDatatable < AjaxDatatablesRails::ActiveRecord
   private
 
     def get_raw_records
-      Group.all
+      if options[:checked_only_filter].present?
+        User.find(options[:only_for_current_user_id]).groups
+      else
+        Group.all
+      end
     end
 
     def link_add_remove(rec, has_group)

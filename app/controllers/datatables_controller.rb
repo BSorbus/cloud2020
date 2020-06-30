@@ -31,7 +31,8 @@ PL =  {
             "selectNone": "Odznacz wszystkie wiersze",
             "downloadSelected": "Pobierz zaznaczone jako plik ZIP",
             "deleteSelected": "Usuń zaznaczone wiersze",
-            "onlyMyData": "Wszystkie/Tylko moje"
+            "onlyMyData": "Wszystkie/Tylko moje",
+            "onlyChecked": "Wszystkie/Tylko przypisane"
         },
         "select": {
             "rows": {
@@ -76,7 +77,8 @@ EN =  {
             "selectNone": "Unselect all rows",
             "downloadSelected": "Download selected as ZIP file",
             "deleteSelected": "Delete selected rows",
-            "onlyMyData": "All/Only my"
+            "onlyMyData": "All/Only my",
+            "onlyChecked": "All/Only assigned"
         },
         "select": {
             "rows": {
