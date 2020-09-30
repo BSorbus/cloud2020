@@ -94,10 +94,10 @@ $(document).ready(function() {
       oWorkTable.button(3).node().attr( 'title', oWorkTable.i18n( 'buttons.csv' ) );
     },
     stateSaveCallback: function(settings,data) {
-      localStorage.setItem( 'DataTables_works-table_/en-pl/works', JSON.stringify(data) )
+      localStorage.setItem( 'cloud_dt_works-table_/en-pl/works', JSON.stringify(data) )
     },
     stateLoadCallback: function(settings) {
-      return JSON.parse( localStorage.getItem( 'DataTables_works-table_/en-pl/works' ) )
+      return JSON.parse( localStorage.getItem( 'cloud_dt_works-table_/en-pl/works' ) )
     }
   });
 

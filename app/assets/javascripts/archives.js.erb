@@ -141,10 +141,10 @@ $(document).ready(function() {
       oArchivetable.button(4).node().attr( 'title', oArchivetable.i18n( 'buttons.onlyMyData' ) );
     },
     stateSaveCallback: function(settings,data) {
-      localStorage.setItem( 'DataTables_archives-table_/en-pl/archives', JSON.stringify(data) )
+      localStorage.setItem( 'cloud_dt_archives-table_/en-pl/archives', JSON.stringify(data) )
     },
     stateLoadCallback: function(settings) {
-      return JSON.parse( localStorage.getItem( 'DataTables_archives-table_/en-pl/archives' ) )
+      return JSON.parse( localStorage.getItem( 'cloud_dt_archives-table_/en-pl/archives' ) )
     }
   });
 

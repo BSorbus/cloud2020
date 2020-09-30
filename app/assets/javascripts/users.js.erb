@@ -86,10 +86,10 @@ $(document).ready(function() {
       oUsertable.button(3).node().attr( 'title', oUsertable.i18n( 'buttons.csv' ) );
     },
     stateSaveCallback: function(settings,data) {
-      localStorage.setItem( 'DataTables_users-table_/en-pl/users', JSON.stringify(data) )
+      localStorage.setItem( 'cloud_dt_users-table_/en-pl/works', JSON.stringify(data) )
     },
     stateLoadCallback: function(settings) {
-      return JSON.parse( localStorage.getItem( 'DataTables_users-table_/en-pl/users' ) )
+      return JSON.parse( localStorage.getItem( 'cloud_dt_users-table_/en-pl/works' ) )
     }
   });
 

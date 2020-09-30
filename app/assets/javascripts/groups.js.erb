@@ -82,10 +82,10 @@ $(document).ready(function() {
       oGrouptable.button(3).node().attr( 'title', oGrouptable.i18n( 'buttons.csv' ) );
     },
     stateSaveCallback: function(settings,data) {
-      localStorage.setItem( 'DataTables_groups-table_/en-pl/groups', JSON.stringify(data) )
+      localStorage.setItem( 'cloud_dt_groups-table_/en-pl/works', JSON.stringify(data) )
     },
     stateLoadCallback: function(settings) {
-      return JSON.parse( localStorage.getItem( 'DataTables_groups-table_/en-pl/groups' ) )
+      return JSON.parse( localStorage.getItem( 'cloud_dt_groups-table_/en-pl/works' ) )
     }
   });
 

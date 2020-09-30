@@ -271,10 +271,10 @@ $(document).ready(function() {
       oComponentableComponentsTable.button(5).node().attr( 'title', oComponentableComponentsTable.i18n( 'buttons.deleteSelected' ) );
     },
     stateSaveCallback: function(settings,data) {
-      localStorage.setItem( 'DataTables_componentable-components_/all', JSON.stringify(data) )
+      localStorage.setItem( 'cloud_dt_archives-table/all', JSON.stringify(data) )
     },
     stateLoadCallback: function(settings) {
-      return JSON.parse( localStorage.getItem( 'DataTables_componentable-components_/all' ) )
+      return JSON.parse( localStorage.getItem( 'cloud_dt_archives-table/all' ) )
     }
   });
 
