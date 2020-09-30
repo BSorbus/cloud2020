@@ -1,7 +1,7 @@
 class ComponentDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
 
-  def_delegators :@view, :link_to, :edit_component_path, :show_uuid_component_path, :edit_uuid_component_path, :destroy_uuid_component_path, :download_uuid_component_path, :t, :fa_icon, :number_to_human_size, :to_s
+  def_delegators :@view, :link_to, :edit_component_path, :edit_component_path, :component_path, :download_component_path, :t, :fa_icon, :number_to_human_size, :to_s
 
   def initialize(params, opts = {})
     @view = opts[:view_context]
@@ -66,32 +66,26 @@ class ComponentDatatable < AjaxDatatablesRails::ActiveRecord
       # link_to "#{'<strong>'+rec.name+'</strong>'}", "#", onclick: "linkToComponentBreadcrumb( #{breadcrumb_data} )", remote: true
       # link_to fa_icon("folder", text: rec.name ), "javascript:linkToComponentBreadcrumb( #{breadcrumb_data} );return false;"
     else
-      # rec.component_file_identifier == rec.name
-      #link_show_uuid_with_name(rec)
       rec.name
     end
   end
 
-  def link_show_uuid(rec)
-    "<button-as-link ajax-path='" + show_uuid_component_path(rec.component_uuid, format: :js) + "' ajax-method='GET' class='btn btn-xs fa fa-info-circle text-primary' title='" + t('tooltip.show') + "' rel='tooltip'></button-as-link>"
+  def link_show(rec)
+    "<button-as-link ajax-path='" + component_path(rec, format: :js) + "' ajax-method='GET' class='btn btn-xs fa fa-info-circle text-primary' title='" + t('tooltip.show') + "' rel='tooltip'></button-as-link>"
   end
 
-  def link_show_uuid_with_name(rec)
-    "<button-as-link ajax-path='" + show_uuid_component_path(rec.component_uuid, format: :js) + "' ajax-method='GET' title='Pokaż' rel='tooltip'><a href=#>" + rec.name + "</a></button-as-link>"
-  end
-
-  def link_edit_uuid(rec)
+  def link_edit(rec)
 #    link_to(' ', @view.edit_component_path(rec.id), class: 'fa fa-edit', title: "Edycja", rel: 'tooltip')
 #    link_to(' ', @view.edit_component_path(rec.id), class: 'fa fa-edit', remote: true, title: "Edycja", rel: 'tooltip')
-     "<button-as-link ajax-path='" + edit_uuid_component_path(rec.component_uuid, format: :js) + "' ajax-method='GET' class='btn btn-xs fa fa-edit text-primary' title='" + t('tooltip.edit') + "' rel='tooltip'></button-as-link>"
+     "<button-as-link ajax-path='" + edit_component_path(rec, format: :js) + "' ajax-method='GET' class='btn btn-xs fa fa-edit text-primary' title='" + t('tooltip.edit') + "' rel='tooltip'></button-as-link>"
   end
 
-  def link_download_uuid(rec)
-    "<button-as-link ajax-path='" + download_uuid_component_path(rec.component_uuid, format: :js) + "' ajax-method='GET' class='btn btn-xs fa fa-download text-primary' title='" + t('tooltip.download') + "' rel='tooltip'></button-as-link>"
+  def link_download(rec)
+    "<button-as-link ajax-path='" + download_component_path(rec, format: :js) + "' ajax-method='GET' class='btn btn-xs fa fa-download text-primary' title='" + t('tooltip.download') + "' rel='tooltip'></button-as-link>"
   end
 
-  def link_destroy_uuid(rec)
-    "<button-as-link ajax-path='" + destroy_uuid_component_path(rec.component_uuid) + "' ajax-method='DELETE' class='btn btn-xs fa fa-trash text-danger' title='" + t('tooltip.destroy') + "' rel='tooltip'></button-as-link>"
+  def link_destroy(rec)
+    "<button-as-link ajax-path='" + component_path(rec) + "' ajax-method='DELETE' class='btn btn-xs fa fa-trash text-danger' title='" + t('tooltip.destroy') + "' rel='tooltip'></button-as-link>"
   end
 
   def file_size_or_sum_files_size_and_badge(rec)
@@ -111,15 +105,15 @@ class ComponentDatatable < AjaxDatatablesRails::ActiveRecord
   def action_links(rec)
     if rec.is_folder?
       "<div style='text-align: center'>" +
-        link_edit_uuid(rec) + 
-        link_destroy_uuid(rec) +
+        link_edit(rec) + 
+        link_destroy(rec) +
       "</div>"
     else
       "<div style='text-align: center'>" +
-        link_download_uuid(rec) +
-        link_show_uuid(rec) +
-        link_edit_uuid(rec) +
-        link_destroy_uuid(rec) +
+        link_download(rec) +
+        link_show(rec) +
+        link_edit(rec) +
+        link_destroy(rec) +
       "</div>"
     end
   end

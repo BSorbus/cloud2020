@@ -3,7 +3,7 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
 
   extend Forwardable
 
-  def_delegators :@view, :link_to, :show_uuid_archive_path
+  def_delegators :@view, :link_to, :archive_path
 
   def initialize(params, opts = {})
     @view = opts[:view_context]
@@ -27,7 +27,7 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id:             record.id,
-        name:           link_to( record.fullname, show_uuid_archive_path(record.archive_uuid) ),
+        name:           link_to( record.fullname, archive_path(record) ),
         note:           record.note_truncate,
         expiry_on:      record.expiry_on.present? ? record.expiry_on.strftime("%Y-%m-%d") : '' ,
         folders_count:  folders_count_badge(record).html_safe,

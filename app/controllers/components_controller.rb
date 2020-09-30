@@ -3,8 +3,8 @@ require 'zip_file_generator'
 class ComponentsController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized, only: [:show, :create, :destroy]
-  before_action :set_component, only: [:show, :destroy]
-  before_action :set_component_uuid, only: [:show_uuid, :edit_uuid, :update_uuid, :destroy_uuid, :download_uuid ]
+  before_action :set_component, only: [:show, :edit, :update, :destroy]
+  before_action :set_component_maybe_wrong, only: [:download]
 
   def datatables_index
 #    component_parent_filter = params[:component_parent_id].present? ? params[:component_parent_id] : nil
@@ -16,14 +16,14 @@ class ComponentsController < ApplicationController
     end
   end
 
-  def download_uuid
+  def download
     unless @component.present?
       flash[:error] = t('errors.messages.not_found_resource')
       skip_authorization
       redirect_to root_path()
     else
-      component_authorize(@component, "download_uuid", @component.componentable_type.singularize.downcase)
-      @component.log_work('download_uuid_component', current_user.id)
+      component_authorize(@component, "download", @component.componentable_type.singularize.downcase)
+      @component.log_work('download_component', current_user.id)
 
       respond_to do |format|
         format.html { 
@@ -36,13 +36,13 @@ class ComponentsController < ApplicationController
             x_sendfile: true 
         }
         format.js { 
-          # @file_url_as_html = "/#{params[:controller]}/#{params[:component_uuid]}/#{params[:action]}.html"
+          # @file_url_as_html = "/#{params[:controller]}/#{params[:id]}/#{params[:action]}.html"
           @file_url_as_html = url_for( controller: params[:controller],
                                       action: params[:action],
-                                      component_uuid:  params[:component_uuid],
+                                      id:  params[:id],
                                       format: 'html',
                                       only_path: true)
-          render 'download_uuid' 
+          render 'download' 
         }
       end
     end
@@ -90,25 +90,20 @@ class ComponentsController < ApplicationController
     end
   end
 
-  def show_uuid
-    component_authorize(@component, "show_uuid", @component.componentable_type.singularize.downcase)
+  def show
+    component_authorize(@component, "show", @component.componentable_type.singularize.downcase)
 
     respond_to do |format|
       format.html {redirect_to @component.componentable }
-      #format.js { render partial: 'show_uuid' }
-      #format.js { render file: 'components/_show_uuid.js.erb' }
-      #format.js { render 'show_uuid.js.erb' }
-      #format.js { render file: 'components/show_uuid.js.erb' }
-      #format.js { render :show_uuid }
       format.js { 
         @file_url_as_html = url_for( controller: params[:controller],
-                                    action: :download_uuid,
-                                    component_uuid:  params[:component_uuid],
+                                    action: :download,
+                                    id:  params[:id],
                                     format: 'html',
                                     only_path: false)
 
 
-        render 'show_uuid' 
+        render 'show' 
       }
     end
   end
@@ -118,12 +113,12 @@ class ComponentsController < ApplicationController
   #   component_authorize(@component, "edit", @component.componentable_type.singularize.downcase) 
   # end
 
-  def edit_uuid
-    component_authorize(@component, "edit_uuid", @component.componentable_type.singularize.downcase) 
+  def edit
+    component_authorize(@component, "edit", @component.componentable_type.singularize.downcase) 
 
     respond_to do |format|
       format.html
-      format.js { render 'edit_uuid' }
+      format.js { render 'edit' }
     end
   end
 
@@ -134,7 +129,7 @@ class ComponentsController < ApplicationController
     component_authorize(@component, "create", params[:controller].classify.deconstantize.singularize.downcase)
 
     @component = @componentable.components.create(component_params)
-    @component.log_work('upload_file', current_user.id)  if @component.errors.empty?
+    @component.log_work('upload_file', current_user.id) if @component.errors.empty?
 
     @message = I18n.t('activerecord.successfull.messages.downloaded', data: @component.fullname)
   end
@@ -162,9 +157,9 @@ class ComponentsController < ApplicationController
     end
   end
 
-  def update_uuid
+  def update
     @component.author = current_user
-    component_authorize(@component, "update_uuid", @component.componentable_type.singularize.downcase)
+    component_authorize(@component, "update", @component.componentable_type.singularize.downcase)
 
     respond_to do |format|
       if @component.update(component_update_params)
@@ -175,11 +170,11 @@ class ComponentsController < ApplicationController
         }
         format.js { 
           @message = I18n.t('activerecord.successfull.messages.updated', data: @component.fullname)
-          render 'update_uuid' 
+          render 'update' 
         }
       else
         format.html { render :edit }
-        format.js { render 'edit_uuid' }
+        format.js { render 'edit' }
       end
     end
   end
@@ -188,22 +183,10 @@ class ComponentsController < ApplicationController
     component_authorize(@component, "destroy", @component.componentable_type.singularize.downcase)
     if @component.destroy_and_log_work(current_user.id)
       @message = I18n.t('activerecord.successfull.messages.destroyed', data: @component.fullname)
-      render 'destroy_uuid' 
+      render 'destroy' 
     else
       @message = I18n.t('activerecord.errors.messages.destroyed', data: @component.fullname)
-      render 'destroy_uuid_error' 
-    end
-
-  end
-
-  def destroy_uuid
-    component_authorize(@component, "destroy_uuid", @component.componentable_type.singularize.downcase)
-    if @component.destroy_and_log_work(current_user.id)
-      @message = I18n.t('activerecord.successfull.messages.destroyed', data: @component.fullname)
-      render 'destroy_uuid'
-    else
-      @message = I18n.t('activerecord.errors.messages.destroyed', data: @component.fullname)
-      render 'destroy_uuid_error'
+      render 'destroy_error' 
     end
 
   end
@@ -252,39 +235,39 @@ class ComponentsController < ApplicationController
 
   private
     def component_authorize(model_class, action, sub_controller)
-      unless ['index', 'show', 'create', 'destroy', 'zip_and_download', "move_to_parent", 
-              'show_uuid', 'edit_uuid', 'update_uuid', 'destroy_uuid', 'download_uuid'].include?(action)
+      unless ['index', 'show', 'create', 'edit', 'update', 'destroy', 'zip_and_download', "move_to_parent", 'download'].include?(action)
          raise "Ruby injection"
       end
       authorize model_class,"#{sub_controller}_#{action}?"      
     end
 
     def component_policy_check(model_class, action, sub_controller)
-      unless ['index', 'show', 'create', 'destroy', 'zip_and_download', "move_to_parent", 
-              'show_uuid', 'edit_uuid', 'update_uuid', 'destroy_uuid', 'download_uuid'].include?(action)
+      unless ['index', 'show', 'create', 'edit', 'update', 'destroy', 'zip_and_download', "move_to_parent", 'download'].include?(action)
          raise "Ruby injection"
       end
       return policy(model_class).send("#{sub_controller}_#{action}?")      
     end
 
-
-
     # Use callbacks to share common setup or constraints between actions.
     def set_component
       @component = Component.find(params[:id])
     end
-    def set_component_uuid
-      @component = Component.find_by(component_uuid: params[:component_uuid])
+
+    def set_component_maybe_wrong
+      @component = Component.find_by(id: params[:id])
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def component_params
       defaults = { author_id: "#{current_user.id}" }
       params.require(:component).permit(:componentable_id, :componentable_type, :component_file, :note, :author_id, :parent_id ).reverse_merge(defaults)
     end
+
     def component_params_for_create_folder
       defaults = { author_id: "#{current_user.id}" }
       params.require(:component).permit(:componentable_id, :componentable_type, :name_if_folder, :note, :author_id, :parent_id ).reverse_merge(defaults)
     end
+
     def component_update_params
       defaults = { author_id: "#{current_user.id}" }
       params.require(:component).permit(:name_if_folder, :note, :author_id, :parent_id).reverse_merge(defaults)

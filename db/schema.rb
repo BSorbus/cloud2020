@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2020_04_15_214861) do
   end
 
   create_table "archives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "archive_uuid"
     t.string "name"
     t.date "expiry_on"
     t.text "note", default: ""
@@ -46,7 +45,6 @@ ActiveRecord::Schema.define(version: 2020_04_15_214861) do
     t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["archive_uuid"], name: "index_archives_on_archive_uuid"
     t.index ["author_id"], name: "index_archives_on_author_id"
     t.index ["expiry_on"], name: "index_archives_on_expiry_on"
     t.index ["name"], name: "index_archives_on_name", unique: true
@@ -82,13 +80,12 @@ ActiveRecord::Schema.define(version: 2020_04_15_214861) do
   end
 
   create_table "components", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "component_uuid"
     t.string "component_file"
     t.string "file_content_type"
     t.string "file_size"
     t.string "name"
     t.string "name_if_folder"
-    t.bigint "parent_id"
+    t.uuid "parent_id"
     t.text "note", default: ""
     t.string "componentable_type"
     t.uuid "componentable_id"

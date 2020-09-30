@@ -82,6 +82,14 @@ class CreateRoleService
       role.save!
     end
   end 
+  def archive_writer(creator_id=nil)
+    role = Role.find_or_create_by!(name: "Kreator Składnic") do |role|
+      role.activities += %w(archive:index archive:create archive:show_self archive:show_expiried_self archive:update_self archive:delete_self archive:add_remove_archive_group_self)
+      role.note = "<div>Rola służy do tworzenia Składnic oraz zarządzania własnymi składnicami.<br>(Przypisz osobom, które będą tworzyły składnice)</div>"
+      role.author_id = creator_id
+      role.save!
+    end
+  end 
   def archive_observer(creator_id=nil)
     role = Role.find_or_create_by!(name: "Obserwator Składnic") do |role|
       role.activities += %w(archive:index archive:show)
@@ -90,14 +98,5 @@ class CreateRoleService
       role.save!
     end
   end
-  def archive_writer(creator_id=nil)
-    role = Role.find_or_create_by!(name: "Kreator Składnic") do |role|
-      role.activities += %w(archive:index archive:create archive:my_show archive:my_show_expiried archive:my_update archive:my_delete archive:my_add_remove_archive_group)
-      role.note = "<div>Rola służy do tworzenia Składnic oraz zarządzania własnymi składnicami.<br>(Przypisz osobom, które będą tworzyły składnice)</div>"
-      role.author_id = creator_id
-      role.save!
-    end
-  end 
-
 
 end

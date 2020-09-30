@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   devise :saml_authenticatable, :trackable
 
+
   # relations
   has_many :approvals, dependent: :destroy
   has_many :roles, through: :approvals
@@ -32,13 +33,7 @@ class User < ApplicationRecord
   validates :note, length: { in: 0..500 }
                     
   # callbacks
-  before_validation do
-    self.email.downcase if self.email.present?
-    
-    self.first_name = USER_DEFAULT_FIRST_NAME if self.first_name.blank?
-    self.last_name  = USER_DEFAULT_LAST_NAME  if self.last_name.blank?
-    self.user_name  = USER_DEFAULT_USER_NAME  if self.user_name.blank?
-  end
+  before_validation :set_initial_data_corrected, on: :create
   after_commit :set_default_data, on: :create
 
   def set_default_data
@@ -114,5 +109,14 @@ class User < ApplicationRecord
     "(" + %w(users.user_name users.first_name users.last_name users.email).map { |column| "#{column} ilike #{escaped_query_str}" }.join(" OR ") + ")"
   end
 
+  private
+  
+    def set_initial_data_corrected
+      self.email.downcase if self.email.present?
+      
+      self.first_name = USER_DEFAULT_FIRST_NAME if self.first_name.blank?
+      self.last_name  = USER_DEFAULT_LAST_NAME  if self.last_name.blank?
+      self.user_name  = USER_DEFAULT_USER_NAME  if self.user_name.blank?
+    end 
 
 end

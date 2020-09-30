@@ -3,7 +3,7 @@
   <h4 id="myModalLabel"><strong><%= component_new_edit_legend(@component) %></strong></h4>
 </div>
 
-<%= form_for @component, url: update_uuid_component_path(@component.component_uuid), method: :patch, remote: true do |f| %>
+<%= form_for @component, url: component_path(@component), method: :patch, remote: true do |f| %>
 
 	<div class="modal-body">
 

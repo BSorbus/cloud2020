@@ -1,8 +1,7 @@
 class ArchivesController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized, except: [:index, :datatables_index, :help_new_edit]
-  before_action :set_archive, only: [:show, :edit, :update, :destroy]
-  before_action :set_archive_by_uuid, only: [:show_uuid, :destroy_uuid, :send_link_archive_show_uuid_by_email]
+  before_action :set_archive, only: [:show, :edit, :update, :destroy, :send_link_to_archive_show_by_email]
 
   # GET /archives
   # GET /archives.json
@@ -28,13 +27,7 @@ class ArchivesController < ApplicationController
     end
   end
 
-  # GET /archives/1
-  # GET /archives/1.json
   def show
-    authorize @archive, :show?
-  end
-
-  def show_uuid
     unless @archive.present?
       flash[:error] = t('errors.messages.not_found_resource')
       skip_authorization
@@ -76,7 +69,7 @@ class ArchivesController < ApplicationController
         @archive.log_work('create', current_user.id)
         format.html { 
           flash[:success] = t('activerecord.successfull.messages.created', data: @archive.fullname)
-          redirect_to show_uuid_archive_path(@archive.archive_uuid) 
+          redirect_to archive_path(@archive.id) 
         }
         format.json { render :show, status: :created, location: @archive }
       else
@@ -96,7 +89,7 @@ class ArchivesController < ApplicationController
         @archive.log_work('update', current_user.id)
         format.html { 
           flash[:success] = t('activerecord.successfull.messages.updated', data: @archive.fullname)
-          redirect_to show_uuid_archive_path(@archive.archive_uuid) 
+          redirect_to archive_path(@archive.id) 
         }
         format.json { render :show, status: :ok, location: @archive }
       else
@@ -121,23 +114,8 @@ class ArchivesController < ApplicationController
     end      
   end
 
-  # DELETE /archives/1
-  # DELETE /archives/1.json
-  def destroy_uuid
-    authorize @archive, :destroy?
-    destroyed_clone = @archive.clone
-    if @archive.destroy
-      destroyed_clone.log_work('destroy', current_user.id)
-      flash[:success] = t('activerecord.successfull.messages.destroyed', data: @archive.fullname)
-      redirect_to archives_url
-    else 
-      flash.now[:error] = t('activerecord.errors.messages.destroyed', data: @archive.fullname)
-      render :show
-    end      
-  end
-
-  def send_link_archive_show_uuid_by_email
-    authorize @archive, :send_link_archive_show_uuid_by_email?
+  def send_link_to_archive_show_by_email
+    authorize @archive, :send_link_to_archive_show_by_email?
 
     if params[:users_ids].blank?
       respond_to do |format|
@@ -146,7 +124,7 @@ class ArchivesController < ApplicationController
     else
       params[:users_ids].each do |i|
         user = User.find(i)
-        ArchiveMailer.link_archive_show_uuid(@archive, user, current_user).deliver_later
+        ArchiveMailer.link_archive_show(@archive, user, current_user).deliver_later
       end
       # #flash[:success] = t('activerecord.successfull.messages.created', data: @event.fullname)
       # redirect_to @archive, notice: "Email status about \"#{@archive.fullname}\" was successfully sent."
@@ -161,10 +139,6 @@ class ArchivesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_archive
       @archive = Archive.find(params[:id])
-    end
-
-    def set_archive_by_uuid
-      @archive = Archive.find_by(archive_uuid: params[:uuid])
     end
 
     # Only allow a list of trusted parameters through.

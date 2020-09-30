@@ -3,6 +3,7 @@ class Role < ApplicationRecord
 
   delegate :url_helpers, to: 'Rails.application.routes'
 
+
   # relations
   has_many :approvals, dependent: :destroy
   has_many :users, through: :approvals
@@ -36,5 +37,8 @@ class Role < ApplicationRecord
   def note_truncate
     truncate(Loofah.fragment(self.note).text, length: 100)
   end
+
+  private
+  
 
 end

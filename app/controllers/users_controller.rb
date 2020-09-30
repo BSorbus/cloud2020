@@ -123,9 +123,16 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      # params.require(:user).permit(:email, :user_name, :first_name, :last_name, :note, :author_id)
       defaults = { author_id: "#{current_user.id}" }
       params.require(:user).permit(:email, :note, :author_id).reverse_merge(defaults)
+      # params.require(:user).permit(:email, :note, :author_id, role_ids: []).reverse_merge(defaults).tap do |parameters|
+        # raise
+      # end
     end
 
 end
+
+# , examiners_attributes: [:id, :name, :_destroy]
+#       params.require(:role).permit(:name, :note, :activities, :author_id).tap do |parameters|
+#         parameters[:activities] = parameters[:activities].try(:split)
+#       end

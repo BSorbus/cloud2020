@@ -68,7 +68,7 @@
                   <% @archive.archivizations.includes(:group).order('groups.name').each do |archivization| %>
                     <tr>
                       <td class="col-sm-5">
-                        <%= link_to( archivization.group.fullname, group_path(archivization.group.id, archive_uuid: @archive.archive_uuid), remote: true ) %>
+                        <%= link_to( archivization.group.fullname, group_path(archivization.group.id, archive_id: @archive.id), remote: true ) %>
                       </td>
                       <td class="col-sm-5"><%= archivization.archivization_type.try(:name) %></td>
                       <td class="col-sm-2"></td>
@@ -95,7 +95,7 @@
 -->
 
             <% if policy(@archive).destroy? %>
-              <%= link_to destroy_uuid_archive_path(@archive.archive_uuid),
+              <%= link_to archive_path(@archive),
                                   method: :delete,
                                   data: { confirm: t('helpers.links.confirm_destroy', data: @archive.name) }, 
                                   class: "btn btn-danger" do %>

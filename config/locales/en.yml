@@ -148,7 +148,6 @@ en:
         archivization_type: 'Permissions'
       component:
         componentable: 'Attached to'
-        component_uuid: 'Link to download the file'
         component_file: 'File/Folder'
         component_file_identifier: 'Attachment'
         file_content_type: 'Type'
@@ -162,6 +161,7 @@ en:
         name_if_folder: 'Folder'
         name: 'Name'
         sum_file_size: 'Maximum size of all files'
+        link_to_download_component: 'Link to download the file'
     errors:
       models:
         component:

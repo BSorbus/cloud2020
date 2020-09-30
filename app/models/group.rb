@@ -3,6 +3,7 @@ class Group < ApplicationRecord
 
   delegate :url_helpers, to: 'Rails.application.routes'
 
+
   # relations
   has_many :members, dependent: :destroy
   has_many :users, through: :members
@@ -31,7 +32,7 @@ class Group < ApplicationRecord
     worker_id = action_user_id || self.author_id
     url = "<a href=#{url_helpers.group_path(self.id, locale: :pl)}>#{self.fullname}</a>".html_safe
 
-    Work.create!(trackable_type: 'Role', trackable_id: self.id, action: "#{action}", author_id: worker_id, url: "#{url}", 
+    Work.create!(trackable_type: 'Group', trackable_id: self.id, action: "#{action}", author_id: worker_id, url: "#{url}", 
       parameters: self.to_json(except: [:author_id], include: { author: {only: [:id, :user_name, :email]}, 
                                                                 members: {only: [:id, :created_at], 
                                                                   include: {user: {only: [:id, :user_name, :email]}, 
@@ -88,5 +89,7 @@ class Group < ApplicationRecord
     "(" + %w(groups.name).map { |column| "#{column} ilike #{escaped_query_str}" }.join(" OR ") + ")"
   end
 
+  private
+  
 
 end

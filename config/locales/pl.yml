@@ -150,7 +150,6 @@ pl:
         archivization_type: 'Uprawnienia'
       component:
         componentable: 'Załączony do'
-        component_uuid: 'Link do pobrania pliku'
         component_file: 'Plik/Katalog'
         component_file_identifier: 'Plik'
         file_content_type: 'Typ'
@@ -164,6 +163,7 @@ pl:
         name_if_folder: 'Katalog'
         name: 'Nazwa'
         sum_file_size: 'Maksymalna wielkość wszystkich plików'
+        link_to_download_component: 'Link do pobrania pliku'
     errors:
       models:
         component:

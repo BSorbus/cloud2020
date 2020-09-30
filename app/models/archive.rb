@@ -3,6 +3,7 @@ class Archive < ApplicationRecord
 
   delegate :url_helpers, to: 'Rails.application.routes'
 
+
   # relations
   belongs_to :author, class_name: "User"
 
@@ -26,7 +27,6 @@ class Archive < ApplicationRecord
   validates :archivizations, presence: true
 
   # callbacks
-  before_validation :set_initial_data, on: :create
 
   # additionals
   accepts_nested_attributes_for :archivizations, reject_if: :all_blank, allow_destroy: true
@@ -39,7 +39,7 @@ class Archive < ApplicationRecord
 
   def log_work(action = '', action_user_id = nil)
     worker_id = action_user_id || self.author_id
-    url = "<a href=#{url_helpers.show_uuid_archive_path(self.archive_uuid, locale: :pl)}>#{self.fullname}</a>".html_safe
+    url = "<a href=#{url_helpers.archive_path(self.id, locale: :pl)}>#{self.fullname}</a>".html_safe
 
     Work.create!(trackable_type: 'Archive', trackable_id: self.id, action: "#{action}", author_id: worker_id, url: "#{url}", 
       parameters: self.to_json(except: [:author_id], include: {archivizations: {only: [:id], include: { group: {only: [:id, :name]}, 
@@ -69,7 +69,7 @@ class Archive < ApplicationRecord
     archive_with_recipient_json = archive_with_recipient_hash.to_json 
 
     # url_archive = eval( "url_helpers.link_to( #{self.fullname}, archive_path(#{self.id}, locale: :pl), remote: false)")
-    url_archive = "<a href=#{url_helpers.show_uuid_archive_path(uuid: self.archive_uuid, locale: :pl)}>#{self.fullname}</a>".html_safe
+    url_archive = "<a href=#{url_helpers.archive_path(self.id, locale: :pl)}>#{self.fullname}</a>".html_safe
     Work.create!(trackable_type: 'Archive', trackable_id: self.id, action: "#{action}", author_id: worker_id, url: "#{url_archive}", parameters: archive_with_recipient_json)
 
     # save for User Object
@@ -93,10 +93,6 @@ class Archive < ApplicationRecord
 
   private
   
-    def set_initial_data
-      self.archive_uuid ||= SecureRandom.uuid unless self.archive_uuid.present?
-    end 
-
     def expiry_on_after_today
       return if expiry_on.blank?
      

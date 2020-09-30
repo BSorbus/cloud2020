@@ -2,6 +2,7 @@ class Approval < ApplicationRecord
 
   delegate :url_helpers, to: 'Rails.application.routes'
 
+
   # relations
   belongs_to :role
   belongs_to :user

@@ -81,7 +81,7 @@
       <div class="row">
         <div class="col-sm-12">
 
-          <%= link_to archive.new_record? ? archives_path() : show_uuid_archive_path(archive.archive_uuid), class: "btn btn-default" do %>
+          <%= link_to archive.new_record? ? archives_path() : archive_path(archive.id), class: "btn btn-default" do %>
             <span class="glyphicon glyphicon-arrow-left"></span>
             <%= t("helpers.links.back") %>
           <% end %>

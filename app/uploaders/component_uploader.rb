@@ -93,10 +93,9 @@ class ComponentUploader < CarrierWave::Uploader::Base
       file.content_type = 'application/x-vbs'
     end
 
+    # Add in model on init  
     model.file_content_type = file.content_type if file.content_type
     model.file_size = number_to_human_size(file.size) if file.size
-    # Add in model on init  
-    # model.component_uuid = SecureRandom.uuid unless model.component_uuid.present?
   end
 
 end

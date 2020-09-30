@@ -36,8 +36,8 @@
               <td class="col-sm-1">
 
                 <% if @for_archive.present? %>
-                  <% if policy(@for_archive).send_link_archive_show_uuid_by_email? %>
-                    <%= link_to send_link_archive_show_uuid_by_email_archive_path(uuid: @for_archive.archive_uuid, users_ids: [rec.id] ),
+                  <% if policy(@for_archive).send_link_to_archive_show_by_email? %>
+                    <%= link_to send_link_to_archive_show_by_email_archive_path(@for_archive.id, users_ids: [rec.id] ),
                                         method: :get,
                                         remote: true,
                                         data: { confirm: t('helpers.links.confirm_send_mail', data: rec.fullname) }, 
@@ -67,8 +67,8 @@
 <div class="modal-footer">
 
   <% if @for_archive.present? %>
-    <% if policy(@for_archive).send_link_archive_show_uuid_by_email? %>
-      <%= link_to send_link_archive_show_uuid_by_email_archive_path(uuid: @for_archive.archive_uuid, users_ids: @group.users.ids ),
+    <% if policy(@for_archive).send_link_to_archive_show_by_email? %>
+      <%= link_to send_link_to_archive_show_by_email_archive_path(@for_archive.id, users_ids: @group.users.ids ),
                           method: :get,
                           remote: true,
                           data: { confirm: t('helpers.links.confirm_send_mail', data: t('to_all')) }, 

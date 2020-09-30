@@ -44,33 +44,20 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :destroy], controller: 'groups/users'
     end    
 
-    resources :archives, except: [:destroy] do
+    resources :archives do
       post 'datatables_index', on: :collection
       get 'help_new_edit', on: :collection
+      get 'send_link_to_archive_show_by_email', on: :member
       resources :components, module: :archives, only: [:create] do
         post 'create_folder', on: :collection
       end
     end
 
-    resources :archives, only: [], param: :uuid do
-      delete 'destroy_uuid', on: :member
-      get 'show_uuid', on: :member
-      get 'send_link_archive_show_uuid_by_email', on: :member
-    end
-
-    # resources :components, only: [:show, :destroy] do   #enabled destroy from call ajax (destroy_all_selected)
-    resources :components, only: [:destroy] do   #enabled destroy from call ajax (destroy_all_selected)
+    resources :components, except: [:create] do 
       get 'datatables_index', on: :collection # for Trackable
       get 'zip_and_download', on: :collection
       patch 'move_to_parent', on: :collection
-    end
-
-    resources :components, only: [], param: :component_uuid do
-      get 'show_uuid', on: :member
-      get 'edit_uuid', on: :member
-      patch 'update_uuid', on: :member
-      get 'download_uuid', on: :member
-      delete 'destroy_uuid', on: :member
+      get 'download', on: :member
     end
 
     get 'datatables/lang'

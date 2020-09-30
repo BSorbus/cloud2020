@@ -22,6 +22,11 @@ module Cloud2020
       #g.helper          false
       #g.stylesheets     false
       #g.javascripts     false
+
+      # uuid as PK
+      g.orm :active_record, primary_key_type: :uuid
+      # uuid as FK
+      g.orm :active_record, foreign_key_type: :uuid
     end
 
     config.time_zone = 'Warsaw'

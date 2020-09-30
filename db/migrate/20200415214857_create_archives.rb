@@ -1,7 +1,6 @@
 class CreateArchives < ActiveRecord::Migration[5.2]
   def change
     create_table :archives, id: :uuid do |t|
-      t.uuid :archive_uuid, index: true
       t.string :name
       t.date :expiry_on, index: true
       t.text :note, default: ""

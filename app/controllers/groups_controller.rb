@@ -38,7 +38,7 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
-    @for_archive = Archive.find_by(archive_uuid: params[:archive_uuid]) if params[:archive_uuid].present? 
+    @for_archive = Archive.find(params[:archive_id]) if params[:archive_id].present? 
     authorize @group, :show?
   end
 

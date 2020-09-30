@@ -4,6 +4,7 @@ class Component < ApplicationRecord
 
   delegate :url_helpers, to: 'Rails.application.routes'
 
+
   # relations
   belongs_to :author, class_name: "User"
   belongs_to :componentable, polymorphic: true
@@ -32,15 +33,7 @@ class Component < ApplicationRecord
   validate :check_quota, on: :create, unless: -> { name_if_folder.present? }
 
   # callbacks
-  before_validation :set_initial_data, on: :create
-
-  before_validation do
-    if name_if_folder.present?
-      self.name = name_if_folder
-    else 
-      self.name = component_file.present? ? component_file.file.filename : nil
-    end
-  end
+  before_validation :set_name_corrected
 
   # carrierwave uploader
   mount_uploader :component_file, ComponentUploader
@@ -62,18 +55,6 @@ class Component < ApplicationRecord
 
   def log_work(action = '', action_user_id = nil)
     worker_id = action_user_id || self.user_id
-    # url_show_path = "#{self.componentable.class.to_s.downcase}_path"
-    # trackable_url = eval( "Rails.application.routes.url_helpers.#{url_show_path}(only_path: true, controller: '#{self.componentable.class.to_s.pluralize.downcase}', action: 'show', id: #{self.componentable.id})")
-
-    # Work.create!(trackable_type: "#{self.componentable.class.to_s}", trackable_id: self.componentable.id, trackable_url: trackable_url, action: "#{action}", user_id: worker_id, 
-    #   parameters: self.to_json(except: [:user_id], include: {user: {only: [:id, :name, :email]}}))
-
-
-  # components
-  # show_uuid
-  # js
-  # /pl/components/e9443d34-e9a8-469a-9acc-d30b276a3617/show_uuid.html
-
 
     archive_str = self.componentable.to_json(except: [:author_id], include: {author: {only: [:id, :user_name, :email]}}, root: 'archive' )
     archive_hash = JSON.parse(archive_str)
@@ -85,9 +66,8 @@ class Component < ApplicationRecord
     archive_with_component_hash = archive_hash.merge(component_hash)
     archive_with_component_json = archive_with_component_hash.to_json 
 
-    url_archive = "<a href=#{url_helpers.show_uuid_archive_path(uuid: self.componentable.archive_uuid, locale: :pl)}>#{self.componentable.fullname}</a>".html_safe
+    url_archive = "<a href=#{url_helpers.archive_path(self.componentable.id, locale: :pl)}>#{self.componentable.fullname}</a>".html_safe
     Work.create!(trackable_type: 'Archive', trackable_id: self.componentable.id, action: "#{action}", author_id: worker_id, url: "#{url_archive}", parameters: archive_with_component_json)
-
 
     # save for User Object
     user = User.find(worker_id)
@@ -136,9 +116,13 @@ class Component < ApplicationRecord
 
   private
   
-    def set_initial_data
-      self.component_uuid = SecureRandom.uuid unless self.component_uuid.present?
-    end	
+    def set_name_corrected
+      if self.name_if_folder.present?
+        self.name = self.name_if_folder
+      else 
+        self.name = self.component_file.present? ? self.component_file.file.filename : nil
+      end
+    end 
 
     def check_quota
       sum_files_size = self.componentable.components.where.not(component_file: nil).map {|a| a.component_file.file.size }.sum

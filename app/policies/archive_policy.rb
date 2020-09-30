@@ -14,7 +14,7 @@ class ArchivePolicy < ApplicationPolicy
     #   permitted_array = [:title, :all_day, :start_date, :end_date, :note, :project_id, :event_status_id, :event_type_id, :errand_id, :user_id]
     # end
     if @model.class.to_s == 'Symbol'
-      permitted_array << [archivizations_attributes: [:id, :archives_id, :group_id, :archivization_type_id, :author_id, :_destroy]] if user_activities.include?('archive:add_remove_archive_group') || user_activities.include?('archive:my_add_remove_archive_group')
+      permitted_array << [archivizations_attributes: [:id, :archives_id, :group_id, :archivization_type_id, :author_id, :_destroy]] if user_activities.include?('archive:add_remove_archive_group') || user_activities.include?('archive:add_remove_archive_group_self')
     else
       permitted_array << [archivizations_attributes: [:id, :archives_id, :group_id, :archivization_type_id, :author_id, :_destroy]] if ArchivePolicy.new(@user, @model).add_remove_archive_group?
     end
@@ -41,7 +41,7 @@ class ArchivePolicy < ApplicationPolicy
     end
   end
 
-  def send_link_archive_show_uuid_by_email?
+  def send_link_to_archive_show_by_email?
     # moze osobne uprawnienie?
     update?    
   end
@@ -62,10 +62,10 @@ class ArchivePolicy < ApplicationPolicy
     today = Time.zone.today
     if @model.expiry_on >= today
       # classic
-      user_activities.include?('archive:show') || (user_activities.include?('archive:my_show') && owner_access) || user_in_group_activities.include?('archive:show')
+      user_activities.include?('archive:show') || (user_activities.include?('archive:show_self') && owner_access) || user_in_group_activities.include?('archive:show')
     else
       # expired
-      user_activities.include?('archive:show_expiried') || (user_activities.include?('archive:my_show_expiried') && owner_access) || user_in_group_activities.include?('archive:show_expiried')
+      user_activities.include?('archive:show_expiried') || (user_activities.include?('archive:show_expiried_self') && owner_access) || user_in_group_activities.include?('archive:show_expiried')
     end  
   end
 
@@ -82,11 +82,11 @@ class ArchivePolicy < ApplicationPolicy
   end
 
   def update?
-    user_activities.include?('archive:update') || (user_activities.include?('archive:my_update') && owner_access) || user_in_group_activities.include?('archive:update')
+    user_activities.include?('archive:update') || (user_activities.include?('archive:update_self') && owner_access) || user_in_group_activities.include?('archive:update')
   end
 
   def destroy?
-    user_activities.include?('archive:delete') || (user_activities.include?('archive:my_delete') && owner_access) || user_in_group_activities.include?('archive:delete')
+    user_activities.include?('archive:delete') || (user_activities.include?('archive:delete_self') && owner_access) || user_in_group_activities.include?('archive:delete')
   end
 
   def work?
@@ -94,7 +94,7 @@ class ArchivePolicy < ApplicationPolicy
   end
 
   def add_remove_archive_group?
-    user_activities.include?('archive:add_remove_archive_group') || (user_activities.include?('archive:my_add_remove_archive_group') && owner_access) || user_in_group_activities.include?('archive:add_remove_archive_group')
+    user_activities.include?('archive:add_remove_archive_group') || (user_activities.include?('archive:add_remove_archive_group_self') && owner_access) || user_in_group_activities.include?('archive:add_remove_archive_group')
   end
   
   class Scope < Struct.new(:user, :scope)

@@ -43,7 +43,7 @@ function buildDirectoryBreadcrumb(nameIdBreadcrumb, arrayIdParentInput, nameLink
     anchoredElText = ancestry_json.ancestry_path[index];
     // if last position set breadcrumb without <a></a>
     anchoredElActive = (reverseAncestryIds[index] === null); 
-    anchoredElHref = nameLinkToFunction +'( { parent_id:'+ reverseAncestryIds[index] +', ancestry_path: '+ tmpAncestryPathString +', ancestor_ids: ['+ tmpAncestorIdsReverse +'] } );return false;' 
+    anchoredElHref = nameLinkToFunction +'( { parent_id:'+ JSON.stringify(reverseAncestryIds[index]) +', ancestry_path: '+ tmpAncestryPathString +', ancestor_ids: '+ JSON.stringify(tmpAncestorIdsReverse) +' } );return false;' 
     // build breadcrumb pice for current position
     olNode.appendChild( addNavItemToBreadcrumb( anchoredElHref, anchoredElText, anchoredElActive, reverseAncestryIds[index] ) );
   }); 
