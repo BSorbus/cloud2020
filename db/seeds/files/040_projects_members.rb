@@ -1,19 +1,24 @@
 puts " "
 puts "#####  RUN - 040_projects_members.rb  #####"
 
+@first_user = User.order(:created_at).first
+
 def build_user(user_email)
   user = User.find_or_create_by!(email: user_email) do |row|
     row.note = ""
-    row.author_id = 1
+    row.author_id = @first_user.id
     row.save!
-    row.log_work('create', 1)
+    row.log_work('create', @first_user.id)
     puts 'CREATED USER: ' << row.email
   end
   return user
 end
 
 def build_member(user, group)
-  Member.create(group: group, user: user, author_id: 1)  
+  member = Member.create(group: group, user: user, author_id: @first_user.id)
+  member.log_work_for_user('add_group_to_user', @first_user.id)
+  member.log_work_for_group('add_user_to_group', @first_user.id)
+
   puts "CREATED MEMBER:   #{group.name} + " << user.email
 end
 

@@ -1,16 +1,16 @@
 puts " "
-puts "#####  RUN - 040_projects_members.rb  #####"
+puts "#####  RUN - 050_projects_archivizations.rb  #####"
 
+@first_user = User.order(:created_at).first
 
 def build_archive(archive_name, archive_note, group)
   archive = Archive.find_or_create_by!(name: "#{archive_name}") do |row|
     row.note = "<div>#{archive_note}</div>"
-    # row.expiry_on = Time.zone.today + Rails.application.secrets.archive_default_days_expiry_on_create.days
     row.expiry_on = Time.zone.today + 2.years
     row.archivizations.build(group: group, archivization_type: @archivization_type)
-    row.author_id = 1
+    row.author_id = @first_user.id
     row.save!
-    row.log_work('create', 1)
+    row.log_work('create', @first_user.id)
     puts 'CREATED ARCHIVE: ' << row.name
   end
 end
@@ -35,5 +35,5 @@ set_archivization_type
 set_projects_groups
 build_projects_archives
 
-puts "#####  END OF - 040_projects_members.rb  #####"
+puts "#####  END OF - 050_projects_archivizations.rb  #####"
 puts " "

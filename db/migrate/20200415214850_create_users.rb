@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration[5.2]
   def change
-    create_table :users do |t|
+    create_table :users, id: :uuid do |t|
       t.string :wso2is_userid
       t.string :email, null: false
       t.string :first_name, index: true
@@ -20,7 +20,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string   :last_sign_in_ip
 
       t.text :note, default: ""
-      t.references :author, foreign_key: false, index: true
+      t.references :author, foreign_key: false, index: true, type: :uuid
 
       t.timestamps
     end

@@ -12,7 +12,7 @@ Dir[File.join(Rails.root, 'db', 'seeds/files', '*projects_members.rb')].sort.eac
 Dir[File.join(Rails.root, 'db', 'seeds/files', '*projects_archivizations.rb')].sort.each { |seed| load seed }
 
 #load 'db/seeds/files/021_dictionary.rb'
-#load 'db/seeds/files/031_customer.rb'
+#load 'db/seeds/files/031_organization.rb'
 #load 'db/seeds/files/041_project.rb'
 
 

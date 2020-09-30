@@ -1,8 +1,8 @@
 class CreateComponentHierarchies < ActiveRecord::Migration[5.2]
   def change
     create_table :component_hierarchies, id: false do |t|
-      t.integer :ancestor_id, null: false
-      t.integer :descendant_id, null: false
+      t.uuid :ancestor_id, null: false
+      t.uuid :descendant_id, null: false
       t.integer :generations, null: false
     end
 

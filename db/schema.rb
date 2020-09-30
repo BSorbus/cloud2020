@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_06_002356) do
+ActiveRecord::Schema.define(version: 2020_04_15_214861) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "api_keys", force: :cascade do |t|
+  create_table "api_keys", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "password"
     t.string "access_token"
@@ -25,9 +26,9 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
   end
 
   create_table "approvals", force: :cascade do |t|
-    t.bigint "role_id"
-    t.bigint "user_id"
-    t.bigint "author_id"
+    t.uuid "role_id"
+    t.uuid "user_id"
+    t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_approvals_on_author_id"
@@ -36,15 +37,15 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
     t.index ["user_id"], name: "index_approvals_on_user_id"
   end
 
-  create_table "archives", force: :cascade do |t|
+  create_table "archives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "archive_uuid"
     t.string "name"
     t.date "expiry_on"
     t.text "note", default: ""
-    t.bigint "author_id"
+    t.bigint "quota", default: 1073741824
+    t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "quota"
     t.index ["archive_uuid"], name: "index_archives_on_archive_uuid"
     t.index ["author_id"], name: "index_archives_on_author_id"
     t.index ["expiry_on"], name: "index_archives_on_expiry_on"
@@ -60,9 +61,9 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
     t.index ["name"], name: "index_archivization_types_on_name"
   end
 
-  create_table "archivizations", force: :cascade do |t|
-    t.bigint "archive_id"
-    t.bigint "group_id"
+  create_table "archivizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "archive_id"
+    t.uuid "group_id"
     t.bigint "archivization_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -73,14 +74,14 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
   end
 
   create_table "component_hierarchies", id: false, force: :cascade do |t|
-    t.integer "ancestor_id", null: false
-    t.integer "descendant_id", null: false
+    t.uuid "ancestor_id", null: false
+    t.uuid "descendant_id", null: false
     t.integer "generations", null: false
     t.index ["ancestor_id", "descendant_id", "generations"], name: "component_anc_desc_idx", unique: true
     t.index ["descendant_id"], name: "component_desc_idx"
   end
 
-  create_table "components", force: :cascade do |t|
+  create_table "components", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "component_uuid"
     t.string "component_file"
     t.string "file_content_type"
@@ -90,8 +91,8 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
     t.bigint "parent_id"
     t.text "note", default: ""
     t.string "componentable_type"
-    t.bigint "componentable_id"
-    t.bigint "author_id"
+    t.uuid "componentable_id"
+    t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_components_on_author_id"
@@ -100,10 +101,10 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
     t.index ["name_if_folder"], name: "index_components_on_name_if_folder"
   end
 
-  create_table "groups", force: :cascade do |t|
+  create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "note", default: ""
-    t.bigint "author_id"
+    t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_groups_on_author_id"
@@ -111,9 +112,9 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.bigint "group_id"
-    t.bigint "user_id"
-    t.bigint "author_id"
+    t.uuid "group_id"
+    t.uuid "user_id"
+    t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_members_on_author_id"
@@ -122,18 +123,18 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "activities", default: [], array: true
     t.text "note", default: ""
-    t.bigint "author_id"
+    t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_roles_on_author_id"
     t.index ["name"], name: "index_roles_on_name", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "wso2is_userid"
     t.string "email", null: false
     t.string "first_name"
@@ -149,7 +150,7 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.text "note", default: ""
-    t.bigint "author_id"
+    t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_users_on_author_id"
@@ -159,10 +160,10 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
     t.index ["session_index"], name: "index_users_on_session_index"
   end
 
-  create_table "works", force: :cascade do |t|
+  create_table "works", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "trackable_type"
-    t.bigint "trackable_id"
-    t.bigint "author_id"
+    t.uuid "trackable_id"
+    t.uuid "author_id"
     t.string "action"
     t.string "url"
     t.text "parameters"
@@ -174,9 +175,16 @@ ActiveRecord::Schema.define(version: 2020_06_06_002356) do
 
   add_foreign_key "approvals", "roles"
   add_foreign_key "approvals", "users"
+  add_foreign_key "approvals", "users", column: "author_id"
+  add_foreign_key "archives", "users", column: "author_id"
   add_foreign_key "archivizations", "archives"
   add_foreign_key "archivizations", "archivization_types"
   add_foreign_key "archivizations", "groups"
+  add_foreign_key "components", "users", column: "author_id"
+  add_foreign_key "groups", "users", column: "author_id"
   add_foreign_key "members", "groups"
   add_foreign_key "members", "users"
+  add_foreign_key "members", "users", column: "author_id"
+  add_foreign_key "roles", "users", column: "author_id"
+  add_foreign_key "works", "users", column: "author_id"
 end
