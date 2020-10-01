@@ -17,7 +17,7 @@ class ArchiveMailer < ApplicationMailer
     @archive = archive
     @recipient = recipient
     @archive_fullname = "#{@archive.fullname}" # "#{archive_info_legend(@archive)}"
-    @archive_url_uuid = Rails.application.routes.url_helpers.url_for(only_path: false, controller: 'archives', action: 'show_uuid', uuid: @archive.archive_uuid, locale: locale)
+    @archive_url_uuid = Rails.application.routes.url_helpers.url_for(only_path: false, controller: 'archives', action: 'show', id: @archive.id, locale: locale)
 
     attachments.inline['logo_mailer'] = File.read("app/assets/images/logo_mailer.png")
     attachments.inline['logo_uke'] = File.read("app/assets/images/logo_uke_pl_do_lewej_small.png")
