@@ -10,7 +10,7 @@ class ArchiveMailer < ApplicationMailer
 
   after_action :attach_metadata
 
-  def link_archive_show_uuid(archive, recipient, sending_user)
+  def link_archive_show(archive, recipient, sending_user)
     @attr_archive = archive
     @attr_sending_user = sending_user
 

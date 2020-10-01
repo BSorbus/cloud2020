@@ -1,6 +1,6 @@
 class MailLoggerObserver
   def self.delivered_email(mail)
-    if mail.mailer_klass == "ArchiveMailer" && mail.mailer_action == "link_archive_show_uuid"
+    if mail.mailer_klass == "ArchiveMailer" && mail.mailer_action == "link_archive_show"
     	# puts '-------------------- MailLoggerObserver ------------------'
      #  puts "sender: #{mail.from}"
      #  puts "recipient: #{mail.to}"
