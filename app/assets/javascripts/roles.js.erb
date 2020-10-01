@@ -83,13 +83,12 @@ $(document).ready(function() {
       oRoletable.button(3).node().attr( 'title', oRoletable.i18n( 'buttons.csv' ) );
     },
     stateSaveCallback: function(settings,data) {
-      localStorage.setItem( 'DataTables_roles-table_/en-pl/roles', JSON.stringify(data) )
+      localStorage.setItem( 'cloud_dt_roles-table_/en-pl/roles', JSON.stringify(data) )
     },
     stateLoadCallback: function(settings) {
-      return JSON.parse( localStorage.getItem( 'DataTables_roles-table_/en-pl/roles' ) )
+      return JSON.parse( localStorage.getItem( 'cloud_dt_roles-table_/en-pl/roles' ) )
     }
   });
-
 
 });
 

@@ -170,10 +170,10 @@ $(document).ready(function() {
       type: "GET",
       data: function(d){
         //d.component_parent_id = 8501;
-        if (localStorage.getItem("ls_component_breadcrumb") === null) {
+        if (localStorage.getItem("cloud_component_breadcrumb") === null) {
           d.component_parent_id = null
         } else {
-          d.component_parent_id = JSON.parse(localStorage.getItem('ls_component_breadcrumb')).parent_id;
+          d.component_parent_id = JSON.parse(localStorage.getItem('cloud_component_breadcrumb')).parent_id;
         }
       },
       error: function (jqXHR, exception) {
@@ -271,13 +271,12 @@ $(document).ready(function() {
       oComponentableComponentsTable.button(5).node().attr( 'title', oComponentableComponentsTable.i18n( 'buttons.deleteSelected' ) );
     },
     stateSaveCallback: function(settings,data) {
-      localStorage.setItem( 'cloud_dt_archives-table/all', JSON.stringify(data) )
+      localStorage.setItem( 'cloud_dt_components-table_/en-pl/archives', JSON.stringify(data) )
     },
-    stateLoadCallback: function(settings) {
-      return JSON.parse( localStorage.getItem( 'cloud_dt_archives-table/all' ) )
+    stateLoadCarchivesback: function(settings) {
+      return JSON.parse( localStorage.getItem( 'cloud_dt_components-table_/en-pl/archives' ) )
     }
   });
-
 
   oComponentableComponentsTable
   .on( 'draw', function () {

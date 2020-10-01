@@ -85,7 +85,7 @@
 
   function linkToComponentBreadcrumb(breadcrumb_ancestry_json={parent_id: null, ancestry_path: [], ancestor_ids: []}){
     // Store the latest `component_breadcrumb_path` object for next reload
-    localStorage.setItem( 'ls_component_breadcrumb', JSON.stringify(breadcrumb_ancestry_json) );
+    localStorage.setItem( 'cloud_component_breadcrumb', JSON.stringify(breadcrumb_ancestry_json) );
     // redraw for new ajax data: d.component_parent_id 
     $('#componentable-components').DataTable().draw();
     buildDirectoryBreadcrumb("id_component_breadcrumb", 
@@ -97,7 +97,7 @@
 
   $(document).ready(function() {
 
-    localStorage.removeItem('ls_component_breadcrumb');
+    localStorage.removeItem('cloud_component_breadcrumb');
     buildDirectoryBreadcrumb("id_component_breadcrumb", 
                               ["component_parent_id_for_folder","component_parent_id"],
                               "linkToComponentBreadcrumb", 
