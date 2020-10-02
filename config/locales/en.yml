@@ -163,7 +163,7 @@ en:
         name: 'Name'
         sum_file_size: 'Maximum size of all files'
         link_to_download: 'Link to download the file'
-        link_to_download_simple: 'Link to download the file without authorization'
+        link_to_download_simple: 'Link to download the file without authorization (no login to CSU required!)'
     errors:
       models:
         component:

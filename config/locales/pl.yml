@@ -165,7 +165,7 @@ pl:
         name: 'Nazwa'
         sum_file_size: 'Maksymalna wielkość wszystkich plików'
         link_to_download: 'Link do pobrania pliku'
-        link_to_download_simple: 'Link do pobrania pliku bez autoryzacji'
+        link_to_download_simple: 'Link do pobrania pliku bez autoryzacji (nie wymaga logowania do CSU!)'
     errors:
       models:
         component:
