@@ -13,6 +13,29 @@ module ApplicationHelper
     obj.new_record? ? "" :  t('last_updated') + ": " + obj.updated_at.strftime("%Y-%m-%d %H:%M:%S") + ", " + obj.author.fullname
   end
 
+  def copy_to_clipboard_legend
+    fa_icon("clipboard", text: t("helpers.links.copy_to_clipboard") )    
+  end
+
+  def no_data_legend
+    # data =
+    # '<div class="col-sm-12" class="clearfix">
+    #   <div class="alert alert-info alert-dismissable">
+    #     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    #     <h2 class="center">' + t(".no_data") + '</h2>
+    #   </div>
+    # </div>'
+    # data.html_safe
+
+    data =
+    '<fieldset class="my-fieldset">
+        <legend class="my-fieldset">' + t("no_data") + '</legend>
+        <p class="center">' + t("no_data") + '</p>
+     </fieldset>'
+
+    data.html_safe
+  end
+
   # for layouts/messages
   def flash_class_name(name)
     case name

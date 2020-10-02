@@ -20,5 +20,4 @@ module ComponentsHelper
     data_obj.new_record? ? component_new_legend(data_obj) :  component_edit_legend(data_obj)
   end
 
-
 end

@@ -58,6 +58,7 @@ Rails.application.routes.draw do
       get 'zip_and_download', on: :collection
       patch 'move_to_parent', on: :collection
       get 'download', on: :member
+      get 'download_simple', on: :member
     end
 
     get 'datatables/lang'

@@ -1,10 +1,11 @@
 require 'zip_file_generator'
 
 class ComponentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:download_simple]
   after_action :verify_authorized, only: [:show, :create, :destroy]
   before_action :set_component, only: [:show, :edit, :update, :destroy]
   before_action :set_component_maybe_wrong, only: [:download]
+  before_action :set_component_maybe_wrong_for_download_simple, only: [:download_simple]
 
   def datatables_index
 #    component_parent_filter = params[:component_parent_id].present? ? params[:component_parent_id] : nil
@@ -35,6 +36,7 @@ class ComponentsController < ApplicationController
             stream: true, 
             x_sendfile: true 
         }
+
         format.js { 
           # @file_url_as_html = "/#{params[:controller]}/#{params[:id]}/#{params[:action]}.html"
           @file_url_as_html = url_for( controller: params[:controller],
@@ -44,6 +46,28 @@ class ComponentsController < ApplicationController
                                       only_path: true)
           render 'download' 
         }
+      end
+    end
+  end
+
+  def download_simple
+    unless @component.present?
+      flash[:error] = t('errors.messages.not_found_resource')
+      redirect_to root_path()
+    else
+      # @component.log_work('download_component', current_user.id)
+
+      respond_to do |format|
+        format.html { 
+          send_file "#{@component.component_file.path}", 
+            type: "#{@component.file_content_type}",
+            filename: @component.component_file.file.filename, 
+            dispostion: "inline", 
+            status: 200, 
+            stream: true, 
+            x_sendfile: true 
+        }
+
       end
     end
   end
@@ -98,7 +122,14 @@ class ComponentsController < ApplicationController
       format.js { 
         @file_url_as_html = url_for( controller: params[:controller],
                                     action: :download,
-                                    id:  params[:id],
+                                    id:  @component.id,
+                                    format: 'html',
+                                    only_path: false)
+
+
+        @file_url_as_html_to_simple = url_for( controller: params[:controller],
+                                    action: :download_simple,
+                                    id:  @component.for_simple_download,
                                     format: 'html',
                                     only_path: false)
 
@@ -255,6 +286,10 @@ class ComponentsController < ApplicationController
 
     def set_component_maybe_wrong
       @component = Component.find_by(id: params[:id])
+    end
+
+    def set_component_maybe_wrong_for_download_simple
+      @component = Component.find_by(for_simple_download: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

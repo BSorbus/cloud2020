@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_214861) do
+ActiveRecord::Schema.define(version: 2020_10_02_074851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_214861) do
     t.uuid "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "for_simple_download", default: -> { "gen_random_uuid()" }
     t.index ["author_id"], name: "index_components_on_author_id"
     t.index ["componentable_type", "componentable_id"], name: "index_components_on_componentable_type_and_componentable_id"
     t.index ["name"], name: "index_components_on_name"

@@ -47,11 +47,21 @@
           </div> 
 
           <div class="form-group col-sm-12">
-            <p><strong><%= Component.human_attribute_name(:link_to_download_component) %></strong></p>
+            <p><strong><%= Component.human_attribute_name(:link_to_download) %></strong></p>
             <div class="input-group">
-              <input id="foo" type="text" class="form-control" value='<%= @file_url_as_html %>' readonly='true'>
+              <input id="component_to_download" type="text" class="form-control" value='<%= @file_url_as_html %>' readonly='true'>
               <span class="input-group-btn">
-                <button class="btn btn-default btn-clip" type="button" data-clipboard-target="#foo"><%= fa_icon('clipboard', text: t('helpers.links.copy_to_clipboard') ) %></button>
+                <button class="btn btn-default btn-clip" type="button" data-clipboard-target="#component_to_download"><%= copy_to_clipboard_legend %></button>
+              </span>
+            </div><!-- /input-group -->
+          </div> 
+
+          <div class="form-group col-sm-12 text-danger">
+            <p><strong><%= Component.human_attribute_name(:link_to_download_simple) %></strong></p>
+            <div class="input-group">
+              <input id="component_to_download_simple" type="text" class="form-control" value='<%= @file_url_as_html_to_simple %>' readonly='true'>
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-clip" type="button" data-clipboard-target="#component_to_download_simple"><%= copy_to_clipboard_legend %></button>
               </span>
             </div><!-- /input-group -->
           </div> 

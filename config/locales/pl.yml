@@ -2,6 +2,7 @@ pl:
   "true": "Tak"
   "false": "Nie"
   to_all: 'wszystkich'
+  no_data: 'Brak danych'
   logo_file: "logo_uke_pl_do_lewej.png"
   logo_link: "http://www.uke.gov.pl"
   title: "UKE Cloud"
@@ -163,7 +164,8 @@ pl:
         name_if_folder: 'Katalog'
         name: 'Nazwa'
         sum_file_size: 'Maksymalna wielkość wszystkich plików'
-        link_to_download_component: 'Link do pobrania pliku'
+        link_to_download: 'Link do pobrania pliku'
+        link_to_download_simple: 'Link do pobrania pliku bez autoryzacji'
     errors:
       models:
         component:
