@@ -59,8 +59,7 @@ class ArchivePolicy < ApplicationPolicy
   end
 
   def show?
-    today = Time.zone.today
-    if @model.expiry_on >= today
+    unless @model.is_expired?
       # classic
       user_activities.include?('archive:show') || (user_activities.include?('archive:show_self') && owner_access) || user_in_group_activities.include?('archive:show')
     else

@@ -38,9 +38,20 @@ class ComponentPolicy < ApplicationPolicy
     true
   end
 
+
   def archive_show?
-    user_activities.include?('archivization:show') || (user_activities.include?('archivization:self_show') && owner_access) || user_in_group_activities.include?('archivization:show')
+    unless @model.componentable.is_expired?
+      # classic
+      user_activities.include?('archive:show') || (user_activities.include?('archive:show_self') && owner_access) || user_in_group_activities.include?('archive:show')
+    else
+      # expired
+      user_activities.include?('archive:show_expiried') || (user_activities.include?('archive:show_expiried_self') && owner_access) || user_in_group_activities.include?('archive:show_expiried')
+    end  
   end
+
+  # def archive_show?
+  #   user_activities.include?('archivization:show') || (user_activities.include?('archivization:self_show') && owner_access) || user_in_group_activities.include?('archivization:show')
+  # end
 
   def archive_download?
     archive_show?

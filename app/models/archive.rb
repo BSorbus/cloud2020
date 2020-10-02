@@ -91,12 +91,22 @@ class Archive < ApplicationRecord
     truncate(Loofah.fragment(self.note).text, length: 250)
   end
 
+
+  def is_expired?
+    today = Time.zone.today
+    if expiry_on >= today
+      false
+    else
+      true
+    end  
+  end
+
   private
   
     def expiry_on_after_today
       return if expiry_on.blank?
      
-      if expiry_on < Time.zone.today
+      if is_expired?
         errors.add(:expiry_on, I18n.t('errors.messages.greater_than_or_equal_to', count: Time.zone.today.strftime('%Y-%m-%d')  ) ) 
         throw :abort 
       end 

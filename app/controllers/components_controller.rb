@@ -55,19 +55,24 @@ class ComponentsController < ApplicationController
       flash[:error] = t('errors.messages.not_found_resource')
       redirect_to root_path()
     else
-      # @component.log_work('download_component', current_user.id)
+      if @component.componentable.is_expired?
+        flash[:error] = t('errors.messages.not_found_resource')
+        redirect_to root_path()
+      else
+        # @component.log_work('download_component', current_user.id)
 
-      respond_to do |format|
-        format.html { 
-          send_file "#{@component.component_file.path}", 
-            type: "#{@component.file_content_type}",
-            filename: @component.component_file.file.filename, 
-            dispostion: "inline", 
-            status: 200, 
-            stream: true, 
-            x_sendfile: true 
-        }
+        respond_to do |format|
+          format.html { 
+            send_file "#{@component.component_file.path}", 
+              type: "#{@component.file_content_type}",
+              filename: @component.component_file.file.filename, 
+              dispostion: "inline", 
+              status: 200, 
+              stream: true, 
+              x_sendfile: true 
+          }
 
+        end
       end
     end
   end
