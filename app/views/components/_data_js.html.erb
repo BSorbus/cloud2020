@@ -8,24 +8,26 @@
   <div class="row">
     <div class="form-group col-sm-12">
 
-      <div class="row">
-        <% if @component.is_folder? %>
+      <% if @component.is_folder? %>
 
-          <div class="form-group col-sm-12">
-            <p><strong><%= Component.human_attribute_name(:name_if_folder) %></strong></p>
-            <%= @component.name_if_folder %>
-          </div>
+        <div class="row">
+            <div class="form-group col-sm-12">
+              <p><strong><%= Component.human_attribute_name(:name_if_folder) %></strong></p>
+              <%= @component.name_if_folder %>
+            </div>
 
-          <div class="form-group col-sm-12">
-            <% if @component.note.html_safe.size > 0 %>
-              <blockquote>
-                <%= @component.note.html_safe %>
-              </blockquote>
-            <% end %>
-          </div> 
+            <div class="form-group col-sm-12">
+              <% if @component.note.html_safe.size > 0 %>
+                <blockquote>
+                  <%= @component.note.html_safe %>
+                </blockquote>
+              <% end %>
+            </div> 
+        </div> 
 
-        <% else %>
+      <% else %>
 
+        <div class="row">
           <div class="form-group col-sm-12">
             <p><strong><%= Component.human_attribute_name(:component_file_identifier) %></strong></p>
             <%= @component.component_file_identifier %>
@@ -49,51 +51,91 @@
             <p><strong><%= Archive.human_attribute_name(:expiry_on) %></strong></p>
             <%= @component.componentable.expiry_on %>
           </div> 
+        </div> 
 
-          <div class="form-group col-sm-12">
-            <p><strong><%= Component.human_attribute_name(:link_to_download) %></strong></p>
-            <div class="input-group">
-              <input id="component_to_download" type="text" class="form-control" value='<%= @file_url_as_html %>' readonly='true'>
-              <span class="input-group-btn">
-                <button class="btn btn-default btn-clip" type="button" data-clipboard-target="#component_to_download"><%= copy_to_clipboard_legend %></button>
-              </span>
-            </div><!-- /input-group -->
-          </div> 
-
+        <div class="row">
           <div class="col-sm-12">
-            <div class="input-group">
-              <input id="component_to_download_simple" type="text" class="form-control" value='<%= @file_url_as_html_to_simple %>' readonly='true'>
-              <div class="input-group-btn dropup">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= t('table_action') %> <span class="caret"></span></button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a href="#" class="btn-clip" data-clipboard-target="#component_to_download_simple"><%= copy_to_clipboard_legend %></a></li>
-<!-- 
-                  <li role="separator" class="divider"></li>
 
--->
-                  <li><a href="#">Send Email [niebawem :)]</a></li>
-                </ul>
-              </div><!-- /btn-group -->
-            </div><!-- /input-group -->
-          </div><!-- /.col-lg-6 -->
+            <fieldset class="my-fieldset">
+              <legend class="my-fieldset colored-title"><%= Component.human_attribute_name(:link_to_download) %></legend>
+
+              <% access_to_send_link_download = policy(@component).archive_send_link_to_component_download? %>
+
+              <div class="input-group">
+                <input id="component_to_download" type="text" class="form-control" value='<%= @file_url_as_html %>' readonly='true'>
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= t('table_action') %> <span class="caret"></span></button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#" class="btn-clip" data-clipboard-target="#component_to_download"><%= copy_to_clipboard_legend %></a></li>
+                    <li><a href="#div_send_email_for_download" data-toggle="collapse"><%= send_email_legend %></a></li>
+                  </ul>
+                </div>
+              </div>
 
 
-      </div><!-- /.row -->
+              <!-- collapse segment -->
+              <div id="div_send_email_for_download" class="well-users collapse">
 
-<!-- Target -->
-<!-- 
-<input id="foo" value="https://github.com/zenorocha/clipboard.js.git">
- -->
-<!-- Trigger -->
-<!-- 
-<button class="btn btn-primary btn-clip" type="button" data-clipboard-target="#foo">Click me</button>
- -->
+                <button type="button" class="close" data-target="#div_send_email_for_download" data-toggle="collapse"> <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
-        <% end %>
+                <br>
+                <%= render 'download_info', cached: true %>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <%= render 'download_users', access: access_to_send_link_download %>
+                  </div>
+                </div>
 
-      </div>  <!-- /row -->
+              </div> <!-- /collapse segment -->
+            </fieldset>
 
-    </div> <!-- /form-group col-sm-6 -->
+          </div> <!-- /class="col-sm-12" -->
+        </div> <!-- /class="row" -->
+
+
+        <div class="row">
+          <div class="col-sm-12">
+
+            <fieldset class="my-fieldset">
+              <legend class="my-fieldset text-danger"><%= Component.human_attribute_name(:link_to_download_simple) %></legend>
+
+              <% access_to_send_link_download_simple = policy(@component).archive_send_link_to_component_download_simple? %>
+
+              <div class="input-group">
+                <input id="component_to_download_simple" type="text" class="form-control" value='<%= @file_url_as_html_to_simple %>' readonly='true'>
+                <div class="input-group-btn dropup">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= t('table_action') %> <span class="caret"></span></button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#" class="btn-clip" data-clipboard-target="#component_to_download_simple"><%= copy_to_clipboard_legend %></a></li>
+                    <li><a href="#div_send_email_for_download_simple" data-toggle="collapse"><%= send_email_legend %></a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- collapse segment -->
+              <div id="div_send_email_for_download_simple" class="well-users collapse">
+
+                <button type="button" class="close" data-target="#div_send_email_for_download_simple" data-toggle="collapse"> <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+
+                <br>
+                <%= render 'download_simple_info', cached: true %>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <%= render 'download_simple_users', access: access_to_send_link_download_simple %>
+                  </div>
+                </div>
+
+              </div><!-- /collapse segment -->
+
+            </fieldset>
+
+          </div> <!-- /class="col-sm-12" -->
+        </div> <!-- /class="row" -->
+
+      <% end %>
+
+    </div> <!-- /form-group col-sm-12 -->
 
   </div>  <!-- /row -->
 

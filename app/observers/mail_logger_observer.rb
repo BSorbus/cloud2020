@@ -1,6 +1,6 @@
 class MailLoggerObserver
   def self.delivered_email(mail)
-    if mail.mailer_klass == "ArchiveMailer" && mail.mailer_action == "link_archive_show"
+    if mail.mailer_klass == "CloudMailer" && mail.mailer_action == "link_archive_show"
     	# puts '-------------------- MailLoggerObserver ------------------'
      #  puts "sender: #{mail.from}"
      #  puts "recipient: #{mail.to}"
@@ -12,9 +12,11 @@ class MailLoggerObserver
      #  puts "mailer_klass: #{mail.mailer_klass}"
      #  puts "mailer_action: #{mail.mailer_action}"
      #  puts "mailer_archive: #{mail.mailer_archive}"
+     #  puts "mailer_component: #{mail.mailer_component}"
      #  puts "mailer_sending_user: #{mail.mailer_sending_user}"
-      mail.mailer_archive.log_work_send_email('send_email_with_link', mail.mailer_sending_user.id, mail.to )
+      mail.mailer_archive.log_work_send_email('send_link_archive_show', mail.mailer_sending_user.id, mail.to)
       # puts '----------------------------------------------------------'
     end
+
   end
 end

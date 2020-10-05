@@ -59,7 +59,7 @@
 
             <div class='members-sub-form'>
               <%#= f.fields_for :members do |member_form|  %>
-              <%= f.fields_for :members, @group.members.joins(:user).order(:email, :last_name, :first_name).reload do |member_form|  %>
+              <%= f.fields_for :members, @group.members.joins(:user).order(:email).reload do |member_form|  %>
                 <%= render 'member_fields', f: member_form %> 
               <% end %>
             </div>

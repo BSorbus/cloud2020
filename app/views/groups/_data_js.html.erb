@@ -18,6 +18,16 @@
 
     <div class="form-group col-sm-12">
 
+<!-- 
+class="<%#= @license.status == 'S' ? 'text-danger' : 'text-success' %>"
+
+ -->      
+      <% unless @for_archive.present? %>
+        <% access_to_send_link = false %>
+      <% else %>
+        <% access_to_send_link = policy(@for_archive).send_link_to_archive_show? %>
+      <% end %>
+
       <table class="table table-hover">
         <thead>
           <tr>
@@ -28,25 +38,22 @@
           </tr>
         </thead>
         <tbody>
-          <% @group.users.order(:email, :last_name, :first_name).each do |rec| %>
+          <% @group.users.order(:email).each do |rec| %>
             <tr>
               <td class="col-sm-5"><%= rec.email %></td>
               <td class="col-sm-3"><%= rec.first_name %></td>
               <td class="col-sm-3"><%= rec.last_name %></td>
               <td class="col-sm-1">
 
-                <% if @for_archive.present? %>
-                  <% if policy(@for_archive).send_link_to_archive_show_by_email? %>
-                    <%= link_to send_link_to_archive_show_by_email_archive_path(@for_archive.id, users_ids: [rec.id] ),
+                  <% if access_to_send_link %>
+                    <%= link_to send_link_to_archive_show_archive_path(@for_archive.id, users_ids: [rec.id] ),
                                         method: :get,
                                         remote: true,
-                                        data: { confirm: t('helpers.links.confirm_send_mail', data: rec.fullname) }, 
+                                        data: { confirm: t('helpers.links.confirm_send_mail_for_archive', data: rec.fullname) }, 
                                         class: "btn btn-xs btn-default" do %>
-                      <span class="fa fa-envelope"></span>
-                      <%= t("helpers.links.send_email") %>
+                      <span><%= send_email_legend %></span>
                     <% end %>
                   <% end %>
-                <% end %>
 
               </td>
             </tr>
@@ -67,14 +74,13 @@
 <div class="modal-footer">
 
   <% if @for_archive.present? %>
-    <% if policy(@for_archive).send_link_to_archive_show_by_email? %>
-      <%= link_to send_link_to_archive_show_by_email_archive_path(@for_archive.id, users_ids: @group.users.ids ),
+    <% if policy(@for_archive).send_link_to_archive_show? %>
+      <%= link_to send_link_to_archive_show_archive_path(@for_archive.id, users_ids: @group.users.ids ),
                           method: :get,
                           remote: true,
-                          data: { confirm: t('helpers.links.confirm_send_mail', data: t('to_all')) }, 
+                          data: { confirm: t('helpers.links.confirm_send_mail_for_archive', data: t('to_all')) }, 
                           class: "pull-left btn btn-default" do %>
-        <span class="fa fa-envelope"></span>
-        <%= t("helpers.links.send_email_to_all") %>
+        <span><%= send_email_to_all_legend %></span>
       <% end %>
     <% end %>
   <% end %>

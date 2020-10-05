@@ -1,6 +1,5 @@
 module ApplicationHelper
 
-
   def back_to_index_legend
     fa_icon('list', text: t("helpers.links.back_to_index"))
   end
@@ -11,6 +10,14 @@ module ApplicationHelper
 
   def last_updated_legend(obj)
     obj.new_record? ? "" :  t('last_updated') + ": " + obj.updated_at.strftime("%Y-%m-%d %H:%M:%S") + ", " + obj.author.fullname
+  end
+
+  def send_email_legend
+    fa_icon("envelope", text: t("helpers.links.send_email") )    
+  end
+
+  def send_email_to_all_legend
+    fa_icon("envelope", text: t("helpers.links.send_email_to_all") )    
   end
 
   def copy_to_clipboard_legend

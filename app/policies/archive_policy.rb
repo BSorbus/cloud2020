@@ -41,7 +41,7 @@ class ArchivePolicy < ApplicationPolicy
     end
   end
 
-  def send_link_to_archive_show_by_email?
+  def send_link_to_archive_show?
     # moze osobne uprawnienie?
     update?    
   end

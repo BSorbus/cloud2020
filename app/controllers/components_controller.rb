@@ -3,7 +3,7 @@ require 'zip_file_generator'
 class ComponentsController < ApplicationController
   before_action :authenticate_user!, except: [:download_simple]
   after_action :verify_authorized, only: [:show, :create, :destroy]
-  before_action :set_component, only: [:show, :edit, :update, :destroy]
+  before_action :set_component, only: [:show, :edit, :update, :destroy, :send_link_to_component_download, :send_link_to_component_download_simple]
   before_action :set_component_maybe_wrong, only: [:download]
   before_action :set_component_maybe_wrong_for_download_simple, only: [:download_simple]
 
@@ -269,16 +269,55 @@ class ComponentsController < ApplicationController
     end 
   end
 
+  def send_link_to_component_download
+    component_authorize(@component, "send_link_to_component_download", @component.componentable_type.singularize.downcase)
+
+    if params[:users_ids].blank?
+      respond_to do |format|
+        format.js { render :blank_users_ids }
+      end
+    else
+      params[:users_ids].each do |i|
+        user = User.find(i)
+        CloudMailer.link_component_download(@component, user, current_user).deliver_later
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
+  def send_link_to_component_download_simple
+    component_authorize(@component, "send_link_to_component_download_simple", @component.componentable_type.singularize.downcase)
+
+    if params[:users_ids].blank?
+      respond_to do |format|
+        format.js { render :blank_users_ids }
+      end
+    else
+      params[:users_ids].each do |i|
+        user = User.find(i)
+        CloudMailer.link_component_download_simple(@component, user, current_user).deliver_later
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
+
   private
     def component_authorize(model_class, action, sub_controller)
-      unless ['index', 'show', 'create', 'edit', 'update', 'destroy', 'zip_and_download', "move_to_parent", 'download'].include?(action)
+      unless ['index', 'show', 'create', 'edit', 'update', 'destroy', 'zip_and_download', "move_to_parent", 'download', 
+              'send_link_to_component_download', 'send_link_to_component_download_simple'].include?(action)
          raise "Ruby injection"
       end
       authorize model_class,"#{sub_controller}_#{action}?"      
     end
 
     def component_policy_check(model_class, action, sub_controller)
-      unless ['index', 'show', 'create', 'edit', 'update', 'destroy', 'zip_and_download', "move_to_parent", 'download'].include?(action)
+      unless ['index', 'show', 'create', 'edit', 'update', 'destroy', 'zip_and_download', "move_to_parent", 'download', 
+              'send_link_to_component_download', 'send_link_to_component_download_simple'].include?(action)
          raise "Ruby injection"
       end
       return policy(model_class).send("#{sub_controller}_#{action}?")      

@@ -1,7 +1,7 @@
 class ArchivesController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized, except: [:index, :datatables_index, :help_new_edit]
-  before_action :set_archive, only: [:show, :edit, :update, :destroy, :send_link_to_archive_show_by_email]
+  before_action :set_archive, only: [:show, :edit, :update, :destroy, :send_link_to_archive_show]
 
   # GET /archives
   # GET /archives.json
@@ -114,8 +114,8 @@ class ArchivesController < ApplicationController
     end      
   end
 
-  def send_link_to_archive_show_by_email
-    authorize @archive, :send_link_to_archive_show_by_email?
+  def send_link_to_archive_show
+    authorize @archive, :send_link_to_archive_show?
 
     if params[:users_ids].blank?
       respond_to do |format|
@@ -124,11 +124,8 @@ class ArchivesController < ApplicationController
     else
       params[:users_ids].each do |i|
         user = User.find(i)
-        ArchiveMailer.link_archive_show(@archive, user, current_user).deliver_later
+        CloudMailer.link_archive_show(@archive, user, current_user).deliver_later
       end
-      # #flash[:success] = t('activerecord.successfull.messages.created', data: @event.fullname)
-      # redirect_to @archive, notice: "Email status about \"#{@archive.fullname}\" was successfully sent."
-
       respond_to do |format|
         format.js
       end

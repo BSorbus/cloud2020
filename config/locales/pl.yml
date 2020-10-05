@@ -420,7 +420,9 @@ pl:
       confirm_destroy: 'Na pewno chcesz usunąć wpis: "%{data}"?'
       confirm_add: 'Czy na pewno chcesz dodać ten wpis?'
       confirm_add_user: ' - Czy na pewno chcesz dodać do bazy użytkowników ten wpis?'
-      confirm_send_mail: 'Na pewno chcesz wysłać email o udostepnieniu składnicy do %{data}?'
+      confirm_send_mail_for_archive: 'Na pewno chcesz wysłać email o udostepnieniu składnicy do %{data}?'
+      confirm_send_mail_for_download: 'Na pewno chcesz wysłać email z linkiem do %{data}?'
+      confirm_send_mail_for_download_simple: 'Na pewno chcesz wysłać email zawierający link do pobrania pliku bez autoryzacji do %{data}?'
       destroy: "Usuń"
       destroy_account: "Usuń moje konto"
       send_email: "Wyślij email"

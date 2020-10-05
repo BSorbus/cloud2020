@@ -30,6 +30,23 @@ class ComponentPolicy < ApplicationPolicy
     end
   end
 
+  def archive_send_link_to_component_download?
+    # moze osobne uprawnienie?
+    puts '--------------------------------------------------'
+    puts 'ComponentPolicy: archive_send_link_to_component_download?'
+    puts 'always TRUE'
+    puts '--------------------------------------------------'
+    true    
+  end
+
+  def archive_send_link_to_component_download_simple?
+    # moze osobne uprawnienie?
+    puts '--------------------------------------------------'
+    puts 'ComponentPolicy: archive_send_link_to_component_download_simple?'
+    puts 'always TRUE'
+    puts '--------------------------------------------------'
+    true    
+  end
 
   def archive_index?
     puts '--------------------------------------------------'

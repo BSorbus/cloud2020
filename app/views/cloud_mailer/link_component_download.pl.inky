@@ -19,11 +19,12 @@
 
   <row>
     <columns>
-      <h4>Witaj!</h4>
-      <p>W programie <strong>UKE Cloud</strong> została Ci udostępniona składnica plików</p>
-      <p><%= link_to @archive_fullname, @archive_url_uuid, target: "_blank" %></p> 
+      <p>W programie <strong>UKE Cloud</strong> został Ci udostępniony plik:</p>
+      <p><%= link_to @component_fullname, @component_url_uuid, target: "_blank" %></p> 
+      <spacer size="8"></spacer>
+      <h4 class="h4-small">Dostęp wygasa: <%= @component.componentable.expiry_on %></h4> 
       <spacer size="16"></spacer>
-      <h5 class="h5-small">(Kliknij w link powyżej jeżeli chcesz przejść do składnicy.)</h5> 
+      <h5 class="h5-small">(Kliknij w link powyżej jeżeli chcesz pobrać plik.)</h5> 
     </columns>
   </row>
 
@@ -34,7 +35,7 @@
   <row>
     <columns>
       <h5 class="h5-small">Uwaga</h5> 
-      <h5 class="h5-small">Aby móc korzystać z zasobów składnicy musisz posiadać konto w Centralnym Systemie Uwierzytelniania UKE. Jeżeli nie posiadasz konta w CSU UKE kliknij w link powyżej a zostaniesz automatycznie przekierowany do właściwej strony. Pamiętaj, że Twój <strong>adres e-mail</strong>, na który otrzymałeś tę wiadomość, <strong>musi być zgodny</strong> z Twoim adresem e-mail konta w CSU UKE.</h5> 
+      <h5 class="h5-small">Aby móc pobrać plik musisz posiadać konto w Centralnym Systemie Uwierzytelniania UKE. Jeżeli nie posiadasz konta w CSU UKE kliknij w link powyżej a zostaniesz automatycznie przekierowany do właściwej strony. Pamiętaj, że Twój <strong>adres e-mail</strong>, na który otrzymałeś tę wiadomość, <strong>musi być zgodny</strong> z Twoim adresem e-mail konta w CSU UKE.</h5> 
     </columns>
   </row>
 

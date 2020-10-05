@@ -389,7 +389,9 @@ en:
       confirm_destroy: 'Are you sure delete: "%{data}"?'
       confirm_add: 'Are you sure you want to add this entry?'
       confirm_add_user: ' - Are you sure you want to add this entry to your user base?'
-      confirm_send_mail: 'Are you sure you want to send e-mail to %{data}?'
+      confirm_send_mail_for_archive: 'Are you sure you want to send e-mail to %{data}?'
+      confirm_send_mail_for_download: 'Are you sure you want to send e-mail with link to %{data}?'
+      confirm_send_mail_for_download_simple: 'Are you sure you want to send e-mail containing a link to download the file without authorization to %{data}?'
       destroy: "Delete"
       destroy_account: "Cancel my account"
       send_email: "Send email"
