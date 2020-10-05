@@ -25,6 +25,7 @@ pl:
       slide_1: 'Wystarczy jedno kliknięcie...'
       slide_2: '...aby zobaczyć cały świat'
   management: 'Zarządzanie'
+  data: 'Dane'
   table_action: 'Akcja'
   table_role_granted: 'Przyznane?'
   table_group_member: 'Jest członkiem?'

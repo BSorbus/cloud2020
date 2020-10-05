@@ -22,6 +22,7 @@ en:
       slide_0: 'Access to documents can be simple.'
       slide_1: 'Just one click...'
       slide_2: '...to see the whole world.'
+  data: 'Data'
   management: 'Management'
   table_action: 'Action'
   table_role_granted: 'Granted?'

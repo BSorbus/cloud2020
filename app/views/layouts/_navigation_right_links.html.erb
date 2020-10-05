@@ -1,8 +1,9 @@
 <% if user_signed_in? %>
 
   <% archive_index_access = policy(:archive).index? || policy(:archive).index_self? %>
+  <% menagment_access = policy(:user).index? || policy(:role).index?  || policy(:group).index? || policy(:work).index? %>
 
-  <% if archive_index_access %>
+  <% if archive_index_access || menagment_access %>
 
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-database"></span>&nbsp;<%= t("data") %> <span class="caret"></span></a>
@@ -15,19 +16,8 @@
               <span><%= archive_index_legend %></span>
             <% end %>
           </li>
+          <li class="divider"></li>
         <% end %>
-
-      </ul>
-    </li>
-
-  <% end %>
-
-
-  <% if policy(:user).index? || policy(:role).index?  || policy(:group).index? || policy(:work).index? %>
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-tools"></span>&nbsp;<%= t("management") %> <span class="caret"></span></a>
-
-      <ul class="dropdown-menu">
 
         <% if policy(:user).index? %>
           <li>
