@@ -53,9 +53,8 @@
           </li>
         <% end %>
 
-        <li class="divider"></li>
-
         <% if policy(:work).index? %>
+          <li class="divider"></li>
           <li>
             <%= link_to works_path do %>
               <span><%= work_index_legend %></span>
