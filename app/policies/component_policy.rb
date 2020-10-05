@@ -26,8 +26,8 @@ class ComponentPolicy < ApplicationPolicy
     if @model.class.to_s == 'Symbol'
       false
     else
-      @model.user_id == @user.id || @model.componentable.user_id == @user.id
-      #@model.author_id == @user.id || @model.componentable.author_id == @user.id
+      # @model.user_id == @user.id || @model.componentable.user_id == @user.id
+      @model.author_id == @user.id || @model.componentable.author_id == @user.id
       raise
     end
   end
