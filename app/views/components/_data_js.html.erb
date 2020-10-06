@@ -80,11 +80,7 @@
 
                 <br>
                 <%= render 'download_info', cached: true %>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <%= render 'download_users', access: access_to_send_link_download %>
-                  </div>
-                </div>
+                <%= render 'download_users', access: access_to_send_link_download %>
 
               </div> <!-- /collapse segment -->
             </fieldset>
@@ -120,14 +116,10 @@
 
                 <br>
                 <%= render 'download_simple_info', cached: true %>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <%= render 'download_simple_users', access: access_to_send_link_download_simple %>
-                  </div>
-                </div>
+                <%= render 'download_simple_users', access: access_to_send_link_download_simple %>
+                <%= render 'download_simple_adhoc', access: access_to_send_link_download_simple %>
 
               </div><!-- /collapse segment -->
-
             </fieldset>
 
           </div> <!-- /class="col-sm-12" -->

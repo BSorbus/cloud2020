@@ -19,6 +19,7 @@ class CloudMailer < ApplicationMailer
     @archive = archive
     @recipient = recipient
     @archive_fullname = "#{@archive.fullname}" # "#{archive_info_legend(@archive)}"
+    @archive_note = "#{Loofah.fragment(@archive.note).text}"
     @archive_url_uuid = Rails.application.routes.url_helpers.url_for(only_path: false, controller: 'archives', action: 'show', id: @archive.id, locale: locale)
 
     attachments.inline['logo_mailer'] = File.read("app/assets/images/logo_mailer.png")
@@ -35,7 +36,7 @@ class CloudMailer < ApplicationMailer
     @component = component
     @recipient = recipient
     @component_fullname = "#{@component.fullname}"
-    # @archive_url_uuid = Rails.application.routes.url_helpers.url_for(only_path: false, controller: 'archives', action: 'show', id: @archive.id, locale: locale)
+    @component_note = "#{Loofah.fragment(@component.note).text}"
     @component_url_uuid = Rails.application.routes.url_helpers.url_for(only_path: false, controller: 'components', action: 'download', id: @component.id, locale: locale)
 
     attachments.inline['logo_mailer'] = File.read("app/assets/images/logo_mailer.png")
@@ -52,6 +53,7 @@ class CloudMailer < ApplicationMailer
     @component = component
     @recipient = recipient
     @component_fullname = "#{@component.fullname}"
+    @component_note = "#{Loofah.fragment(@component.note).text}"
     @component_url_uuid = Rails.application.routes.url_helpers.url_for(only_path: false, controller: 'components', action: 'download_simple', id: @component.for_simple_download, locale: locale)
 
     attachments.inline['logo_mailer'] = File.read("app/assets/images/logo_mailer.png")

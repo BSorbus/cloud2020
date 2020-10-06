@@ -290,13 +290,17 @@ class ComponentsController < ApplicationController
   def send_link_to_component_download_simple
     component_authorize(@component, "send_link_to_component_download_simple", @component.componentable_type.singularize.downcase)
 
-    if params[:users_ids].blank?
+    if params[:users_ids].blank? && user_id.blank?
       respond_to do |format|
         format.js { render :blank_users_ids }
       end
-    else
+    else      
       params[:users_ids].each do |i|
         user = User.find(i)
+        CloudMailer.link_component_download_simple(@component, user, current_user).deliver_later
+      end unless params[:users_ids].blank?
+      unless user_id.blank?
+        user = User.find(user_id)
         CloudMailer.link_component_download_simple(@component, user, current_user).deliver_later
       end
       respond_to do |format|

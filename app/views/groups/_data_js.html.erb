@@ -47,10 +47,10 @@ class="<%#= @license.status == 'S' ? 'text-danger' : 'text-success' %>"
 
                   <% if access_to_send_link %>
                     <%= link_to send_link_to_archive_show_archive_path(@for_archive.id, users_ids: [rec.id] ),
-                                        method: :get,
+                                        method: :post,
                                         remote: true,
                                         data: { confirm: t('helpers.links.confirm_send_mail_for_archive', data: rec.fullname) }, 
-                                        class: "btn btn-xs btn-default" do %>
+                                        class: "btn btn-xs btn-info" do %>
                       <span><%= send_email_legend %></span>
                     <% end %>
                   <% end %>
@@ -76,10 +76,10 @@ class="<%#= @license.status == 'S' ? 'text-danger' : 'text-success' %>"
   <% if @for_archive.present? %>
     <% if policy(@for_archive).send_link_to_archive_show? %>
       <%= link_to send_link_to_archive_show_archive_path(@for_archive.id, users_ids: @group.users.ids ),
-                          method: :get,
+                          method: :post,
                           remote: true,
                           data: { confirm: t('helpers.links.confirm_send_mail_for_archive', data: t('to_all')) }, 
-                          class: "pull-left btn btn-default" do %>
+                          class: "pull-left btn btn-info" do %>
         <span><%= send_email_to_all_legend %></span>
       <% end %>
     <% end %>
