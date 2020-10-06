@@ -290,6 +290,8 @@ class ComponentsController < ApplicationController
   def send_link_to_component_download_simple
     component_authorize(@component, "send_link_to_component_download_simple", @component.componentable_type.singularize.downcase)
 
+    user_id = params.fetch(:user, '').fetch(:id, '')
+
     if params[:users_ids].blank? && user_id.blank?
       respond_to do |format|
         format.js { render :blank_users_ids }
