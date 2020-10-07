@@ -31,7 +31,7 @@
       <h4 class="h4-small">Dostęp wygasa: <%= @component.componentable.expiry_on %></h4> 
 
       <spacer size="16"></spacer>
-      <h5 class="h5-small">(Kliknij w link powyżej jeżeli chcesz pobrać plik.)</h5> 
+      <h5 class="h5-small">(Dostęp do pliku wymaga autoryzacji w Centralnym Systemie Uwierzytelniania UKE. Kliknij w link powyżej jeżeli chcesz pobrać plik.)</h5> 
     </columns>
   </row>
 
