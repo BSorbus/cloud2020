@@ -133,7 +133,7 @@ en:
         author_id: 'Author'
         author: 'Author'
         archivizations: 'Group permissions'
-        quota: 'Maksymalna wielkość wszystkich plików'
+        quota: 'Maximum size of all files'
       archivization:
         archive_id: 'Archive'
         group_id: 'Group'
