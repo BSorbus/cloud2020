@@ -1,55 +1,35 @@
-<br>
-<div class="container-fluid"> 
-  <div class="row">
+<div class="grid-container">
 
-    <div class="col-sm-2 colored-sidebar">
-      <ul  class="nav nav-pills brand-pills nav-stacked">
+  <div class="sidebar">
+    <%= render 'sidebar_show' %>
+  </div>
 
-        <li class="brand-nav active">
-          <a href="#group_show" data-toggle="tab"><%= group_show_legend %></a>
-        </li>
+  <div class="main-content">
+    <br>
+    <div class="container-fluid"> 
+      <div class="row">
 
-        <% if policy(:user).index? %>
-          <li class="brand-nav brand-nav-level-1">
-            <a href="#users" data-toggle="tab"><%= user_index_legend %></a>
-          </li>
-        <% end %>
+        <div class="col-sm-12">
+          <div class="tab-content clearfix">
 
-        <% if policy(:group).work? %>
-          <li class="brand-nav brand-nav-level-1">
-            <a href="#works" data-toggle="tab"><%= work_index_legend %></a>
-          </li>
-        <% end %>
+            <div role="tabpanel" class="tab-pane active" id="group_show">
+              <%= render 'data', input_disabled: true, subtitle: group_info_legend(@group) %>
+            </div>
 
-        <hr>
+            <div role="tabpanel" class="tab-pane" id="users">
+              <%= render 'users', subtitle: group_info_legend(@group) %>
+            </div>
 
-        <li>
-          <%= link_to groups_path do %>
-            <%= back_to_index_legend %>
-          <% end %>
-        </li>
+            <div role="tabpanel" class="tab-pane" id="works">
+              <%= render 'works/works_tab', trackable_type: "Group", trackable_id: @group.id, subtitle: group_info_legend(@group) %>
+            </div>
 
-      </ul>
-    </div>
-    <div class="col-sm-10">
-      <div class="tab-content clearfix">
-
-        <div class="tab-pane active" id="group_show">
-          <%= render 'data', input_disabled: true, subtitle: group_info_legend(@group) %>
-        </div>
-
-        <div class="tab-pane" id="users">
-          <%= render 'users', subtitle: group_info_legend(@group) %>
-        </div>
-
-        <div class="tab-pane" id="works">
-          <%= render 'works/works_tab', trackable_type: "Group", trackable_id: @group.id, subtitle: group_info_legend(@group) %>
+          </div>
         </div>
 
       </div>
-    </div>
 
-  </div>
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
 
-</div>
-
+</div> <!--/grid-containe--> 

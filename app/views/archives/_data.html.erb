@@ -33,10 +33,6 @@
             <div class="row">
 
               <div class="form-group col-sm-12">
-<!-- 
-                <p><strong><%= Archive.human_attribute_name(:note) %></strong></p>
-                <%#= @archive.note.html_safe %>
- -->
                 <% if @archive.note.html_safe.size > 0 %>
                   <blockquote>
                     <%= @archive.note.html_safe %>
@@ -51,8 +47,8 @@
         <div class="row">
           <div class="col-sm-12">
 
-            <fieldset class="my-fieldset">
-              <legend class="my-fieldset"><%= t('archive.fieldset.archivizations_title') %></legend>
+            <fieldset class="my-fieldset-short">
+              <legend class="my-fieldset"><%= t('archives.fieldset.archivizations_title') %></legend>
 
               <table class="table table-hover">
 
@@ -64,7 +60,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <%# Archivization.includes(:group, :archive).where(archive: @archive).order('groups.name').each do |archivization| %>
                   <% @archive.archivizations.includes(:group).order('groups.name').each do |archivization| %>
                     <tr>
                       <td class="col-sm-5">

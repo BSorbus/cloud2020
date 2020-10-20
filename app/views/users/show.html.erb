@@ -1,68 +1,44 @@
-<br>
-<div class="container-fluid"> 
-  <div class="row">
+<div class="grid-container">
 
-    <div class="col-sm-2 colored-sidebar">
-      <ul class="nav nav-pills brand-pills nav-stacked">
+  <div class="sidebar">
+    <%= render 'sidebar_show' %>
+  </div>
 
-        <li class="brand-nav active">
-          <a href="#user_show" data-toggle="tab"><%= user_show_legend %></a>
-        </li>
+  <div class="main-content">
+    <br>
+    <div class="container-fluid"> 
+      <div class="row">
 
-        <% if policy(:role).index? %>
-          <li class="brand-nav brand-nav-level-1">
-            <a href="#roles" data-toggle="tab"><%= role_index_legend %></a>
-          </li>
-        <% end %>
+        <div class="col-sm-12">
+          <div class="tab-content clearfix">
 
-        <% if policy(:group).index? %>
-          <li class="brand-nav brand-nav-level-1">
-            <a href="#groups" data-toggle="tab"><%= group_index_legend %></a>
-          </li>
-        <% end %>
+            <div role="tabpanel" class="tab-pane active" id="user_show">
+              <%= render 'data', input_disabled: true, subtitle: user_info_legend(@user) %>
+            </div>
 
-        <% if policy(:user).work? %>
-          <li class="brand-nav brand-nav-level-1">
-            <a href="#works" data-toggle="tab"><%= work_index_legend %></a>
-          </li>
-        <% end %>
+            <div role="tabpanel" class="tab-pane" id="roles">
+              <%= render 'roles', trackable_type: "User", trackable_id: @user.id, subtitle: user_info_legend(@user) %>
+            </div>
 
-        <hr>
+            <div role="tabpanel" class="tab-pane" id="groups">
+              <%= render 'groups', trackable_type: "User", trackable_id: @user.id, subtitle: user_info_legend(@user) %>
+            </div>
 
-        <li>
-          <%= link_to users_path do %>
-            <%= back_to_index_legend %>
-          <% end %>
-        </li>
+            <div role="tabpanel" class="tab-pane" id="works">
+              <%= render 'works/works_tab', trackable_type: "User", trackable_id: @user.id, subtitle: user_info_legend(@user) %>
+            </div>
 
-      </ul>
-    </div>
-
-    <div class="col-sm-10">
-      <div class="tab-content clearfix">
-
-        <div class="tab-pane active" id="user_show">
-          <%= render 'data', input_disabled: true, subtitle: user_info_legend(@user) %>
-        </div>
-
-        <div class="tab-pane" id="roles">
-          <%= render 'roles', trackable_type: "User", trackable_id: @user.id, subtitle: user_info_legend(@user) %>
-        </div>
-
-        <div class="tab-pane" id="groups">
-          <%= render 'groups', trackable_type: "User", trackable_id: @user.id, subtitle: user_info_legend(@user) %>
-        </div>
-
-        <div class="tab-pane" id="works">
-          <%= render 'works/works_tab', trackable_type: "User", trackable_id: @user.id, subtitle: user_info_legend(@user) %>
+          </div>
         </div>
 
       </div>
+
     </div>
 
-  </div>
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
 
-</div>
+</div> <!--/grid-containe--> 
 
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">

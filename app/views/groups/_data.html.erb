@@ -22,10 +22,6 @@
           <div class="col-sm-6">
             <div class="row">
               <div class="form-group col-sm-12">
-<!-- 
-                <p><strong><%= Group.human_attribute_name(:note) %></strong></p>
-                <%= @group.note.html_safe %>
- -->
                 <% if @group.note.html_safe.size > 0 %>
                   <blockquote>
                     <%= @group.note.html_safe %>
@@ -40,12 +36,7 @@
 
         <div class="row">
           <div class="col-sm-12">
-<!-- 
-            <%#= link_to groups_path, class: "btn btn-default" do %>
-              <span class="fa fa-list"></span>
-              <%#= t("helpers.links.index") %>
-            <%# end %>
- -->
+
             <% if policy(@group).destroy? %>
               <%= link_to group_path(@group),
                                   method: :delete,

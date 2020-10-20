@@ -8,6 +8,10 @@ module ApplicationHelper
     fa_icon('info-circle', text: t("helpers.links.help"))
   end
 
+  def sidebar_menu_legend
+    fa_icon('bars')
+  end
+
   def last_updated_legend(obj)
     obj.new_record? ? "" :  t('last_updated') + ": " + obj.updated_at.strftime("%Y-%m-%d %H:%M:%S") + ", " + obj.author.fullname
   end

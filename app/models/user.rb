@@ -58,8 +58,16 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def name_was
+    "#{first_name_was} #{last_name_was}"
+  end
+
   def fullname
-    "#{email} (#{name})"
+    name.blank? ? "#{email}" : "#{email} (#{name})"
+  end
+
+  def fullname_was
+    name_was.blank? ? "#{email_was}" : "#{email_was} (#{name_was})"
   end
 
   def last_name_to_display

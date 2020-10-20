@@ -1,4 +1,6 @@
 en:
+  "true": "True"
+  "false": "False"
   to_all: 'all'
   no_data: 'No data'
   logo_file: "logo_uke_en_do_lewej.png"
@@ -31,14 +33,62 @@ en:
   file_upload:
     in_progress: 'Downloaded:'
     wait_to_save: 'The data is being saved...'
-  user:
+  archives:
+    sidebar_index:
+      new: 'Add new Archive'
+    sidebar_new:
+      index: 'Archives'
+      help: 'Help'
+    sidebar_edit:
+      index: 'Archives'
+      help: 'Help'
+    sidebar_show:
+      index: 'Archives'
     index:
-      title: 'Users'
+      title: 'Archives'
     show:
-      title: 'User'
+      title: 'Archive'
+    new:
+      title: 'New Archive'
     edit:
-      title: 'Edit -> User'
-  role:
+      title: 'Edit -> Archive'
+    fieldset:
+      archivizations_title: 'Group Permission'
+  components:
+    components_tab:
+      folder_submit: 'Create'
+    index:
+      title: 'Attachments'
+    edit:
+      title: 'Edit'
+  groups:
+    sidebar_index:
+      new: 'Add new Group'
+    sidebar_new:
+      index: 'Groups'
+    sidebar_edit:
+      index: 'Groups'
+    sidebar_show:
+      index: 'Groups'
+    index:
+      title: 'Groups'
+    show:
+      title: 'Group'
+    new:
+      title: 'New Group'
+    edit:
+      title: 'Edit -> Group'
+    fieldset:
+      members_title: 'Members:'
+  roles:
+    sidebar_index:
+      new: Add new Role'
+    sidebar_new:
+      index: 'Roles'
+    sidebar_edit:
+      index: 'Roles'
+    sidebar_show:
+      index: 'Roles'
     index:
       title: 'Roles'
     show:
@@ -47,6 +97,21 @@ en:
       title: 'New Role'
     edit:
       title: 'Edit -> Role'
+  users:
+    sidebar_index:
+      new: 'Add new User'
+    sidebar_new:
+      index: 'Users'
+    sidebar_edit:
+      index: 'Users'
+    sidebar_show:
+      index: 'Users'
+    index:
+      title: 'Users'
+    show:
+      title: 'User'
+    edit:
+      title: 'Edit -> User'
   work:
     index:
       title: 'Operation log'
@@ -61,24 +126,6 @@ en:
       title: 'Edit -> Group'
     fieldset:
       members_title: 'Members:'
-  archive:
-    index:
-      title: 'Archives'
-    show:
-      title: 'Archive'
-    new:
-      title: 'New Archive'
-    edit:
-      title: 'Edit -> Archive'
-    fieldset:
-      archivizations_title: 'Group Permission'
-  component:
-    components_tab:
-      folder_submit: 'Create'
-    index:
-      title: 'Attachments'
-    edit:
-      title: 'Edit'
   activerecord:
     models:
       work: 'Operation log'
@@ -379,7 +426,7 @@ en:
     links:
       index: "Index"
       back_to_index: "Back to list"
-      show: "Show"
+      show: "Details"
       show_link: 'Show'
       new: "Add"
       want_create: 'You want to create?'

@@ -1,9 +1,19 @@
 $brand-primary:     #1B3C8F;
-
+$btn-default-bg:    lighten(#BECC25, 42.5%);
 
 @media (min-width: 768px) {
  
   .brand-pills > li > a {
+//    border-top-right-radius: 0px;
+//    border-bottom-right-radius: 0px;
+    border: 1px solid #ccc;
+  }
+
+  .nav-pills > li > a:hover {
+      background-color: $btn-default-bg;
+  }
+
+  li.brand-nav.active {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
   }

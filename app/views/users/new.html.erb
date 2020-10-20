@@ -1,25 +1,24 @@
-<br>
-<div class="container-fluid"> 
-  <div class="row">
-    <div class="col-sm-2">
-      <div class="center colored-title"><%= fa_icon("plus", size: '3x') %></div>
-      <h3 class="center colored-title"><%= t('helpers.links.new') %></h3>
-      <hr>
-      <ul  class="nav nav-pills brand-pills nav-stacked">
-        <li>
-          <%= link_to users_path do %>
-            <%= back_to_index_legend %>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-    <div class="col-sm-10">
-      <fieldset class="my-fieldset">
-        <legend class="my-fieldset colored-title"><%= user_new_legend(@user) %></legend>
-        <%= render 'form', user: @user, input_disabled: true %>
-      </fieldset>
-    </div>
+<div class="grid-container">
 
+  <div class="sidebar">
+    <%= render 'sidebar_new' %>
   </div>
 
-</div>
+  <div class="main-content">
+    <br>
+    <div class="container-fluid"> 
+      <div class="row">
+        <div class="col-sm-12">
+          <fieldset class="my-fieldset">
+            <legend class="my-fieldset colored-title"><%= user_new_legend(@user) %></legend>
+            <%= render 'form', user: @user, input_disabled: true %>
+          </fieldset>
+        </div>
+
+      </div>
+
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
+
+</div> <!--/grid-containe--> 
+

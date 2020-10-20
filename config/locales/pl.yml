@@ -33,37 +33,17 @@ pl:
   file_upload:
     in_progress: 'Pobrano:'
     wait_to_save: 'Trwa zapisywanie danych...'
-  user:
-    index:
-      title: 'Użytkownicy'
-    show:
-      title: 'Użytkownik'
-    edit:
-      title: 'Edycja -> Użytkownik'
-  role:
-    index:
-      title: 'Role'
-    show:
-      title: 'Rola'
-    new:
-      title: 'Nowa Rola'
-    edit:
-      title: 'Edycja -> Rola'
-  work:
-    index:
-      title: 'Dziennik operacji'
-  group:
-    index:
-      title: 'Grupy'
-    show:
-      title: 'Grupa'
-    new:
-      title: 'Nowa Grupa'
-    edit:
-      title: 'Edycja -> Grupa'
-    fieldset:
-      members_title: 'Członkowie:'
-  archive:
+  archives:
+    sidebar_index:
+      new: 'Dodaj nową Składnicę'
+    sidebar_new:
+      index: 'Składnice'
+      help: 'Pomoc'
+    sidebar_edit:
+      index: 'Składnice'
+      help: 'Pomoc'
+    sidebar_show:
+      index: 'Składnice'
     index:
       title: 'Składnice'
     show:
@@ -74,13 +54,69 @@ pl:
       title: 'Edycja -> Skłdnica'
     fieldset:
       archivizations_title: 'Uprawnienia Grup'
-  component:
+  components:
     components_tab:
       folder_submit: 'Utwórz'
     index:
       title: 'Pliki'
     edit:
       title: 'Edycja'
+  groups:
+    sidebar_index:
+      new: 'Dodaj nową Grupę'
+    sidebar_new:
+      index: 'Grupy'
+    sidebar_edit:
+      index: 'Grupy'
+    sidebar_show:
+      index: 'Grupy'
+    index:
+      title: 'Grupy'
+    show:
+      title: 'Grupa'
+    new:
+      title: 'Nowa Grupa'
+    edit:
+      title: 'Edycja -> Grupa'
+    fieldset:
+      members_title: 'Członkowie:'
+  roles:
+    sidebar_index:
+      new: 'Dodaj nową Rolę'
+    sidebar_new:
+      index: 'Role'
+    sidebar_edit:
+      index: 'Role'
+    sidebar_show:
+      index: 'Role'
+    index:
+      title: 'Role'
+    show:
+      title: 'Rola'
+    new:
+      title: 'Nowa Rola'
+    edit:
+      title: 'Edycja -> Rola'
+  users:
+    sidebar_index:
+      new: 'Dodaj nowego Użytkownika'
+    sidebar_new:
+      index: 'Użytkownicy'
+    sidebar_edit:
+      index: 'Użytkownicy'
+    sidebar_show:
+      index: 'Użytkownicy'
+    index:
+      title: 'Użytkownicy'
+    show:
+      title: 'Użytkownik'
+    new:
+      title: 'Nowy Użytkownik'
+    edit:
+      title: 'Edycja -> Użytkownik'
+  works:
+    index:
+      title: 'Dziennik operacji'
   activerecord:
     models:
       work: 'Dziennik operacji'
@@ -410,7 +446,7 @@ pl:
     links:
       index: 'Lista'
       back_to_index: 'Powrót do listy'
-      show: 'Pokaż szczegóły'
+      show: 'Szczegóły'
       show_link: 'Pokaż'
       new:  'Dodaj'
       want_create: 'Czy utworzyć?'

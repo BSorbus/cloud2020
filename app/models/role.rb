@@ -34,6 +34,10 @@ class Role < ApplicationRecord
     "#{name}"
   end
 
+  def fullname_was
+    "#{name_was}"
+  end
+
   def note_truncate
     truncate(Loofah.fragment(self.note).text, length: 100)
   end
