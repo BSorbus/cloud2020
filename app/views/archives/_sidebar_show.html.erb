@@ -54,13 +54,13 @@
         </li>
 
         <% if policy(:component).archive_index? %>
-          <li role="presentation" class="brand-nav" title="<%= t('components.index.title') %>" rel='tooltip'>
+          <li role="presentation" class="brand-nav brand-nav-level-1" title="<%= t('components.index.title') %>" rel='tooltip'>
             <a href="#components" aria-controls="components" role="tab" data-toggle="tab"><%= component_index_legend %></a>
           </li>
         <% end %>
 
         <% if policy(@archive).work? %>
-          <li role="presentation" class="brand-nav" title="<%= t('works.index.title') %>" rel='tooltip'>
+          <li role="presentation" class="brand-nav brand-nav-level-1" title="<%= t('works.index.title') %>" rel='tooltip'>
             <a href="#works" aria-controls="works" role="tab" data-toggle="tab"><%= work_index_legend %></a>
           </li>
         <% end %>
