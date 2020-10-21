@@ -82,9 +82,9 @@
         <div class="col-sm-12">
 
           <%= link_to archive.new_record? ? archives_path() : archive_path(archive.id), class: "btn btn-default" do %>
-            <span class="glyphicon glyphicon-arrow-left"></span>
-            <%= t("helpers.links.back") %>
+            <%= back_from_new_or_edit_legend %>
           <% end %>
+          
           <%= f.submit nil, class: 'btn btn-success' %>
 
         </div> <!--/col-sm-12 -->

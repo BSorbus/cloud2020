@@ -30,7 +30,7 @@ pl:
   table_role_granted: 'Przyznane?'
   table_group_member: 'Jest członkiem?'
   last_updated: 'Ostatnia aktualizacja'
-  sidebar: 'szerokie/wąskie menu boczne'
+  sidebar: 'Menu boczne'
   file_upload:
     in_progress: 'Pobrano:'
     wait_to_save: 'Trwa zapisywanie danych...'
@@ -453,6 +453,7 @@ pl:
       want_create: 'Czy utworzyć?'
       edit: 'Edycja'
       back: 'Powrót'
+      back_from_new_or_edit: 'Anuluj'
       cancel: 'Wróć'
       confirm: "Czy na pewno?"
       confirm_destroy: 'Na pewno chcesz usunąć wpis: "%{data}"?'

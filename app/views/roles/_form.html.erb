@@ -51,19 +51,11 @@
 
       <div class="row">
         <div class="col-sm-12">
-<!-- 
-          <%#= link_to roles_path, class: "btn btn-default" do %>
-            <span class="fa fa-list"></span>
-            <%#= t("helpers.links.index") %>
-          <%# end %>
- -->
-<!-- 
-          <%#= link_to :back, class: "btn btn-default" do %>
- -->
+
           <%= link_to role.new_record? ? roles_path() : role_path(role), class: "btn btn-default" do %>
-            <span class="glyphicon glyphicon-arrow-left"></span>
-            <%= t("helpers.links.back") %>
+            <%= back_from_new_or_edit_legend %>
           <% end %>
+
           <%= f.submit nil, class: 'btn btn-success' %>
 
         </div> <!--/col-sm-12 -->

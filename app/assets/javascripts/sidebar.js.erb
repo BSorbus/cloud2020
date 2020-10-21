@@ -29,10 +29,20 @@ function changeSidebar(obj) {
   // };
 
 
-  if ( $(sidebarContentSmall).hasClass("hidden") ) {
+  if ( $(sidebarContentSmall).hasClass('hidden') ) {
+    $(obj).removeClass('fa fa-chevron-left');
+    $(obj).addClass('fa fa-chevron-right');
+
+    // $(obj).attr('title', 'zwiń');
+
     $(sidebarContentLarge).addClass('hidden');
     $(sidebarContentSmall).removeClass('hidden');
   } else {
+    $(obj).removeClass('fa fa-chevron-right');
+    $(obj).addClass('fa fa-chevron-left'); 
+
+    // $(obj).attr('title', 'rozwiń');
+
     $(sidebarContentSmall).addClass('hidden');
     $(sidebarContentLarge).show(200, function() { 
       $(sidebarContentLarge).removeClass('hidden');

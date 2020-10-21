@@ -30,7 +30,7 @@ en:
   table_role_granted: 'Granted?'
   table_group_member: 'Is a member?'
   last_updated: 'Last updated'
-  sidebar: 'wide/narrow the side menu'
+  sidebar: 'Side menu'
   file_upload:
     in_progress: 'Downloaded:'
     wait_to_save: 'The data is being saved...'
@@ -433,6 +433,7 @@ en:
       want_create: 'You want to create?'
       edit: "Edit"
       back: "Back"
+      back_from_new_or_edit: 'Cancel'
       cancel: "Cancel"
       confirm: "Are you sure?"
       confirm_destroy: 'Are you sure delete: "%{data}"?'
