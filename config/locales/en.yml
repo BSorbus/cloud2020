@@ -30,6 +30,7 @@ en:
   table_role_granted: 'Granted?'
   table_group_member: 'Is a member?'
   last_updated: 'Last updated'
+  sidebar: 'wide/narrow the side menu'
   file_upload:
     in_progress: 'Downloaded:'
     wait_to_save: 'The data is being saved...'

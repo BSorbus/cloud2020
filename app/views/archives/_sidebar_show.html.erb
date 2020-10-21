@@ -1,4 +1,4 @@
-<button class="sideber-button" onclick="changeSidebar(this)"><%= sidebar_menu_legend %></button>
+<button class="sideber-button" onclick="changeSidebar(this)" title="<%=t('sidebar')%>" rel='tooltip'><%= sidebar_menu_legend %></button>
 
 <div class="sidebar-content-small container-fluid">
   <div class="center colored-title"><%= archive_icon_legend %></div>
@@ -9,7 +9,7 @@
 
       <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
 
-        <li role="presentation" class="brand-nav active">
+        <li role="presentation" class="brand-nav active" title="<%= t('helpers.links.show') %>" rel='tooltip'>
           <a href="#archive_show" aria-controls="archive_show" role="tab" data-toggle="tab"><%= archive_icon_legend %></a>
         </li>
 
