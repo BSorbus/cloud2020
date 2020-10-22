@@ -21,6 +21,12 @@ $(document).ready(function() {
     text: '<span class="text-primary fa fa-square"></span>',
     // titleAttr: 'Wszystkie/tylko moje',
     className: 'btn btn-sm btn-default',
+    init: function ( dt, node, config ) {
+      // button 4 na starcie wlaczony
+      // dt.button( 4 ).text('<span class="text-primary fa fa-user"></span> Tylko moje');
+      dt.button( 4 ).text('<span class="text-primary fa fa-check-square"></span>');
+      dt.button( 4 ).active( true );
+    },
     action: function ( e, dt, node, config ) {
       if (dt.button( 4 ).active() == false) {
         dt.button( 4 ).text('<span class="text-primary fa fa-check-square"></span>');

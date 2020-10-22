@@ -31,8 +31,8 @@ PL =  {
             "selectNone": "Odznacz wszystkie wiersze",
             "downloadSelected": "Pobierz zaznaczone jako plik ZIP",
             "deleteSelected": "Usuń zaznaczone wiersze",
-            "onlyMyData": "Wszystkie/Tylko moje",
-            "onlyChecked": "Wszystkie/Tylko przypisane"
+            "onlyMyData": "Tylko moje/Wszystkie",
+            "onlyChecked": "Tylko przypisane/Wszystkie"
         },
         "select": {
             "rows": {
