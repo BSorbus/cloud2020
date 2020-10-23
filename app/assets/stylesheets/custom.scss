@@ -30,7 +30,7 @@ $brand-danger:      #d9534f;
 
 //$brand-primary:          darken(#428bca, 6.5%) !default; // #337ab7
 //$btn-default-color:                #333 !default; 
-$btn-default-bg:         lighten(#BECC25, 48.5%) !default;
+$btn-default-bg:         lighten(#818FAB, 36.5%) !default;
 //$btn-default-border:             #ccc !default;
 
 
@@ -370,7 +370,7 @@ pre {
 }
 
 .breadcrumb {
-    background-color: lighten(#BECC25, 45.5%);
+    background-color: $btn-default-bg; 
     color: $brand-primary;
     font-size: 16px;
 }

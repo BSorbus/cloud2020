@@ -1,5 +1,8 @@
+//@import "./custom";
+
 $brand-primary:     #1B3C8F;
-$btn-default-bg:    lighten(#BECC25, 42.5%);
+$btn-default-bg:         lighten(#818FAB, 36.5%) !default;
+
 
 @media (min-width: 768px) {
  
