@@ -29,20 +29,22 @@
 
       <spacer size="8"></spacer>
       <h4 class="h4-small">Dostęp wygasa: <%= @component.componentable.expiry_on %></h4> 
-
-      <spacer size="16"></spacer>
-      <h5 class="h5-small">(Dostęp do pliku wymaga autoryzacji w Centralnym Systemie Uwierzytelniania UKE. Kliknij w link powyżej jeżeli chcesz pobrać plik.)</h5> 
     </columns>
   </row>
 
 
-  <spacer size="16"></spacer>
-
-
   <row>
     <columns>
-      <h5 class="h5-small">Uwaga</h5> 
-      <h5 class="h5-small">Aby móc pobrać plik musisz posiadać konto w Centralnym Systemie Uwierzytelniania UKE. Jeżeli nie posiadasz konta w CSU UKE kliknij w link powyżej a zostaniesz automatycznie przekierowany do właściwej strony. Pamiętaj, że Twój <strong>adres e-mail</strong>, na który otrzymałeś tę wiadomość, <strong>musi być zgodny</strong> z Twoim adresem e-mail konta w CSU UKE.</h5> 
+      <callout class="primary">
+        <h5 class="h5-small">Uwaga!</h5> 
+
+        <h5 class="h5-small">Dostęp do pliku wymaga autoryzacji w Centralnym Systemie Uwierzytelniania UKE (CSU UKE).</h5> 
+
+        <h5 class="h5-small">Jeżeli nie posiadasz konta w CSU UKE kliknij w link powyżej a zostaniesz automatycznie przekierowany do właściwej strony. Pamiętaj, że Twój <strong>adres e-mail</strong>, na który otrzymałeś tę wiadomość, <strong>musi być zgodny</strong> z Twoim adresem e-mail konta w CSU UKE. Jeżeli logujesz się wykorzystując Profil Zaufany (PZ), to adres e-mail zapisany w PZ musi być zgodny.</h5> 
+
+        <h5 class="h5-small">Kliknij w link powyżej jeżeli chcesz pobrać plik.</h5> 
+
+      </callout>
     </columns>
   </row>
 
