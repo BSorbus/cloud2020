@@ -25,6 +25,12 @@
           </li>
         <% end %>
 
+        <% if policy(:archive).index? %>
+          <li role="presentation" class="brand-nav" title="<%= t('archives.index.title') %>" rel='tooltip'>
+            <a href="#archives" aria-controls="archives" role="tab" data-toggle="tab"><%= archive_icon_legend %></a>
+          </li>
+        <% end %>
+
         <% if policy(:user).work? %>
           <li role="presentation" class="brand-nav" title="<%= t('works.index.title') %>" rel='tooltip'>
             <a href="#works" aria-controls="works" role="tab" data-toggle="tab"><%= work_icon_legend %></a>
@@ -66,6 +72,12 @@
         <% if policy(:group).index? %>
           <li role="presentation" class="brand-nav brand-nav-level-1" title="<%= t('groups.index.title') %>" rel='tooltip'>
             <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"><%= group_index_legend %></a>
+          </li>
+        <% end %>
+
+        <% if policy(:archive).index? %>
+          <li role="presentation" class="brand-nav brand-nav-level-1" title="<%= t('archives.index.title') %>" rel='tooltip'>
+            <a href="#archives" aria-controls="archives" role="tab" data-toggle="tab"><%= archive_index_legend %></a>
           </li>
         <% end %>
 

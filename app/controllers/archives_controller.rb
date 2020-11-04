@@ -1,10 +1,22 @@
 class ArchivesController < ApplicationController
   before_action :authenticate_user!
-  after_action :verify_authorized, except: [:index, :datatables_index, :help_new_edit]
+  after_action :verify_authorized, except: [:index, :datatables_index, :datatables_index_group, :datatables_index_user, :help_new_edit]
   before_action :set_archive, only: [:show, :edit, :update, :destroy, :send_link_to_archive_show]
 
-  # GET /archives
-  # GET /archives.json
+
+  def datatables_index_group
+    checked_filter = (params[:checked_only_filter].blank? || params[:checked_only_filter] == 'false' ) ? nil : true
+    respond_to do |format|
+      format.json { render json: GroupArchivesDatatable.new(params, view_context: view_context, only_for_current_group_id: params[:group_id], checked_only_filter: checked_filter) }
+    end
+  end
+
+  def datatables_index_user
+    checked_filter = (params[:checked_only_filter].blank? || params[:checked_only_filter] == 'false' ) ? nil : true
+    respond_to do |format|
+      format.json { render json: UserArchivesDatatable.new(params, view_context: view_context, only_for_current_user_id: params[:user_id], checked_only_filter: checked_filter) }
+    end
+  end
 
   def datatables_index
     # always set user_filter if current_user not have role archive:index

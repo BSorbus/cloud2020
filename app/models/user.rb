@@ -17,6 +17,8 @@ class User < ApplicationRecord
 
   has_many :members, dependent: :destroy
   has_many :groups, through: :members
+  has_many :accesses_archives, through: :groups, source: :accesses_archives
+
 
   belongs_to :author, class_name: "User", optional: true
   has_many :works, as: :trackable

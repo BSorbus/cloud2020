@@ -46,6 +46,8 @@ Rails.application.routes.draw do
 
     resources :archives do
       post 'datatables_index', on: :collection
+      get 'datatables_index_group', on: :collection # Displays archives for showed group
+      get 'datatables_index_user', on: :collection # Displays archives for showed user
       get 'help_new_edit', on: :collection
       post 'send_link_to_archive_show', on: :member
       resources :components, module: :archives, only: [:create] do

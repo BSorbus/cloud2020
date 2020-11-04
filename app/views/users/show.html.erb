@@ -24,6 +24,10 @@
               <%= render 'groups', trackable_type: "User", trackable_id: @user.id, subtitle: user_info_legend(@user) %>
             </div>
 
+            <div role="tabpanel" class="tab-pane" id="archives">
+              <%= render 'archives', subtitle: user_info_legend(@user) %>
+            </div>
+
             <div role="tabpanel" class="tab-pane" id="works">
               <%= render 'works/works_tab', trackable_type: "User", trackable_id: @user.id, subtitle: user_info_legend(@user) %>
             </div>

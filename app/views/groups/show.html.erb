@@ -20,6 +20,10 @@
               <%= render 'users', subtitle: group_info_legend(@group) %>
             </div>
 
+            <div role="tabpanel" class="tab-pane" id="archives">
+              <%= render 'archives', subtitle: group_info_legend(@group) %>
+            </div>
+
             <div role="tabpanel" class="tab-pane" id="works">
               <%= render 'works/works_tab', trackable_type: "Group", trackable_id: @group.id, subtitle: group_info_legend(@group) %>
             </div>

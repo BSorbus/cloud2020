@@ -29,6 +29,7 @@ pl:
   table_action: 'Akcja'
   table_role_granted: 'Przyznane?'
   table_group_member: 'Jest członkiem?'
+  table_group_archivization: 'Uprawnienia'
   last_updated: 'Ostatnia aktualizacja'
   sidebar: 'Menu boczne'
   file_upload:
