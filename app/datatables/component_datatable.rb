@@ -71,7 +71,7 @@ class ComponentDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def link_show(rec)
-    "<button-as-link ajax-path='" + component_path(rec, format: :js) + "' ajax-method='GET' class='btn btn-xs fa fa-info-circle text-primary' title='" + t('tooltip.show') + "' rel='tooltip'></button-as-link>"
+    "<button-as-link ajax-path='" + component_path(rec, format: :js) + "' ajax-method='GET' class='btn btn-xs fa fa-share-alt text-primary' title='" + t('tooltip.show') + "' rel='tooltip'></button-as-link>"
   end
 
   def link_edit(rec)

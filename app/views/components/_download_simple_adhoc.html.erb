@@ -8,8 +8,7 @@
                           remote: true,
                           data: { confirm: t('helpers.links.confirm_send_mail_for_download', data: t('to_all')) }, 
                           class: "pull-left btn btn-sm btn-info" do %>
-        <span class="fa fa-envelope"></span>
-        <%= t("helpers.links.send_email_to_all") %>
+        <span><%= send_email_with_share_to_all_legend %></span>
       <% end %>
     <% end %>    
 
@@ -29,7 +28,7 @@
       </div>
 
       <%= f.button(:class => "btn btn-sm btn-primary pull-right", disabled: false) do %>
-        <span><%= fa_icon("envelope", text: t("helpers.links.send_email")) %></span>
+        <span><%= send_email_with_share_legend %></span>
       <% end %>
 
 

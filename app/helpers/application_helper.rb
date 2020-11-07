@@ -20,6 +20,14 @@ module ApplicationHelper
     fa_icon("envelope", text: t("helpers.links.send_email") )    
   end
 
+  def send_email_with_share_legend
+    fa_icon("share-alt", text: t("helpers.links.send_email") )    
+  end
+
+  def send_email_with_share_to_all_legend
+    fa_icon("share-alt", text: t("helpers.links.send_email_to_all") )    
+  end
+
   def send_email_to_all_legend
     fa_icon("envelope", text: t("helpers.links.send_email_to_all") )    
   end

@@ -32,7 +32,7 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
         expiry_on:      record.expiry_on.present? ? record.expiry_on.strftime("%Y-%m-%d") : '' ,
         folders_count:  folders_count_badge(record).html_safe,
         files_count:    files_count_badge(record).html_safe,
-        files_size_sum: number_to_human_size(files_size_sum(record))
+        files_size_sum: human_files_size_sum(record).html_safe
         # author:         link_to( record.author.fullname, user_path(record.author_id) )
       }
     end
@@ -60,6 +60,47 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
 
     def files_size_sum(rec)
       rec.components.where.not(component_file: nil).map {|a| a.component_file.file.size }.sum
+    end
+
+    def human_files_size_sum(rec)
+      rec_files_size_sum = files_size_sum(rec)
+      rec_files_quota = rec.quota
+
+      procentage_used = ((rec_files_size_sum.to_f / rec_files_quota.to_f) * 100).round(0)
+
+      human_size = number_to_human_size(rec_files_size_sum)
+      human_quota = number_to_human_size(rec_files_quota)
+ 
+      case procentage_used
+      when 0..50
+        bar_type = 'success'
+      when 51..75
+        bar_type = 'warning'
+      when 76..100
+        bar_type = 'danger'        
+      end
+
+      # "<div class='col-sm-7' style='padding-left: 0px; padding-right: 0px;'>
+      #   <div class='progress' style='margin-bottom: 0px;'>
+      #     <div class='progress-bar progress-bar-#{bar_type}' role='progressbar' aria-valuenow='#{rec_files_size_sum}' aria-valuemin='0' aria-valuemax='#{rec_files_quota}' style='width: #{procentage_used}%;'>
+      #       #{procentage_used}%
+      #     </div>
+      #   </div>
+      # </div>
+      # <div class='col-sm-5' style='padding-left: 5px; padding-right: 0px;'>
+      #   <span class='pull-right'>#{human_size}/#{human_quota}</span>
+      # </div>"
+
+
+      "<div class='progress' style='margin-bottom: 0px;'>
+        <div class='progress-bar progress-bar-#{bar_type}' role='progressbar' aria-valuenow='#{rec_files_size_sum}' aria-valuemin='0' aria-valuemax='#{rec_files_quota}' style='width: #{procentage_used}%;'>
+          #{procentage_used}%
+        </div>
+      </div>
+      <div>
+        <span class='pull-right'>#{human_size}/#{human_quota}</span>
+      </div>"
+
     end
 
 end

@@ -51,7 +51,7 @@ class="<%#= @license.status == 'S' ? 'text-danger' : 'text-success' %>"
                                         remote: true,
                                         data: { confirm: t('helpers.links.confirm_send_mail_for_archive', data: rec.fullname) }, 
                                         class: "btn btn-xs btn-info" do %>
-                      <span><%= send_email_legend %></span>
+                      <span><%= send_email_with_share_legend %></span>
                     <% end %>
                   <% end %>
 
@@ -80,7 +80,7 @@ class="<%#= @license.status == 'S' ? 'text-danger' : 'text-success' %>"
                           remote: true,
                           data: { confirm: t('helpers.links.confirm_send_mail_for_archive', data: t('to_all')) }, 
                           class: "pull-left btn btn-info" do %>
-        <span><%= send_email_to_all_legend %></span>
+        <span><%= send_email_with_share_to_all_legend %></span>
       <% end %>
     <% end %>
   <% end %>
