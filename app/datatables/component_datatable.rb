@@ -1,3 +1,5 @@
+require 'my_human'
+
 class ComponentDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
 
@@ -99,7 +101,8 @@ class ComponentDatatable < AjaxDatatablesRails::ActiveRecord
   def badge(rec)
     count = rec.leaves.where.not(component_file: nil).size
     sum_size = rec.leaves.where.not(component_file: nil).map {|a| a.component_file.file.size }.sum
-    count > 0 ? "<div> #{number_to_human_size(sum_size)} <span class='badge alert-info pull-right'> #{count} </span></div>" : "<div></div>"
+#    count > 0 ? "<div> #{number_to_human_size(sum_size)} <span class='badge alert-info pull-right'> #{count} </span></div>" : "<div></div>"
+    count > 0 ? "<div> #{MyHuman.new.filesize(sum_size)} <span class='badge alert-info pull-right'> #{count} </span></div>" : "<div></div>"
   end
 
   def action_links(rec)
