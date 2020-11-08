@@ -27,7 +27,8 @@
         <h4 class="h4-small">Opis i uwagi:<br> <%= @component_note %></h4> 
       <% end %>
 
-      <spacer size="8"></spacer>
+      <spacer size="16"></spacer>
+      <h4 class="h4-small">Wielkość pliku: <%= @component.file_size %></h4> 
       <h4 class="h4-small">Dostęp wygasa: <%= @component.componentable.expiry_on %></h4> 
     </columns>
   </row>
