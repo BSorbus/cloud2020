@@ -1,4 +1,6 @@
 #require 'mime/types'
+require 'my_human'
+
 class ComponentUploader < CarrierWave::Uploader::Base
   include ActionView::Helpers::NumberHelper
   # Include RMagick or MiniMagick support:
@@ -95,7 +97,8 @@ class ComponentUploader < CarrierWave::Uploader::Base
 
     # Add in model on init  
     model.file_content_type = file.content_type if file.content_type
-    model.file_size = number_to_human_size(file.size) if file.size
+    # model.file_size = number_to_human_size(file.size, options = {}) if file.size
+    model.file_size = MyHuman.new.filesize(file.size) if file.size
   end
 
 end

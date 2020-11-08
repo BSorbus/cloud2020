@@ -216,6 +216,13 @@ pl:
       #       user_id:
       #         taken: użytkownik %{model} %{attribute} %{value} jest już przypisany do tej grupy
       messages:
+        file_size_is_in: 'rozmiar pliku musi być pomiędzy %{min} a %{max}'
+        file_size_is_less_than: 'rozmiar pliku musi być mniejszy od %{count}'
+        file_size_is_less_than_or_equal_to: 'rozmiar pliku musi być mniejszy lub równy %{count}'
+        file_size_is_greater_than: 'rozmiar pliku musi być większy od %{count}'
+        file_size_is_greater_than_or_equal_to: 'rozmiar pliku musi być większy lub równy %{count}'
+        allowed_file_content_types: 'plik powinien być jednym z %{types}'
+        excluded_file_content_types: 'plik nie może być typu %{types}'
         record_invalid: "Validation failed: %{errors}"
         restrict_dependent_destroy:
           has_one: "Cannot delete record because a dependent %{record} exists"

@@ -1,3 +1,5 @@
+require 'my_human'
+
 class Component < ApplicationRecord
   include ActionView::Helpers::TextHelper
   include  ActionView::Helpers::NumberHelper
@@ -164,7 +166,8 @@ class Component < ApplicationRecord
       current_file_size = component_file.file.size 
       archive_quota = self.componentable.quota
       if sum_files_size + current_file_size > archive_quota
-        errors.add(:sum_file_size, I18n.t('errors.messages.less_than', count: number_to_human_size(archive_quota)) ) 
+        # errors.add(:sum_file_size, I18n.t('errors.messages.less_than', count: number_to_human_size(archive_quota)) ) 
+        errors.add(:sum_file_size, I18n.t('errors.messages.less_than', count: MyHuman.new.filesize(archive_quota)) ) 
         throw :abort 
       end 
     end

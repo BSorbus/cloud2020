@@ -1,3 +1,5 @@
+require 'my_human'
+
 class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
   include  ActionView::Helpers::NumberHelper
 
@@ -68,8 +70,10 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
 
       procentage_used = ((rec_files_size_sum.to_f / rec_files_quota.to_f) * 100).round(0)
 
-      human_size = number_to_human_size(rec_files_size_sum)
-      human_quota = number_to_human_size(rec_files_quota)
+      # human_size = number_to_human_size(rec_files_size_sum)
+      # human_quota = number_to_human_size(rec_files_quota)
+      human_size = MyHuman.new.filesize(rec_files_size_sum)
+      human_quota = MyHuman.new.filesize(rec_files_quota)
  
       case procentage_used
       when 0..50
@@ -79,18 +83,6 @@ class ArchiveDatatable < AjaxDatatablesRails::ActiveRecord
       when 76..100
         bar_type = 'danger'        
       end
-
-      # "<div class='col-sm-7' style='padding-left: 0px; padding-right: 0px;'>
-      #   <div class='progress' style='margin-bottom: 0px;'>
-      #     <div class='progress-bar progress-bar-#{bar_type}' role='progressbar' aria-valuenow='#{rec_files_size_sum}' aria-valuemin='0' aria-valuemax='#{rec_files_quota}' style='width: #{procentage_used}%;'>
-      #       #{procentage_used}%
-      #     </div>
-      #   </div>
-      # </div>
-      # <div class='col-sm-5' style='padding-left: 5px; padding-right: 0px;'>
-      #   <span class='pull-right'>#{human_size}/#{human_quota}</span>
-      # </div>"
-
 
       "<div class='progress' style='margin-bottom: 0px;'>
         <div class='progress-bar progress-bar-#{bar_type}' role='progressbar' aria-valuenow='#{rec_files_size_sum}' aria-valuemin='0' aria-valuemax='#{rec_files_quota}' style='width: #{procentage_used}%;'>
