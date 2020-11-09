@@ -64,7 +64,6 @@
         <columns small="8">
           <spacer size="8"></spacer>
           <h6 class="text-right h6-small"><%= mail_to "cloud@uke.gov.pl" %></h6>
-          <h6 class="text-right h6-small"><%= mail_to "serwis.cloud@uke.gov.pl" %></h6>
         </columns>
       </row>
       <row>
