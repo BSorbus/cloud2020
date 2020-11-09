@@ -449,9 +449,9 @@ pl:
     select:
       prompt: Proszę wybrać
     submit:
-      create: Utwórz %{model}
-      submit: Zapisz %{model}
-      update: Aktualizuj %{model}
+      create: Utwórz obiekt %{model}
+      submit: Zapisz obiekt %{model}
+      update: Aktualizuj obiekt %{model}
     links:
       index: 'Lista'
       back_to_index: 'Powrót do listy'
@@ -484,10 +484,10 @@ pl:
       help:  'Pomoc'
       copy_to_clipboard:  'Kopiuj do Schowka'
     titles:
-      edit: "Edycja %{model}"
-      save: "Zapisz %{model}"
-      new: "Nowy %{model}"
-      delete: "Usuń %{model}"
+      edit: "Edycja obiektu %{model}"
+      save: "Zapisz obiekt %{model}"
+      new: "Nowy obiekt %{model}"
+      delete: "Usuń obiekt %{model}"
       change_your_password: "Zmiań swoje hasło"
   tooltip:
     show: 'Pokaż'
