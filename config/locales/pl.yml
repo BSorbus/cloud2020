@@ -53,7 +53,7 @@ pl:
     new:
       title: 'Nowa Składnica'
     edit:
-      title: 'Edycja -> Skłdnica'
+      title: 'Edycja -> Składnica'
     fieldset:
       archivizations_title: 'Uprawnienia Grup'
   components:
