@@ -23,7 +23,8 @@
 
               <div class="form-group col-sm-7">
                 <p><strong><%= Archive.human_attribute_name(:quota) %></strong></p>
-                <%= number_to_human_size(@archive.quota) %>
+                <%= MyHuman.new.filesize(@archive.quota) %>
+<!--            <%#= number_to_human_size(@archive.quota) %> -->
               </div>
 
             </div>  <!-- /row -->
