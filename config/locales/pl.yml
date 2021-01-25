@@ -24,6 +24,9 @@ pl:
       slide_0: 'Dostęp do dokumentów może być prosty.'
       slide_1: 'Wystarczy jedno kliknięcie...'
       slide_2: '...aby zobaczyć cały świat'
+    declaration:
+      title: 'Deklaracja dostępności'
+      navbar: 'Deklaracja dostępności'
   management: 'Zarządzanie'
   data: 'Dane'
   table_action: 'Akcja'
