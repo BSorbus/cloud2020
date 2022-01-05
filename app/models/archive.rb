@@ -1,5 +1,28 @@
+require 'my_human'
+
 class Archive < ApplicationRecord
   include ActionView::Helpers::TextHelper
+
+  QUOTA_SIZES = [["1,0 GB",   1000000000],
+                 ["2,0 GB",   2000000000], 
+                 ["3,0 GB",   3000000000], 
+                 ["4,0 GB",   4000000000], 
+                 ["5,0 GB",   5000000000], 
+                 ["6,0 GB",   6000000000], 
+                 ["7,0 GB",   7000000000], 
+                 ["8,0 GB",   8000000000], 
+                 ["9,0 GB",   9000000000], 
+                 ["10,0 GB", 10000000000], 
+                 ["11,0 GB", 11000000000], 
+                 ["12,0 GB", 12000000000], 
+                 ["13,0 GB", 13000000000], 
+                 ["14,0 GB", 14000000000], 
+                 ["15,0 GB", 15000000000], 
+                 ["16,0 GB", 16000000000], 
+                 ["17,0 GB", 17000000000], 
+                 ["18,0 GB", 18000000000], 
+                 ["19,0 GB", 19000000000], 
+                 ["20,0 GB", 20000000000]]
 
   delegate :url_helpers, to: 'Rails.application.routes'
 
@@ -25,6 +48,7 @@ class Archive < ApplicationRecord
   validates :expiry_on, presence: true
 
   validates :archivizations, presence: true
+  validate :only_quota_resize_up, unless: -> { (new_record? == true) }
 
   # callbacks
 
@@ -112,6 +136,13 @@ class Archive < ApplicationRecord
      
       if is_expired?
         errors.add(:expiry_on, I18n.t('errors.messages.greater_than_or_equal_to', count: Time.zone.today.strftime('%Y-%m-%d')  ) ) 
+        throw :abort 
+      end 
+    end
+
+    def only_quota_resize_up
+      if quota < quota_was
+        errors.add(:quota, I18n.t('errors.messages.greater_than_or_equal_to', count: MyHuman.new.filesize(quota_was) )) 
         throw :abort 
       end 
     end

@@ -1,3 +1,5 @@
+require 'my_human'
+
 module ArchivesHelper
 
   ICON = "archive"
@@ -28,6 +30,10 @@ module ArchivesHelper
 
   def archive_info_legend(data_obj)
     archive_show_legend + ": " + data_obj.fullname
+  end
+
+  def archive_human_size(data_size)
+    MyHuman.new.filesize(data_size)
   end
 
 end

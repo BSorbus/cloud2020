@@ -7,7 +7,7 @@ class ArchivePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    permitted_array = [:name, :expiry_on, :note]
+    permitted_array = [:name, :expiry_on, :quota, :note]
     # if ArchivePolicy.new(@user, @model).add_remove_archive_group?
     #   permitted_array = [:name, :note, accessorizations_attributes: [:id, :event_id, :user_id, :role_id, :_destroy]]
     # else
