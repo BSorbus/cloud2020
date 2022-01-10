@@ -74,7 +74,6 @@ class ArchivesController < ApplicationController
   def create
     @archive = Archive.new(archive_params_create)
     @archive.author = current_user
-    @archive.quota = Rails.application.secrets[:archive_default_quota]
     authorize @archive, :create?
     respond_to do |format|
       if @archive.save
