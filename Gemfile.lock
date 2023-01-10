@@ -349,7 +349,7 @@ DEPENDENCIES
   jquery-rails
   kaminari (>= 1.2.1)
   listen (>= 3.0.5)
-  mail (!= 2.8.0)
+  mail (= 2.7.1)
   mina
   mina-whenever
   mini_magick
