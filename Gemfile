@@ -105,4 +105,3 @@ gem 'rubyzip'
 gem "rack", ">= 2.2.3"
 gem "websocket-extensions", ">= 0.1.5"
 gem "addressable", ">= 2.8.1"
-gem 'mail', '= 2.7.1'
