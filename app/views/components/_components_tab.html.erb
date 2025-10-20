@@ -9,12 +9,9 @@
         <%= form_for [componentable, Component.new], url: polymorphic_url([componentable, Component.new], action: "create_folder"), remote: true, html: { id: "new_component_folder", class: "form form-inline" } do |ff| %>
           <div class="row pull-right">
             <div class="form-group col-sm-12">
-              <%#= ff.label :name_if_folder, class: 'control-label' %>
               <%= ff.text_field :name_if_folder, class: 'form-control input-sm' %>
 
               <%= ff.hidden_field :parent_id, id: "component_parent_id_for_folder", value: nil %>
-              <%#= f.submit nil, :class => 'btn btn-sm btn-success' %>
-
               <%= ff.button(:class => "btn btn-sm btn-success", disabled: false, :id => "for_folder_subbimt_btn_submit") do %>
                 <span><%= fa_icon("folder-plus", text: t("components.components_tab.folder_submit")) %></span>
               <% end %>
